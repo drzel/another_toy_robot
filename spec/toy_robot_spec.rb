@@ -5,7 +5,9 @@ describe ToyRobot do
     expect(ToyRobot::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  describe "#sanitize" do
+    it "returns a sanitized user command" do
+      expect(ToyRobot.sanitize("  mOVe ")).to eq "move"
+    end
   end
 end

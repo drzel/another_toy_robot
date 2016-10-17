@@ -1,7 +1,16 @@
 require "toy_robot/version"
 require "pry"
-require "factory_girl"
 
 module ToyRobot
-  # Your code goes here...
+  def self.sanitize(str)
+    str.downcase.strip
+  end
+
+  def main
+    loop do
+      puts "Enter command:"
+      command = sanitize(gets)
+      command == "exit" ? break : command
+    end
+  end
 end
