@@ -11,8 +11,7 @@ class Client
   def main
     loop do
       puts "Enter command:"
-      command = sanitize(gets)
-      command == "exit" ? break : parse(command)
+      parse sanitize(gets)
     end
   end
 
@@ -26,6 +25,8 @@ class Client
       # @invoker.execute(RightCommand.new(@robot))
     when /place\s*(\d\s*,\s*){2}[nesw]/
       # @invoker.execute(PlaceCommand.new(@robot))
+    else
+      # error
     end
   end
 
@@ -49,5 +50,12 @@ class Command
 
   def execute
     raise NotImplementedError
+  end
+end
+
+class Tabletop
+  def initialize(x, y)
+    @width = x
+    @height = y
   end
 end
