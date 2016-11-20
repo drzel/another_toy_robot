@@ -5,7 +5,7 @@ class Client
   def main
     loop do
       puts "Enter command:"
-      parse sanitize(gets)
+      parse gets
     end
   end
 
@@ -32,8 +32,26 @@ class Tabletop
   end
 end
 
+class Direction
+  CARDINAL_POINTS = %w(NORTH EAST SOUTH WEST).freeze
+  NAVIGATE = { left: -1, right: 1 }.freeze
+
+  def initialize(cardinal_point)
+    @cardinal_point = cardinal_point
+  end
+
+  def turn(direction)
+    Direction.new CARDINAL_POINTS[to_i + NAVIGATE[direction]]
+  end
+
+  private
+
+  def to_i
+    CARDINAL_POINTS.find_index @cardinal_point
+  end
+end
+
 class Position
-  DIRECTIONS = %w(NORTH EAST SOUTH WEST).freeze
 
   attr_reader :x, :y, :direction
 
@@ -45,6 +63,7 @@ class Position
 
   def turn_left
     self.direction = DIRECTIONS.find_index(self.direction) - 1
+    Position.new @x, @y, direction - 1
   end
 
   def turn_right
