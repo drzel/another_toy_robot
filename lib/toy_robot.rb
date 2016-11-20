@@ -1,7 +1,62 @@
 require "toy_robot/version"
 require "pry"
 
+class Robot
+  attr_accessor :position
+
+  def initialize
+    @position = nil
+  end
+end
+
+class Tabletop
+  def initialize(width, height)
+    @width = width
+    @height = height
+  end
+
+  def valid_position?(position)
+    position.x.between?(0, @width - 1) && position.y.between?(0, @height - 1)
+  end
+end
+
+class Direction
+  CARDINAL_POINTS = %w(n e s w)
+  NAVIGATE = { left: -1, right: 1, 180: 2 }
+
+  def initialize(char)
+    @cardinal_int = CARDINAL_POINTS.find_index char
+  end
+
+  def turn(direction)
+    Direction.new CARDINAL_POINTS[@cardinal_int + NAVIGATE[direction] % 4]
+  end
+
+  def to_s
+    CARDINAL_POINTS.find_index(@cardinal_int)
+  end
+end
+
+class Position
+  attr_reader :x, :y
+
+  def initialize(x, y, direction)
+    @x = x
+    @y = y
+    @direction = Direction.new direction
+  end
+
+  def direction
+    @direction.to_s
+  end
+end
+
 class Client
+  def initialize(robot, tabletop)
+    @robot = robot
+    @tabletop = tabletop
+  end
+
   def main
     loop do
       puts "Enter command:"
@@ -11,73 +66,34 @@ class Client
 
   def parse(command)
     case command
+    when /place\s+(\d,\s*){2}[nesw]\s*/
+      params = command[/\s.*/].delete(" ").split(",")
+      x, y, direction = params[0], params[1], params[2]
+      position = Position.new x, y, direction
+      PlaceCommand.new(@robot, @tabletop, position).execute
     when "move"
       # MoveCommand.new(@robot).execute
     when "left"
       # LeftCommand.new(@robot)).execute
     when "right"
       # RightCommand.new(@robot).execute
-    when /place\s*(\d\s*,\s*){2}[nesw]/
-      # PlaceCommand.new(@robot).execute
     else
       # error
     end
   end
 end
 
-class Tabletop
-  def initialize(x, y)
-    @width = x
-    @height = y
-  end
-end
-
-class Direction
-  CARDINAL_POINTS = %w(NORTH EAST SOUTH WEST).freeze
-  NAVIGATE = { left: -1, right: 1 }.freeze
-
-  def initialize(cardinal_point)
-    @cardinal_point = cardinal_point
+class PlaceCommand
+  def initialize(robot, table, position)
+    @robot = robot
+    @table = table
+    @position = position
   end
 
-  def turn(direction)
-    Direction.new CARDINAL_POINTS[to_i + NAVIGATE[direction]]
+  def execute
+    @robot.position = @position if @table.valid_position?(@position)
   end
-
-  private
-
-  def to_i
-    CARDINAL_POINTS.find_index @cardinal_point
-  end
-end
-
-class Position
-
-  attr_reader :x, :y, :direction
-
-  def initialize(x, y, direction)
-    @x = x
-    @y = y
-    @direction = direction
-  end
-
-  def turn_left
-    self.direction = DIRECTIONS.find_index(self.direction) - 1
-    Position.new @x, @y, direction - 1
-  end
-
-  def turn_right
-    self.direction = DIRECTIONS.find_index(self.direction) + 1
-  end
-end
-
-class Robot
-  attr_accessor :position
-
-  def initialize
-    @position = nil
-  end
-end
+end 
 
 class MoveCommand
   def initialize(robot, tabletop)
@@ -105,5 +121,3 @@ class RightCommand
   @robot.position = Position.new(@robot).turn_left
 end
 
-class PlaceCommand
-end 
