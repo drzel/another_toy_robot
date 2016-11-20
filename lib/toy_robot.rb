@@ -2,12 +2,6 @@ require "toy_robot/version"
 require "pry"
 
 class Client
-  attr_reader :invoker
-
-  def initialize
-    @invoker = Invoker.new
-  end
-
   def main
     loop do
       puts "Enter command:"
@@ -18,38 +12,16 @@ class Client
   def parse(command)
     case command
     when "move"
-      # @invoker.execute(MoveCommand.new(@robot))
+      # MoveCommand.new(@robot).execute
     when "left"
-      # @invoker.execute(LeftCommand.new(@robot))
+      # LeftCommand.new(@robot)).execute
     when "right"
-      # @invoker.execute(RightCommand.new(@robot))
+      # RightCommand.new(@robot).execute
     when /place\s*(\d\s*,\s*){2}[nesw]/
-      # @invoker.execute(PlaceCommand.new(@robot))
+      # PlaceCommand.new(@robot).execute
     else
       # error
     end
-  end
-
-  def sanitize(str)
-    str.chomp.downcase.squeeze.strip
-  end
-end
-
-class Invoker
-  def execute(cmd)
-    cmd.execute
-  end
-end
-
-class Command
-  attr_reader :obj
-
-  def initialize(obj)
-    @obj = obj
-  end
-
-  def execute
-    raise NotImplementedError
   end
 end
 
@@ -59,3 +31,60 @@ class Tabletop
     @height = y
   end
 end
+
+class Position
+  DIRECTIONS = %w(NORTH EAST SOUTH WEST).freeze
+
+  attr_reader :x, :y, :direction
+
+  def initialize(x, y, direction)
+    @x = x
+    @y = y
+    @direction = direction
+  end
+
+  def turn_left
+    self.direction = DIRECTIONS.find_index(self.direction) - 1
+  end
+
+  def turn_right
+    self.direction = DIRECTIONS.find_index(self.direction) + 1
+  end
+end
+
+class Robot
+  attr_accessor :position
+
+  def initialize
+    @position = nil
+  end
+end
+
+class MoveCommand
+  def initialize(robot, tabletop)
+    @robot = robot
+    @tabletop = tabletop
+  end
+
+  def execute
+  end
+end
+
+class LeftCommand
+  def initialize(robot)
+    @robot = robot
+  end
+
+  @robot.position = Position.new(@robot).turn_left
+end
+
+class RightCommand
+  def initialize(robot)
+    @robot = robot
+  end
+
+  @robot.position = Position.new(@robot).turn_left
+end
+
+class PlaceCommand
+end 
