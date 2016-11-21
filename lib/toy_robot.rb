@@ -23,15 +23,17 @@ end
 class Direction
   CARDINAL_POINTS = %i(n e s w).freeze
 
+  attr_reader :cardinal_point
+
   def initialize(cardinal_point)
     @cardinal_point = cardinal_point
   end
 
-  def turn_left
+  def left
     Direction.new CARDINAL_POINTS[(to_i - 1) % 4]
   end
 
-  def turn_right
+  def right
     Direction.new CARDINAL_POINTS[(to_i + 1) % 4]
   end
 
@@ -57,14 +59,22 @@ class Position
   def initialize(x, y, direction)
     @x = x
     @y = y
-    @direction = Direction.new direction
+    @direction = direction
   end
 
   def step
-    displacement = DISPLACEMENT[@direction.to_sym]
-    x = @x + displacement[:x]
-    y = @y + displacement[:y]
-    Position.new x, y, @direction
+    displacement = DISPLACEMENT[@direction.cardinal_point]
+    new_x = @x + displacement[:x]
+    new_y = @y + displacement[:y]
+    Position.new new_x, new_y, @direction
+  end
+
+  def turn_left
+    Position.new @x, @y, @direction.left
+  end
+
+  def turn_right
+    Position.new @x, @y, @direction.right
   end
 end
 
@@ -91,11 +101,11 @@ class Client
       position = Position.new x, y, direction
       PlaceCommand.new(@robot, @tabletop, position).execute
     when "move"
-      MoveCommand.new(@robot).execute
+      MoveCommand.new(@robot, @tabletop).execute
     when "left"
-      # LeftCommand.new(@robot)).execute
+      LeftCommand.new(@robot).execute
     when "right"
-      # RightCommand.new(@robot).execute
+      RightCommand.new(@robot).execute
     else
       # error
     end
@@ -133,7 +143,9 @@ class LeftCommand
     @robot = robot
   end
 
-  @robot.position = Position.new(@robot).turn_left
+  def execute
+    @robot.position = @robot.position.turn_left
+  end
 end
 
 class RightCommand
@@ -141,5 +153,7 @@ class RightCommand
     @robot = robot
   end
 
-  @robot.position = Position.new(@robot).turn_left
+  def execute
+    @robot.position = @robot.position.turn_right
+  end
 end
