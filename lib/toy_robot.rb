@@ -117,7 +117,7 @@ class Client
     when "report"
       ReportCommand.new(@robot).execute
     else
-      # error
+      puts "invalid command"
     end
   end
 end
