@@ -15,29 +15,43 @@ class Tabletop
     @height = height
   end
 
-  def valid_position?(position)
-    position.x.between?(0, @width - 1) && position.y.between?(0, @height - 1)
+  def valid_position?(x, y)
+    x.between?(0, @width - 1) && y.between?(0, @height - 1)
   end
 end
 
 class Direction
-  CARDINAL_POINTS = %w(n e s w)
-  NAVIGATE = { left: -1, right: 1, 180: 2 }
+  CARDINAL_POINTS = %i(n e s w).freeze
 
-  def initialize(char)
-    @cardinal_int = CARDINAL_POINTS.find_index char
+  def initialize(cardinal_point)
+    @cardinal_point = cardinal_point
   end
 
-  def turn(direction)
-    Direction.new CARDINAL_POINTS[@cardinal_int + NAVIGATE[direction] % 4]
+  def turn_left
+    Direction.new CARDINAL_POINTS[(to_i - 1) % 4]
+  end
+
+  def turn_right
+    Direction.new CARDINAL_POINTS[(to_i + 1) % 4]
+  end
+
+  def to_i
+    CARDINAL_POINTS.find_index(@cardinal_point)
   end
 
   def to_s
-    CARDINAL_POINTS.find_index(@cardinal_int)
+    @cardinal_point.to_s
   end
 end
 
 class Position
+  DISPLACEMENT = {
+    n: { x: 0, y: 1 },
+    e: { x: 1, y: 0 },
+    s: { x: 0, y: -1 },
+    w: { x: -1, y: 0 },
+  }.freeze
+
   attr_reader :x, :y
 
   def initialize(x, y, direction)
@@ -46,8 +60,11 @@ class Position
     @direction = Direction.new direction
   end
 
-  def direction
-    @direction.to_s
+  def step
+    displacement = DISPLACEMENT[@direction.to_sym]
+    x = @x + displacement[:x]
+    y = @y + displacement[:y]
+    Position.new x, y, @direction
   end
 end
 
@@ -68,11 +85,13 @@ class Client
     case command
     when /place\s+(\d,\s*){2}[nesw]\s*/
       params = command[/\s.*/].delete(" ").split(",")
-      x, y, direction = params[0], params[1], params[2]
+      x = params[0]
+      y = params[1]
+      direction = params[2]
       position = Position.new x, y, direction
       PlaceCommand.new(@robot, @tabletop, position).execute
     when "move"
-      # MoveCommand.new(@robot).execute
+      MoveCommand.new(@robot).execute
     when "left"
       # LeftCommand.new(@robot)).execute
     when "right"
@@ -84,16 +103,16 @@ class Client
 end
 
 class PlaceCommand
-  def initialize(robot, table, position)
+  def initialize(robot, tabletop, position)
     @robot = robot
-    @table = table
+    @tabletop = tabletop
     @position = position
   end
 
   def execute
-    @robot.position = @position if @table.valid_position?(@position)
+    @robot.position = @position if @tabletop.valid_position?(@position.x, @position.y)
   end
-end 
+end
 
 class MoveCommand
   def initialize(robot, tabletop)
@@ -102,6 +121,10 @@ class MoveCommand
   end
 
   def execute
+    new_position = @position.step
+    if @tabletop.valid_position? new_position.x, new_position.y
+      @robot.position = new_position
+    end
   end
 end
 
@@ -120,4 +143,3 @@ class RightCommand
 
   @robot.position = Position.new(@robot).turn_left
 end
-
