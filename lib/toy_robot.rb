@@ -7,6 +7,10 @@ class Robot
   def initialize
     @position = nil
   end
+
+  def report
+    @position.to_s
+  end
 end
 
 class Tabletop
@@ -76,6 +80,10 @@ class Position
   def turn_right
     Position.new @x, @y, @direction.right
   end
+
+  def to_s
+    "#{@x}, #{@y}, #{@direction}"
+  end
 end
 
 class Client
@@ -106,6 +114,8 @@ class Client
       LeftCommand.new(@robot).execute
     when "right"
       RightCommand.new(@robot).execute
+    when "report"
+      ReportCommand.new(@robot).execute
     else
       # error
     end
@@ -155,5 +165,15 @@ class RightCommand
 
   def execute
     @robot.position = @robot.position.turn_right
+  end
+end
+
+class ReportCommand
+  def initialize(robot)
+    @robot = robot
+  end
+
+  def execute
+    puts @robot.report
   end
 end
