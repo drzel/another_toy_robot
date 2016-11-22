@@ -28,64 +28,38 @@ end
 Arena = Struct.new(:width, :height) do
 end
 
-class Direction
-  CARDINAL_POINTS = %i(n e s w).freeze
-  ROTATION_INTS = { left: -1, right: 1 }.freeze
-
-  def initialize(cardinal_point)
-    @cardinal_point = cardinal_point
-  end
-
-  def turn(direction)
-    Direction.new CARDINAL_POINTS[(to_i + ROTATION_INTS[direction]) % 4]
-  end
-
-  def to_sym
-    @cardinal_point
-  end
-
-  def to_s
-    @cardinal_point.to_s
-  end
-
-  private
-
-  def to_i
-    CARDINAL_POINTS.find_index(@cardinal_point)
-  end
-end
-
 class Position
-  DISPLACEMENT = {
-    n: { x: 0, y: 1 },
-    e: { x: 1, y: 0 },
-    s: { x: 0, y: -1 },
-    w: { x: -1, y: 0 },
-  }.freeze
+  COMPASS      = %i(n e s w).freeze
+  ROTATION     = { left: -1, right: 1 }.freeze
+  DISPLACEMENT = { n: { x: 0,  y: 1  },
+                   e: { x: 1,  y: 0  },
+                   s: { x: 0,  y: -1 },
+                   w: { x: -1, y: 0  } }.freeze
 
-  def initialize(x, y, cardinal_point)
+  def initialize(x, y, direction)
     @x = x
     @y = y
-    @direction = Direction.new cardinal_point
+    @direction = direction
   end
 
   def advance
-    displacement = DISPLACEMENT[@direction.to_sym]
+    displacement = DISPLACEMENT[@direction]
     new_x = @x + displacement[:x]
     new_y = @y + displacement[:y]
-    Position.new new_x, new_y, @direction.to_sym
+    Position.new new_x, new_y, @direction
   end
 
   def turn(direction)
-    Position.new @x, @y, @direction.turn(direction).to_sym
-  end
-
-  def to_s
-    "#{@x}, #{@y}, #{@direction}"
+    index = (COMPASS.find_index @direction + ROTATION[direction]) % 4
+    Position.new @x, @y, COMPASS[index]
   end
 
   def inside?(arena)
     @x.between?(0, arena.width - 1) && @y.between?(0, arena.height - 1)
+  end
+
+  def to_s
+    "#{@x}, #{@y}, #{@direction}"
   end
 end
 
