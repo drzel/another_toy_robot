@@ -16,12 +16,8 @@ class Robot
     puts @position.to_s
   end
 
-  def left
-    @position = @position.turn_left
-  end
-
-  def right
-    @position = @position.turn_right
+  def turn(direction)
+    @position = @position.turn(direction)
   end
 
   def move
@@ -42,17 +38,14 @@ end
 
 class Direction
   CARDINAL_POINTS = %i(n e s w).freeze
+  ROTATION_INTS = { left: -1, right: 1 }.freeze
 
   def initialize(cardinal_point)
     @cardinal_point = cardinal_point
   end
 
-  def left
-    Direction.new CARDINAL_POINTS[(to_i - 1) % 4]
-  end
-
-  def right
-    Direction.new CARDINAL_POINTS[(to_i + 1) % 4]
+  def turn(direction)
+    Direction.new CARDINAL_POINTS[(to_i + ROTATION_INTS[direction]) % 4]
   end
 
   def to_sym
@@ -93,12 +86,8 @@ class Position
     Position.new new_x, new_y, @direction.to_sym
   end
 
-  def turn_left
-    Position.new @x, @y, @direction.left.to_sym
-  end
-
-  def turn_right
-    Position.new @x, @y, @direction.right.to_sym
+  def turn(direction)
+    Position.new @x, @y, @direction.turn(direction).to_sym
   end
 
   def to_s
@@ -119,11 +108,7 @@ class NullPosition
     NullPosition.new
   end
 
-  def turn_left
-    NullPosition.new
-  end
-
-  def turn_right
+  def turn(*)
     NullPosition.new
   end
 
@@ -149,9 +134,9 @@ class Client
     when "move"
       @robot.move
     when "left"
-      @robot.left
+      @robot.turn(:left)
     when "right"
-      @robot.right
+      @robot.turn(:right)
     when "report"
       @robot.report
     else
