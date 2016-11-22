@@ -7,7 +7,7 @@ class Robot
   end
 
   def place(position)
-    if @arena.valid_position? position.x, position.y
+    if position.inside? @arena
       @position = position
     end
   end
@@ -17,23 +17,15 @@ class Robot
   end
 
   def turn(direction)
-    @position = @position.turn(direction)
+    @position = @position.turn direction
   end
 
   def move
-    place @position.move
+    place @position.advance
   end
 end
 
-class Tabletop
-  def initialize(width, height)
-    @width = width
-    @height = height
-  end
-
-  def valid_position?(x, y)
-    x && y && x.between?(0, @width - 1) && y.between?(0, @height - 1)
-  end
+Arena = Struct.new(:width, :height) do
 end
 
 class Direction
@@ -71,15 +63,13 @@ class Position
     w: { x: -1, y: 0 },
   }.freeze
 
-  attr_reader :x, :y
-
   def initialize(x, y, cardinal_point)
     @x = x
     @y = y
     @direction = Direction.new cardinal_point
   end
 
-  def move
+  def advance
     displacement = DISPLACEMENT[@direction.to_sym]
     new_x = @x + displacement[:x]
     new_y = @y + displacement[:y]
@@ -93,6 +83,10 @@ class Position
   def to_s
     "#{@x}, #{@y}, #{@direction}"
   end
+
+  def inside?(arena)
+    @x.between?(0, arena.width - 1) && @y.between?(0, arena.height - 1)
+  end
 end
 
 class NullPosition
@@ -104,7 +98,7 @@ class NullPosition
     @direction = nil
   end
 
-  def move
+  def advance
     NullPosition.new
   end
 
@@ -115,11 +109,15 @@ class NullPosition
   def to_s
     "no position"
   end
+
+  def inside?(*)
+    false
+  end
 end
 
 class Client
   def initialize
-    @tabletop = Tabletop.new(5, 5)
+    @tabletop = Arena.new 5, 5
     @robot = Robot.new arena: @tabletop
   end
 
