@@ -90,7 +90,7 @@ class Command
   def execute
     case @command
     when /place\s+(\d,\s*){2}[nesw]/
-      @robot.place Position.new place_params
+      @robot.place place_position
     when "move"
       @robot.move
     when "left"
@@ -104,13 +104,11 @@ class Command
     end
   end
 
-  private
-
-  def place_params
+  def place_position
     params = @command[/\s.*/].delete(" ").split(",")
-    { x:         params[0].to_i,
-      y:         params[1].to_i,
-      direction: params[2].to_sym }
+    Position.new(x:         params[0].to_i,
+                 y:         params[1].to_i,
+                 direction: params[2].to_sym)
   end
 end
 
