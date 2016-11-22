@@ -7,7 +7,7 @@ class Robot
   end
 
   def place(position)
-    if position.inside? @arena
+    if position.inside?(@arena.width - 1, @arena.height - 1)
       @position = position
     end
   end
@@ -49,13 +49,13 @@ class Position
     Position.new x: new_x, y: new_y, direction: @direction
   end
 
-  def turn(direction)
-    index = (COMPASS.find_index(@direction) + ROTATION[direction]) % 4
+  def turn(hand_side)
+    index = (COMPASS.find_index(@direction) + ROTATION[hand_side]) % 4
     Position.new x: @x, y: @y, direction: COMPASS[index]
   end
 
-  def inside?(arena)
-    @x.between?(0, arena.width - 1) && @y.between?(0, arena.height - 1)
+  def inside?(x, y)
+    @x.between?(0, x) && @y.between?(0, y)
   end
 
   def to_s
