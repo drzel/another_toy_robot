@@ -50,8 +50,8 @@ class Position
   end
 
   def turn(direction)
-    index = (COMPASS.find_index @direction + ROTATION[direction]) % 4
-    Position.new @x, @y, COMPASS[index]
+    index = (COMPASS.find_index(@direction) + ROTATION[direction]) % 4
+    Position.new x: @x, y: @y, direction: COMPASS[index]
   end
 
   def inside?(arena)
@@ -81,22 +81,22 @@ class NullPosition
   end
 end
 
-class Client
-  def initialize
-    @tabletop = Arena.new 5, 5
-    @robot = Robot.new arena: @tabletop
+class Command
+  def initialize(robot, command)
+    @robot = robot
+    @command = command.strip
   end
 
-  def parse(command)
-    case command.strip
+  def execute
+    case @command
     when /place\s+(\d,\s*){2}[nesw]/
-      @robot.place Position.new(place_params(command))
+      @robot.place Position.new place_params
     when "move"
       @robot.move
     when "left"
-      @robot.turn(:left)
+      @robot.turn :left
     when "right"
-      @robot.turn(:right)
+      @robot.turn :right
     when "report"
       @robot.report
     else
@@ -104,21 +104,28 @@ class Client
     end
   end
 
-  def main
-    loop do
-      print "Input command: "
-      parse gets
-      print "\n"
-    end
-  end
-
   private
 
-  def place_params(command)
-    params = command[/\s.*/].delete(" ").split(",")
+  def place_params
+    params = @command[/\s.*/].delete(" ").split(",")
     { x:         params[0].to_i,
       y:         params[1].to_i,
       direction: params[2].to_sym }
+  end
+end
+
+class Client
+  def initialize
+    @tabletop = Arena.new 5, 5
+    @robot = Robot.new arena: @tabletop
+  end
+
+  def main
+    loop do
+      print "Input command: "
+      Command.new(@robot, gets).execute
+      print "\n"
+    end
   end
 end
 
