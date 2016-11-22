@@ -36,7 +36,7 @@ class Position
                    s: { x: 0,  y: -1 },
                    w: { x: -1, y: 0  } }.freeze
 
-  def initialize(x, y, direction)
+  def initialize(x:, y:, direction:)
     @x = x
     @y = y
     @direction = direction
@@ -90,11 +90,7 @@ class Client
   def parse(command)
     case command.strip
     when /place\s+(\d,\s*){2}[nesw]/
-      params = place_params(command)
-      position = Position.new(params[:x],
-                              params[:y],
-                              params[:cardinal_point])
-      @robot.place position
+      @robot.place Position.new(place_params(command))
     when "move"
       @robot.move
     when "left"
@@ -121,9 +117,9 @@ class Client
 
   def place_params(command)
     params = command[/\s.*/].delete(" ").split(",")
-    { x:              params[0].to_i,
-      y:              params[1].to_i,
-      cardinal_point: params[2].to_sym }
+    { x:         params[0].to_i,
+      y:         params[1].to_i,
+      direction: params[2].to_sym }
   end
 end
 
