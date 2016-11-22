@@ -64,14 +64,6 @@ class Position
 end
 
 class NullPosition
-  attr_reader :x, :y
-
-  def initialize
-    @x = nil
-    @y = nil
-    @direction = nil
-  end
-
   def advance
     NullPosition.new
   end
