@@ -1,14 +1,35 @@
 require "pry"
 
 class Robot
-  attr_accessor :position
+  def initialize(position: NullPosition.new, arena: NullArena.new)
+    @position = position
+    @arena = arena
+  end
 
-  def initialize
-    @position = nil
+  def place(arena, position)
+    if arena.valid_position? position.x, position.y
+      @arena = arena
+      @position = position
+    end
   end
 
   def report
-    @position.to_s
+    puts @position.to_s
+  end
+
+  def left
+    @position = @position.turn_left
+  end
+
+  def right
+    @position = @position.turn_right
+  end
+
+  def move
+    new_position = @position.move
+    if @arena.valid_position? new_position.x, new_position.y
+      @position = new_position
+    end
   end
 end
 
@@ -23,10 +44,14 @@ class Tabletop
   end
 end
 
+class NullArena
+  def valid_position?(*)
+    false
+  end
+end
+
 class Direction
   CARDINAL_POINTS = %i(n e s w).freeze
-
-  attr_reader :cardinal_point
 
   def initialize(cardinal_point)
     @cardinal_point = cardinal_point
@@ -40,12 +65,18 @@ class Direction
     Direction.new CARDINAL_POINTS[(to_i + 1) % 4]
   end
 
-  def to_i
-    CARDINAL_POINTS.find_index(@cardinal_point)
+  def to_sym
+    @cardinal_point
   end
 
   def to_s
     @cardinal_point.to_s
+  end
+
+  private
+
+  def to_i
+    CARDINAL_POINTS.find_index(@cardinal_point)
   end
 end
 
@@ -59,25 +90,25 @@ class Position
 
   attr_reader :x, :y
 
-  def initialize(x, y, direction)
+  def initialize(x, y, cardinal_point)
     @x = x
     @y = y
-    @direction = direction
+    @direction = Direction.new cardinal_point
   end
 
-  def step
-    displacement = DISPLACEMENT[@direction.cardinal_point]
+  def move
+    displacement = DISPLACEMENT[@direction.to_sym]
     new_x = @x + displacement[:x]
     new_y = @y + displacement[:y]
-    Position.new new_x, new_y, @direction
+    Position.new new_x, new_y, @direction.to_sym
   end
 
   def turn_left
-    Position.new @x, @y, @direction.left
+    Position.new @x, @y, @direction.left.to_sym
   end
 
   def turn_right
-    Position.new @x, @y, @direction.right
+    Position.new @x, @y, @direction.right.to_sym
   end
 
   def to_s
@@ -85,61 +116,29 @@ class Position
   end
 end
 
-class PlaceCommand
-  def initialize(robot, tabletop, position)
-    @robot = robot
-    @tabletop = tabletop
-    @position = position
+class NullPosition
+  attr_reader :x, :y
+
+  def initialize
+    @x = nil
+    @y = nil
+    @direction = nil
   end
 
-  def execute
-    if @tabletop.valid_position?(@position.x, @position.y)
-      @robot.position = @position
-    end
-  end
-end
-
-class MoveCommand
-  def initialize(robot, tabletop)
-    @robot = robot
-    @tabletop = tabletop
+  def move
+    NullPosition.new
   end
 
-  def execute
-    new_position = @robot.position.step
-    if @tabletop.valid_position? new_position.x, new_position.y
-      @robot.position = new_position
-    end
-  end
-end
-
-class LeftCommand
-  def initialize(robot)
-    @robot = robot
+  def turn_left
+    NullPosition.new
   end
 
-  def execute
-    @robot.position = @robot.position.turn_left
-  end
-end
-
-class RightCommand
-  def initialize(robot)
-    @robot = robot
+  def turn_right
+    NullPosition.new
   end
 
-  def execute
-    @robot.position = @robot.position.turn_right
-  end
-end
-
-class ReportCommand
-  def initialize(robot)
-    @robot = robot
-  end
-
-  def execute
-    puts @robot.report
+  def to_s
+    "no position"
   end
 end
 
@@ -151,21 +150,20 @@ class Client
 
   def parse(command)
     case command.strip
-    when /place\s+(\d,\s*){2}[nesw]\s*/
-      params = command[/\s.*/].delete(" ").split(",")
-      x = params[0].to_i
-      y = params[1].to_i
-      direction = Direction.new params[2].to_sym
-      position = Position.new x, y, direction
-      PlaceCommand.new(@robot, @tabletop, position).execute
+    when /place\s+(\d,\s*){2}[nesw]/
+      params = place_params(command)
+      position = Position.new(params[:x],
+                              params[:y],
+                              params[:cardinal_point])
+      @robot.place @tabletop, position
     when "move"
-      MoveCommand.new(@robot, @tabletop).execute
+      @robot.move
     when "left"
-      LeftCommand.new(@robot).execute
+      @robot.left
     when "right"
-      RightCommand.new(@robot).execute
+      @robot.right
     when "report"
-      ReportCommand.new(@robot).execute
+      @robot.report
     else
       puts "invalid command"
     end
@@ -178,6 +176,15 @@ class Client
       break if input == "exit"
       parse input
     end
+  end
+
+  private
+
+  def place_params(command)
+    params = command[/\s.*/].delete(" ").split(",")
+    { x:              params[0].to_i,
+      y:              params[1].to_i,
+      cardinal_point: params[2].to_sym }
   end
 end
 
