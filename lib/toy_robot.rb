@@ -1,14 +1,13 @@
 require "pry"
 
 class Robot
-  def initialize(position: NullPosition.new, arena: NullArena.new)
-    @position = position
+  def initialize(arena:, position: NullPosition.new)
     @arena = arena
+    @position = position
   end
 
-  def place(arena, position)
-    if arena.valid_position? position.x, position.y
-      @arena = arena
+  def place(position)
+    if @arena.valid_position? position.x, position.y
       @position = position
     end
   end
@@ -26,10 +25,7 @@ class Robot
   end
 
   def move
-    new_position = @position.move
-    if @arena.valid_position? new_position.x, new_position.y
-      @position = new_position
-    end
+    place @position.move
   end
 end
 
@@ -40,13 +36,7 @@ class Tabletop
   end
 
   def valid_position?(x, y)
-    x.between?(0, @width - 1) && y.between?(0, @height - 1)
-  end
-end
-
-class NullArena
-  def valid_position?(*)
-    false
+    x && y && x.between?(0, @width - 1) && y.between?(0, @height - 1)
   end
 end
 
@@ -144,8 +134,8 @@ end
 
 class Client
   def initialize
-    @robot = Robot.new
     @tabletop = Tabletop.new(5, 5)
+    @robot = Robot.new arena: @tabletop
   end
 
   def parse(command)
@@ -155,7 +145,7 @@ class Client
       position = Position.new(params[:x],
                               params[:y],
                               params[:cardinal_point])
-      @robot.place @tabletop, position
+      @robot.place position
     when "move"
       @robot.move
     when "left"
@@ -171,7 +161,7 @@ class Client
 
   def main
     loop do
-      puts "Input command:"
+      print "\nInput command: "
       input = gets
       break if input == "exit"
       parse input
