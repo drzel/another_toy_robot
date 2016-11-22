@@ -46,7 +46,7 @@ class Position
     displacement = DISPLACEMENT[@direction]
     new_x = @x + displacement[:x]
     new_y = @y + displacement[:y]
-    Position.new new_x, new_y, @direction
+    Position.new x: new_x, y: new_y, direction: @direction
   end
 
   def turn(direction)
