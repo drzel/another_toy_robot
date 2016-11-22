@@ -1,4 +1,3 @@
-require "toy_robot/version"
 require "pry"
 
 class Robot
@@ -86,42 +85,6 @@ class Position
   end
 end
 
-class Client
-  def initialize(robot, tabletop)
-    @robot = robot
-    @tabletop = tabletop
-  end
-
-  def main
-    loop do
-      puts "Enter command:"
-      parse gets
-    end
-  end
-
-  def parse(command)
-    case command
-    when /place\s+(\d,\s*){2}[nesw]\s*/
-      params = command[/\s.*/].delete(" ").split(",")
-      x = params[0]
-      y = params[1]
-      direction = params[2]
-      position = Position.new x, y, direction
-      PlaceCommand.new(@robot, @tabletop, position).execute
-    when "move"
-      MoveCommand.new(@robot, @tabletop).execute
-    when "left"
-      LeftCommand.new(@robot).execute
-    when "right"
-      RightCommand.new(@robot).execute
-    when "report"
-      ReportCommand.new(@robot).execute
-    else
-      puts "invalid command"
-    end
-  end
-end
-
 class PlaceCommand
   def initialize(robot, tabletop, position)
     @robot = robot
@@ -130,7 +93,9 @@ class PlaceCommand
   end
 
   def execute
-    @robot.position = @position if @tabletop.valid_position?(@position.x, @position.y)
+    if @tabletop.valid_position?(@position.x, @position.y)
+      @robot.position = @position
+    end
   end
 end
 
@@ -141,7 +106,7 @@ class MoveCommand
   end
 
   def execute
-    new_position = @position.step
+    new_position = @robot.position.step
     if @tabletop.valid_position? new_position.x, new_position.y
       @robot.position = new_position
     end
@@ -177,3 +142,43 @@ class ReportCommand
     puts @robot.report
   end
 end
+
+class Client
+  def initialize
+    @robot = Robot.new
+    @tabletop = Tabletop.new(5, 5)
+  end
+
+  def parse(command)
+    case command.strip
+    when /place\s+(\d,\s*){2}[nesw]\s*/
+      params = command[/\s.*/].delete(" ").split(",")
+      x = params[0].to_i
+      y = params[1].to_i
+      direction = Direction.new params[2].to_sym
+      position = Position.new x, y, direction
+      PlaceCommand.new(@robot, @tabletop, position).execute
+    when "move"
+      MoveCommand.new(@robot, @tabletop).execute
+    when "left"
+      LeftCommand.new(@robot).execute
+    when "right"
+      RightCommand.new(@robot).execute
+    when "report"
+      ReportCommand.new(@robot).execute
+    else
+      puts "invalid command"
+    end
+  end
+
+  def main
+    loop do
+      puts "Input command:"
+      input = gets
+      break if input == "exit"
+      parse input
+    end
+  end
+end
+
+Client.new.main
