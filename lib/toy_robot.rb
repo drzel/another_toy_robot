@@ -106,10 +106,9 @@ class Client
 
   def main
     loop do
-      print "\nInput command: "
-      input = gets
-      break if input == "exit"
-      parse input
+      print "Input command: "
+      parse gets
+      print "\n"
     end
   end
 
