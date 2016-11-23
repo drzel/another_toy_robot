@@ -7,25 +7,39 @@ class Robot
   end
 
   def place(position)
-    if position.inside?(@arena.width - 1, @arena.height - 1)
-      @position = position
-    end
+    go_to position
+  end
+
+  def move
+    go_to @position.advance
+  end
+
+  def left
+    @position = @position.turn :left
+  end
+
+  def right
+    @position = @position.turn :right
   end
 
   def report
     puts @position.to_s
   end
 
-  def turn(direction)
-    @position = @position.turn direction
-  end
+  private
 
-  def move
-    place @position.advance
+  def go_to(position)
+    @position = position if position.inside? @arena.max_x, @arena.max_y
   end
 end
 
-Arena = Struct.new(:width, :height) do
+class Arena
+  attr_reader :max_x, :max_y
+
+  def initialize(width, height)
+    @max_x = width - 1
+    @max_y = height - 1
+  end
 end
 
 class Position
@@ -37,15 +51,15 @@ class Position
                    w: { x: -1, y: 0  } }.freeze
 
   def initialize(x:, y:, direction:)
-    @x = x
-    @y = y
+    @x         = x
+    @y         = y
     @direction = direction
   end
 
   def advance
     displacement = DISPLACEMENT[@direction]
-    new_x = @x + displacement[:x]
-    new_y = @y + displacement[:y]
+    new_x        = @x + displacement[:x]
+    new_y        = @y + displacement[:y]
     Position.new x: new_x, y: new_y, direction: @direction
   end
 
@@ -65,11 +79,11 @@ end
 
 class NullPosition
   def advance
-    NullPosition.new
+    self
   end
 
   def turn(*)
-    NullPosition.new
+    self
   end
 
   def to_s
@@ -89,18 +103,12 @@ class Command
 
   def execute
     case @command
-    when /place\s+(\d,\s*){2}[nesw]/
-      @robot.place place_position
-    when "move"
-      @robot.move
-    when "left"
-      @robot.turn :left
-    when "right"
-      @robot.turn :right
-    when "report"
-      @robot.report
-    else
-      puts "invalid command"
+    when /place\s+(\d,\s*){2}[nesw]/ then @robot.place place_position
+    when "move"                      then @robot.move
+    when "left"                      then @robot.left
+    when "right"                     then @robot.right
+    when "report"                    then @robot.report
+    else                             puts "invalid command"
     end
   end
 
@@ -122,7 +130,7 @@ class Client
     loop do
       print "Input command: "
       Command.new(@robot, gets).execute
-      print "\n"
+      puts
     end
   end
 end
