@@ -98,7 +98,7 @@ end
 class Command
   def initialize(robot, command)
     @robot = robot
-    @command = command.strip
+    @command = command.downcase.strip
   end
 
   def execute
@@ -122,8 +122,8 @@ end
 
 class Client
   def initialize
-    @tabletop = Arena.new 5, 5
-    @robot = Robot.new arena: @tabletop
+    table  = Arena.new 5, 5
+    @robot = Robot.new arena: table
   end
 
   def main
