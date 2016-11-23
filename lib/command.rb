@@ -7,11 +7,11 @@ class Command
   def execute
     case @command
     when /place\s+(\d+,\s*){2}[nesw]/ then @robot.place place_position
-    when "move"                      then @robot.move
-    when "left"                      then @robot.left
-    when "right"                     then @robot.right
-    when "report"                    then @robot.report
-    else                             puts "Invalid command"
+    when "move"                       then @robot.move
+    when "left"                       then @robot.left
+    when "right"                      then @robot.right
+    when "report"                     then @robot.report
+    else                              puts "Invalid command"
     end
   end
 
