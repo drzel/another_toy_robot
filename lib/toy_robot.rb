@@ -87,7 +87,7 @@ class NullPosition
   end
 
   def to_s
-    "no position"
+    "No position"
   end
 
   def inside?(*)
@@ -108,7 +108,7 @@ class Command
     when "left"                      then @robot.left
     when "right"                     then @robot.right
     when "report"                    then @robot.report
-    else                             puts "invalid command"
+    else                             puts "Invalid command"
     end
   end
 
