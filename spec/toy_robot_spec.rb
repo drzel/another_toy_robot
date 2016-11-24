@@ -42,53 +42,31 @@ describe Robot do
     let(:robot) { build(:robot_with_position) }
 
     describe "#left" do
-      it "turns left" do
-        LEFT_HASH  = { n: :w, w: :s, s: :e, e: :n }
-        position = robot.instance_variable_get("@position")
-        direction = position.instance_variable_get("@direction")
+      it "sends turn(:left) to @position" do
+        position = robot.instance_variable_get "@position"
+        expect(position).to receive(:turn).with(:left)
         robot.left
-        new_position = robot.instance_variable_get("@position")
-        new_direction = new_position.instance_variable_get("@direction")
-        expect(new_direction).to eq LEFT_HASH[direction]
       end
     end
 
     describe "#right" do
-      it "turns right" do
-        RIGHT_HASH = { n: :e, e: :s, s: :w, w: :n }
-        position = robot.instance_variable_get("@position")
-        direction = position.instance_variable_get("@direction")
+      it "sends turn(:right) to @position" do
+        position = robot.instance_variable_get "@position"
+        expect(position).to receive(:turn).with(:right)
         robot.right
-        new_position = robot.instance_variable_get("@position")
-        new_direction = new_position.instance_variable_get("@direction")
-        expect(new_direction).to eq RIGHT_HASH[direction]
       end
     end
 
-    context "when next position is within arena" do
-      describe "#move" do
-        MOVE_HASH = { n: { x:  0, y:  1 },
-                      e: { x:  1, y:  0 },
-                      s: { x:  0, y: -1 },
-                      w: { x: -1, y:  0 } }
-        it "advances one position" do
-          position = robot.instance_variable_get("@position")
-          direction = position.instance_variable_get "@direction"
-          x = position.instance_variable_get "@x"
-          y = position.instance_variable_get "@y"
-          robot.move
-          new_position = robot.instance_variable_get "@position"
-          new_x = new_position.instance_variable_get "@x"
-          new_y = new_position.instance_variable_get "@y"
-          expect
-        end
+    describe "#move" do
+      it "sends advance to @position" do
+        position = robot.instance_variable_get "@position"
+        binding.pry
+        expect(position).to receive(:advance)
+        robot.move
       end
     end
 
     describe "#report" do
-      it 'outputs "No position" to stdout' do
-        expect { robot.report }.to output("No position\n").to_stdout
-      end
     end
   end
 end
