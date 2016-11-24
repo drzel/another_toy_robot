@@ -1,3 +1,4 @@
+require 'pry'
 require_relative 'lib/app'
 require_relative 'lib/command'
 require_relative 'lib/arena'
