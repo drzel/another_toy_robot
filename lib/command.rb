@@ -7,7 +7,7 @@ class Command
 
   def execute
     case @command
-    when /place\s+(\d+,\s*){2}[nesw]/ then @robot.place place_position
+    when /place\s+(\d+,\s*){2}[nesw]/ then @robot.place position
     when "move"                       then @robot.move
     when "left"                       then @robot.left
     when "right"                      then @robot.right
@@ -18,12 +18,19 @@ class Command
 
   private
 
-  def place_position
-    params    = @command[/\s.*/].delete(" ").split(",")
-    x         = params[0].to_i
-    y         = params[1].to_i
-    direction = params[2].to_sym
-    position  = NullPosition.new arena: @arena
-    position.go_to x: x, y: y, direction: direction
+  def param_ary
+    @param_ary ||= @command[/\s.*/].delete(" ").split(",")
+  end
+
+  def place_params
+    @params ||= { x:         param_ary[0].to_i,
+                  y:         param_ary[1].to_i,
+                  direction: param_ary[2].to_sym }
+  end
+
+  def position
+    NullPosition.new(arena: @arena).go_to(x:         place_params[:x],
+                                          y:         place_params[:y],
+                                          direction: place_params[:direction])
   end
 end
