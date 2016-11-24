@@ -1,15 +1,14 @@
 class Robot
-  def initialize(arena:, position: NullPosition.new)
-    @arena = arena
+  def initialize(position: NullPosition.new)
     @position = position
   end
 
   def place(position)
-    go_to position
+    @position = position
   end
 
   def move
-    go_to @position.advance
+    @position = @position.advance
   end
 
   def left
@@ -22,11 +21,5 @@ class Robot
 
   def report
     puts @position.to_s
-  end
-
-  private
-
-  def go_to(position)
-    @position = position if position.inside? @arena.max_x, @arena.max_y
   end
 end

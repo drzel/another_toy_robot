@@ -1,4 +1,8 @@
-class NullPosition
+class NullPosition < AbstractPosition
+  def initialize(arena: NullArena.new)
+    @arena = arena
+  end
+
   def advance
     self
   end
@@ -9,9 +13,5 @@ class NullPosition
 
   def to_s
     "No position"
-  end
-
-  def inside?(*)
-    false
   end
 end
