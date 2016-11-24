@@ -1,6 +1,5 @@
-class NullPosition < AbstractPosition
-  def initialize(arena: NullArena.new)
-    @arena = arena
+class NullPosition < Position
+  def post_initialize(*)
   end
 
   def advance

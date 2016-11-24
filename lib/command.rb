@@ -19,13 +19,11 @@ class Command
   private
 
   def place_position
-    position  = NullPosition.new arena: @arena
     params    = @command[/\s.*/].delete(" ").split(",")
-
-    x = params[0].to_i
-    y = params[1].to_i
+    x         = params[0].to_i
+    y         = params[1].to_i
     direction = params[2].to_sym
-
-    position.go_to x, y, direction
+    position  = NullPosition.new arena: @arena
+    position.go_to x: x, y: y, direction: direction
   end
 end
