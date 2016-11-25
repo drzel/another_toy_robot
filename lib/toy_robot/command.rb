@@ -1,5 +1,5 @@
 class Command
-  def initialize(robot: robot, **args)
+  def initialize(robot:, **args)
     @robot = robot
     post_initialize args
   end
@@ -22,7 +22,7 @@ class PlaceCommand < Command
     position = position.go_to(x:         params[:x],
                               y:         params[:y],
                               direction: params[:direction])
-    @robot.place position
+    @robot.position = position
   end
 
   private
