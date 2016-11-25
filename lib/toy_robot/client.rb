@@ -7,7 +7,7 @@ class Client
   def instruction(cmd)
     case cmd.strip
     when /place\s+(\d+,\s*){2}[nesw]/
-      PlaceCommand.new(robot: @robot, arena: @table, params: @params).execute
+      PlaceCommand.new(robot: @robot, arena: @table, command: cmd).execute
     when "move"
       MoveCommand.new(robot: @robot).execute
     when "left"
@@ -19,11 +19,5 @@ class Client
     else
       InvalidCommand.new.execute
     end
-  end
-
-  private
-
-  def params
-    @params ||= @command[/\s.*/].delete(" ").split(",")
   end
 end

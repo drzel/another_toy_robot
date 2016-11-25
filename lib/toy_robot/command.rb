@@ -1,7 +1,6 @@
 class Command
-  def initialize(robot: robot, params:, **args)
+  def initialize(robot: robot, **args)
     @robot = robot
-    @params = params
     post_initialize args
   end
 
@@ -13,8 +12,8 @@ class Command
 end
 
 class PlaceCommand < Command
-  def post_initialize(robot:, arena: NullArena.new)
-    @robot = robot
+  def post_initialize(command:, arena: NullArena.new)
+    @command = command
     @arena = arena
   end
 
@@ -24,12 +23,16 @@ class PlaceCommand < Command
 
   private
 
+  def params
+    @params ||= @command[/\s.*/].delete(" ").split(",")
+  end
+
   def position
     position = NullPosition.new
     position.arena = @arena
-    position.go_to(x:         @params[0].to_i,
-                   y:         @params[1].to_i,
-                   direction: @params[2].to_sym)
+    position.go_to(x:         params[0].to_i,
+                   y:         params[1].to_i,
+                   direction: params[2].to_sym)
   end
 end
 
