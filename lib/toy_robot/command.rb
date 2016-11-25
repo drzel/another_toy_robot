@@ -18,21 +18,20 @@ class PlaceCommand < Command
   end
 
   def execute
+    position = NullPosition.new arena: @arena
+    position = position.go_to(x:         params[:x],
+                              y:         params[:y],
+                              direction: params[:direction])
     @robot.place position
   end
 
   private
 
   def params
-    @params ||= @command[/\s.*/].delete(" ").split(",")
-  end
-
-  def position
-    position = NullPosition.new
-    position.arena = @arena
-    position.go_to(x:         params[0].to_i,
-                   y:         params[1].to_i,
-                   direction: params[2].to_sym)
+    ary = @command[/\s.*/].delete(" ").split(",")
+    { x:         ary[0].to_i,
+      y:         ary[1].to_i,
+      direction: ary[2].to_sym }
   end
 end
 
