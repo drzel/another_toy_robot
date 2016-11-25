@@ -14,4 +14,7 @@ FactoryGirl.define do
 
   factory :null_arena do
   end
+
+  factory :null_position do
+  end
 end
