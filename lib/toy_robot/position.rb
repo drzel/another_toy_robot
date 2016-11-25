@@ -48,8 +48,7 @@ class RealPosition < Position
 end
 
 class NullPosition < Position
-  def post_initialize(*)
-  end
+  def post_initialize(*); end
 
   def advance
     self
