@@ -7,7 +7,7 @@ describe ToyRobot do
 end
 
 describe Robot do
-  let(:robot) { build(:robot) }
+  let(:robot) { build :robot }
 
   describe "#left" do
     it "sends turn(:left) to @position" do
@@ -41,7 +41,7 @@ describe Robot do
 end
 
 describe Arena do
-  let(:arena) { build(:arena) }
+  let(:arena) { build :arena }
 
   describe "#inbounds?" do
     context "when coordinates are inbounds" do
@@ -59,7 +59,7 @@ describe Arena do
 end
 
 describe NullArena do
-  let(:arena) { build(:null_arena) }
+  let(:arena) { build :null_arena }
 
   describe "#inbounds?" do
     it "returns true" do
@@ -71,7 +71,7 @@ end
 describe RealPosition do
   describe "#advance" do
     context "when facing north" do
-      let(:position) { build(:real_position, direction: :n) }
+      let(:position) { build :real_position, direction: :n }
 
       it "increments y coordinate by 1" do
         y_coordinate = position.y
@@ -80,7 +80,7 @@ describe RealPosition do
     end
 
     context "when facing east" do
-      let(:position) { build(:real_position, direction: :e) }
+      let(:position) { build :real_position, direction: :e }
 
       it "increments x coordinate by 1" do
         x_coordinate = position.x
@@ -89,7 +89,7 @@ describe RealPosition do
     end
 
     context "when facing south" do
-      let(:position) { build(:real_position, direction: :s) }
+      let(:position) { build :real_position, direction: :s }
 
       it "decrements y coordinate by 1" do
         y_coordinate = position.y
@@ -98,7 +98,7 @@ describe RealPosition do
     end
 
     context "when facing west" do
-      let(:position) { build(:real_position, direction: :w) }
+      let(:position) { build :real_position, direction: :w }
 
       it "decrements x coordinate by 1" do
         x_coordinate = position.x
@@ -109,7 +109,7 @@ describe RealPosition do
 
   describe "#turn" do
     context "when facing north" do
-      let(:position) { build(:real_position, direction: :n) }
+      let(:position) { build :real_position, direction: :n }
 
       context "and turning left" do
         it "faces west" do
@@ -127,7 +127,7 @@ describe RealPosition do
     end
 
     context "when facing east" do
-      let(:position) { build(:real_position, direction: :e) }
+      let(:position) { build :real_position, direction: :e }
 
       context "and turning left" do
         it "faces north" do
@@ -145,7 +145,7 @@ describe RealPosition do
     end
 
     context "when facing south" do
-      let(:position) { build(:real_position, direction: :s) }
+      let(:position) { build :real_position, direction: :s }
 
       context "and turning left" do
         it "faces east" do
@@ -163,7 +163,7 @@ describe RealPosition do
     end
 
     context "when facing west" do
-      let(:position) { build(:real_position, direction: :w) }
+      let(:position) { build :real_position, direction: :w }
 
       context "and turning left" do
         it "faces south" do
@@ -191,7 +191,7 @@ describe RealPosition do
 
   describe "#go_to" do
     context "when without arena" do
-      let(:position) { build(:real_position) }
+      let(:position) { build :real_position }
 
       it "returns new position" do
         new_x = rand 0...100
@@ -207,7 +207,7 @@ describe RealPosition do
     end
 
     context "when with arena" do
-      let(:position) { build(:real_position_with_arena) }
+      let(:position) { build :real_position_with_arena }
 
       context "when new position is inbounds" do
         it "returns new position" do
@@ -235,7 +235,7 @@ describe RealPosition do
 end
 
 describe NullPosition do
-  let(:null_position) { build(:null_position) }
+  let(:null_position) { build :null_position }
 
   describe "#advance" do
     it "returns NullPosition" do
