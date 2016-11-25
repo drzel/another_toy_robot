@@ -20,3 +20,9 @@ class Arena
     height - 1
   end
 end
+
+class NullArena
+  def inbounds?(*)
+    true
+  end
+end

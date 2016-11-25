@@ -256,3 +256,9 @@ describe NullPosition do
     end
   end
 end
+
+describe Command do
+  context "when command is invalid" do
+    let(:command) { build :command }
+  end
+end
