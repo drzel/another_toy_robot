@@ -7,7 +7,7 @@ class Command
 
   def execute
     case @command
-    when /place\s+(\d+,\s*){2}[nesw]/ then @robot.place position
+    when /place\s+(\d+,\s*){2}[nesw]/ then @robot.position = position
     when "move"                       then @robot.move
     when "left"                       then @robot.left
     when "right"                      then @robot.right

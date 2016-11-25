@@ -1,9 +1,7 @@
 class Robot
-  def initialize(position: NullPosition.new)
-    @position = position
-  end
+  attr_accessor :position
 
-  def place(position)
+  def initialize(position: NullPosition.new)
     @position = position
   end
 
