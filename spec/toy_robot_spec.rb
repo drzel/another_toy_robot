@@ -106,6 +106,88 @@ describe RealPosition do
       end
     end
   end
+
+  describe "#turn" do
+    context "when facing north" do
+      let(:position) { build(:real_position, direction: :n) }
+
+      context "and turning left" do
+        it "faces west" do
+          new_position = position.turn :left
+          expect(new_position.direction).to eq(:w)
+        end
+      end
+
+      context "and turning right" do
+        it "faces east" do
+          new_position = position.turn :right
+          expect(new_position.direction).to eq(:e)
+        end
+      end
+    end
+
+    context "when facing east" do
+      let(:position) { build(:real_position, direction: :e) }
+
+      context "and turning left" do
+        it "faces north" do
+          new_position = position.turn :left
+          expect(new_position.direction).to eq(:n)
+        end
+      end
+
+      context "and turning right" do
+        it "faces south" do
+          new_position = position.turn :right
+          expect(new_position.direction).to eq(:s)
+        end
+      end
+    end
+
+    context "when facing south" do
+      let(:position) { build(:real_position, direction: :s) }
+
+      context "and turning left" do
+        it "faces east" do
+          new_position = position.turn :left
+          expect(new_position.direction).to eq(:e)
+        end
+      end
+
+      context "and turning right" do
+        it "faces west" do
+          new_position = position.turn :right
+          expect(new_position.direction).to eq(:w)
+        end
+      end
+    end
+
+    context "when facing west" do
+      let(:position) { build(:real_position, direction: :w) }
+
+      context "and turning left" do
+        it "faces south" do
+          new_position = position.turn :left
+          expect(new_position.direction).to eq(:s)
+        end
+      end
+
+      context "and turning right" do
+        it "faces north" do
+          new_position = position.turn :right
+          expect(new_position.direction).to eq(:n)
+        end
+      end
+    end
+  end
+
+  describe "#to_s" do
+    let(:position) { build :real_position }
+
+    it "returns string of format 'x, y, d'" do
+      expect(position.to_s).to match(/(\d+,\s){2}[nesw]/)
+    end
+  end
 end
 
 describe NullPosition do
