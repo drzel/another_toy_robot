@@ -13,6 +13,10 @@ FactoryGirl.define do
     x         { rand(0...5) }
     y         { rand(0...5) }
     direction { %i(n e s w).sample }
+
+    factory :real_position_with_arena do
+      association :arena, strategy: :build
+    end
   end
 
   factory :null_position do

@@ -6,8 +6,6 @@ class Position
     post_initialize args
   end
 
-  private
-
   def go_to(x: @x, y: @y, direction: @direction)
     if @arena.inbounds? x, y
       RealPosition.new x: x, y: y, direction: direction, arena: @arena

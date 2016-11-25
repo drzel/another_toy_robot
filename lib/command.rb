@@ -18,18 +18,21 @@ class Command
 
   private
 
+  def params
+    @params ||= @command[/\s.*/].delete(" ").split(",")
+  end
+
   def place_params
-    ary       = @command[/\s.*/].delete(" ").split(",")
-    @params ||= { x:         ary[0].to_i,
-                  y:         ary[1].to_i,
-                  direction: ary[2].to_sym }
+    @place_params ||= { x:         params[0].to_i,
+                        y:         params[1].to_i,
+                        direction: params[2].to_sym }
   end
 
   def place_position
     position = NullPosition.new
     position.arena = @arena
-    position.go_to(x:         @params[:x],
-                   y:         @params[:y],
-                   direction: @params[:direction])
+    position.go_to(x:         place_params[:x],
+                   y:         place_params[:y],
+                   direction: place_params[:direction])
   end
 end

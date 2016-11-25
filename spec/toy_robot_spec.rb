@@ -46,13 +46,13 @@ describe Arena do
   describe "#inbounds?" do
     context "when coordinates are inbounds" do
       it "returns true" do
-        expect(arena.inbounds? 0, 0).to eq true
+        expect(arena.inbounds?(0, 0)).to eq true
       end
     end
 
     context "when coordinates are out-of-bounds" do
       it "returns false" do
-        expect(arena.inbounds? 10, 10).to eq false
+        expect(arena.inbounds?(10, 10)).to eq false
       end
     end
   end
@@ -63,7 +63,7 @@ describe NullArena do
 
   describe "#inbounds?" do
     it "returns true" do
-      expect(arena.inbounds? rand(100), rand(100)).to eq true
+      expect(arena.inbounds?(rand(100), rand(100))).to eq true
     end
   end
 end
@@ -186,6 +186,50 @@ describe RealPosition do
 
     it "returns string of format 'x, y, d'" do
       expect(position.to_s).to match(/(\d+,\s){2}[nesw]/)
+    end
+  end
+
+  describe "#go_to" do
+    context "when without arena" do
+      let(:position) { build(:real_position) }
+
+      it "returns new position" do
+        new_x = rand 0...100
+        new_y = rand 0...100
+        new_direction = %i(n e s w).sample
+        new_position = position.go_to(x: new_x,
+                                      y: new_y,
+                                      direction: new_direction)
+        expect(new_position.x).to eq new_x
+        expect(new_position.y).to eq new_y
+        expect(new_position.direction).to eq new_direction
+      end
+    end
+
+    context "when with arena" do
+      let(:position) { build(:real_position_with_arena) }
+
+      context "when new position is inbounds" do
+        it "returns new position" do
+          new_x = rand 0...5
+          new_y = rand 0...5
+          new_direction = %i(n e s w).sample
+          new_position = position.go_to(x: new_x,
+                                        y: new_y,
+                                        direction: new_direction)
+          expect(new_position.x).to eq new_x
+          expect(new_position.y).to eq new_y
+          expect(new_position.direction).to eq new_direction
+        end
+      end
+
+      context "when new position is out-of-bounds" do
+        it "returns self" do
+          new_x = 100
+          new_position = position.go_to x: new_x
+          expect(new_position).to be position
+        end
+      end
     end
   end
 end
