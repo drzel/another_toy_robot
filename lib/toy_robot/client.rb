@@ -1,14 +1,13 @@
 class Client
-  def initialize(robot: Robot.new, arena: NullArena.new, command:)
-    @robot = robot
-    @arena = arena
-    @command = command.downcase.strip
+  def initialize
+    @robot = Robot.new
+    @table = Arena.new width: 5, height: 5
   end
 
-  def execute
-    case @command
+  def instruction(cmd)
+    case cmd.strip
     when /place\s+(\d+,\s*){2}[nesw]/
-      PlaceCommand.new(robot: @robot, arena: @arena, params: @params).execute
+      PlaceCommand.new(robot: @robot, arena: @table, params: @params).execute
     when "move"
       MoveCommand.new(robot: @robot).execute
     when "left"
