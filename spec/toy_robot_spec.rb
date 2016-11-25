@@ -111,14 +111,14 @@ describe RealPosition do
     context "when facing north" do
       let(:position) { build :real_position, direction: :n }
 
-      context "and turning left" do
+      context "when turning left" do
         it "faces west" do
           new_position = position.turn :left
           expect(new_position.direction).to eq(:w)
         end
       end
 
-      context "and turning right" do
+      context "when turning right" do
         it "faces east" do
           new_position = position.turn :right
           expect(new_position.direction).to eq(:e)
@@ -129,14 +129,14 @@ describe RealPosition do
     context "when facing east" do
       let(:position) { build :real_position, direction: :e }
 
-      context "and turning left" do
+      context "when turning left" do
         it "faces north" do
           new_position = position.turn :left
           expect(new_position.direction).to eq(:n)
         end
       end
 
-      context "and turning right" do
+      context "when turning right" do
         it "faces south" do
           new_position = position.turn :right
           expect(new_position.direction).to eq(:s)
@@ -147,14 +147,14 @@ describe RealPosition do
     context "when facing south" do
       let(:position) { build :real_position, direction: :s }
 
-      context "and turning left" do
+      context "when turning left" do
         it "faces east" do
           new_position = position.turn :left
           expect(new_position.direction).to eq(:e)
         end
       end
 
-      context "and turning right" do
+      context "when turning right" do
         it "faces west" do
           new_position = position.turn :right
           expect(new_position.direction).to eq(:w)
@@ -165,14 +165,14 @@ describe RealPosition do
     context "when facing west" do
       let(:position) { build :real_position, direction: :w }
 
-      context "and turning left" do
+      context "when turning left" do
         it "faces south" do
           new_position = position.turn :left
           expect(new_position.direction).to eq(:s)
         end
       end
 
-      context "and turning right" do
+      context "when turning right" do
         it "faces north" do
           new_position = position.turn :right
           expect(new_position.direction).to eq(:n)
@@ -190,7 +190,7 @@ describe RealPosition do
   end
 
   describe "#go_to" do
-    context "when without arena" do
+    context "with NullArena" do
       let(:position) { build :real_position }
 
       it "returns new position" do
@@ -206,7 +206,7 @@ describe RealPosition do
       end
     end
 
-    context "when with arena" do
+    context "with Arena" do
       let(:position) { build :real_position_with_arena }
 
       context "when new position is inbounds" do
