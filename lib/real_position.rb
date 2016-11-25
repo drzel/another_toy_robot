@@ -1,4 +1,6 @@
 class RealPosition < Position
+  attr_accessor :x, :y, :direction
+
   ROTATION     = { left: -1, right: 1 }.freeze
   DISPLACEMENT = { n: { x:  0, y:  1 },
                    e: { x:  1, y:  0 },

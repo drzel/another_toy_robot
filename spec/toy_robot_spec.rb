@@ -59,11 +59,51 @@ describe Arena do
 end
 
 describe NullArena do
-  let(:null_arena) { build(:null_arena) }
+  let(:arena) { build(:null_arena) }
 
   describe "#inbounds?" do
     it "returns true" do
-      expect(null_arena.inbounds? rand(100), rand(100)).to eq true
+      expect(arena.inbounds? rand(100), rand(100)).to eq true
+    end
+  end
+end
+
+describe RealPosition do
+  describe "#advance" do
+    context "when facing north" do
+      let(:position) { build(:real_position, direction: :n) }
+
+      it "increments y coordinate by 1" do
+        y_coordinate = position.y
+        expect(position.advance.y).to eq(y_coordinate + 1)
+      end
+    end
+
+    context "when facing east" do
+      let(:position) { build(:real_position, direction: :e) }
+
+      it "increments x coordinate by 1" do
+        x_coordinate = position.x
+        expect(position.advance.x).to eq(x_coordinate + 1)
+      end
+    end
+
+    context "when facing south" do
+      let(:position) { build(:real_position, direction: :s) }
+
+      it "decrements y coordinate by 1" do
+        y_coordinate = position.y
+        expect(position.advance.y).to eq(y_coordinate - 1)
+      end
+    end
+
+    context "when facing west" do
+      let(:position) { build(:real_position, direction: :w) }
+
+      it "decrements x coordinate by 1" do
+        x_coordinate = position.x
+        expect(position.advance.x).to eq(x_coordinate - 1)
+      end
     end
   end
 end
