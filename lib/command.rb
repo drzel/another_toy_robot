@@ -1,5 +1,5 @@
 class Command
-  def initialize(robot, arena, command)
+  def initialize(robot: Robot.new, arena: NullArena.new, command:)
     @robot = robot
     @arena = arena
     @command = command.downcase.strip

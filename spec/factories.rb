@@ -7,4 +7,11 @@ FactoryGirl.define do
 
   factory :robot do
   end
+
+  factory :arena do
+    initialize_with { new width: 5, height: 5 }
+  end
+
+  factory :null_arena do
+  end
 end

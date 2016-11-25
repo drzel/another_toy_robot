@@ -8,9 +8,10 @@ require_relative "lib/real_position"
 require_relative "lib/null_position"
 
 robot = Robot.new
-table = Arena.new 5, 5
+table = Arena.new width: 5, height: 5
 
 loop do
   print "Input command: "
-  Command.new(robot, table, gets).execute
+  command = Command.new robot: robot, arena: table, command: gets
+  command.execute
 end
