@@ -39,31 +39,3 @@ describe Robot do
     end
   end
 end
-
-describe NullPosition do
-  let(:null_position) { build(:null_position) }
-
-  describe "#advance" do
-    it "returns self" do
-      expect(null_position.advance).to eq null_position
-    end
-  end
-
-  describe "#turn" do
-    it "returns self" do
-      expect(null_position.turn).to eq null_position
-    end
-  end
-
-  describe "#to_s" do
-    it 'returns "No position"' do
-      expect(null_position.to_s).to eq "No position"
-    end
-  end
-
-  describe "#inside?" do
-    it "returns false" do
-      expect(null_position.inside?).to eq false
-    end
-  end
-end
