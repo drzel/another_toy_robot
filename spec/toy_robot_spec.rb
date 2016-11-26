@@ -12,7 +12,7 @@ describe Robot do
   describe "#left" do
     it "sends turn(:left) to @position" do
       position = robot.position
-      expect(position).to receive(:turn).with(:left)
+      expect(position).to receive(:turn).with :left
       robot.left
     end
   end
@@ -20,7 +20,7 @@ describe Robot do
   describe "#right" do
     it "sends turn(:right) to @position" do
       position = robot.position
-      expect(position).to receive(:turn).with(:right)
+      expect(position).to receive(:turn).with :right
       robot.right
     end
   end
@@ -117,14 +117,14 @@ describe RealPosition do
       context "when turning left" do
         it "faces west" do
           new_position = position.turn :left
-          expect(new_position.direction).to eq(:w)
+          expect(new_position.direction).to eq :w
         end
       end
 
       context "when turning right" do
         it "faces east" do
           new_position = position.turn :right
-          expect(new_position.direction).to eq(:e)
+          expect(new_position.direction).to eq :e
         end
       end
     end
@@ -135,14 +135,14 @@ describe RealPosition do
       context "when turning left" do
         it "faces north" do
           new_position = position.turn :left
-          expect(new_position.direction).to eq(:n)
+          expect(new_position.direction).to eq :n
         end
       end
 
       context "when turning right" do
         it "faces south" do
           new_position = position.turn :right
-          expect(new_position.direction).to eq(:s)
+          expect(new_position.direction).to eq :s
         end
       end
     end
@@ -153,14 +153,14 @@ describe RealPosition do
       context "when turning left" do
         it "faces east" do
           new_position = position.turn :left
-          expect(new_position.direction).to eq(:e)
+          expect(new_position.direction).to eq :e
         end
       end
 
       context "when turning right" do
         it "faces west" do
           new_position = position.turn :right
-          expect(new_position.direction).to eq(:w)
+          expect(new_position.direction).to eq :w
         end
       end
     end
@@ -171,14 +171,14 @@ describe RealPosition do
       context "when turning left" do
         it "faces south" do
           new_position = position.turn :left
-          expect(new_position.direction).to eq(:s)
+          expect(new_position.direction).to eq :s
         end
       end
 
       context "when turning right" do
         it "faces north" do
           new_position = position.turn :right
-          expect(new_position.direction).to eq(:n)
+          expect(new_position.direction).to eq :n
         end
       end
     end
@@ -188,7 +188,7 @@ describe RealPosition do
     let(:position) { build :real_position }
 
     it "returns string of format 'x, y, d'" do
-      expect(position.to_s).to match(/(\d+,\s){2}[nesw]/)
+      expect(position.to_s).to match /(\d+,\s){2}[nesw]/
     end
   end
 
@@ -354,9 +354,9 @@ describe PlaceCommand do
         command.execute
         robot = command.instance_variable_get "@robot"
         params = command.instance_variable_get "@params"
-        expect(robot.position.x).to eq(params[0].to_i)
-        expect(robot.position.y).to eq(params[1].to_i)
-        expect(robot.position.direction).to eq(params[2].to_sym)
+        expect(robot.position.x).to eq params[0].to_i
+        expect(robot.position.y).to eq params[1].to_i
+        expect(robot.position.direction).to eq params[2].to_sym
       end
     end
 
@@ -378,7 +378,7 @@ describe MoveCommand do
   describe "#execute" do
     it "sends move to @robot" do
       robot = command.instance_variable_get "@robot"
-      expect(robot).to receive(:move)
+      expect(robot).to receive :move
       command.execute
     end
   end
@@ -390,7 +390,7 @@ describe LeftCommand do
   describe "#execute" do
     it "sends left to @robot" do
       robot = command.instance_variable_get "@robot"
-      expect(robot).to receive(:left)
+      expect(robot).to receive :left
       command.execute
     end
   end
@@ -402,7 +402,7 @@ describe RightCommand do
   describe "#execute" do
     it "sends right to @robot" do
       robot = command.instance_variable_get "@robot"
-      expect(robot).to receive(:right)
+      expect(robot).to receive :right
       command.execute
     end
   end
@@ -414,7 +414,7 @@ describe ReportCommand do
   describe "#execute" do
     it "sends report to @robot" do
       robot = command.instance_variable_get "@robot"
-      expect(robot).to receive(:report)
+      expect(robot).to receive :report
       command.execute
     end
   end
