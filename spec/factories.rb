@@ -25,31 +25,41 @@ FactoryGirl.define do
   factory :null_position do
   end
 
-  factory :command do
-    initialize_with { new command: %w(move left right report derp) }
+  factory :place_command do
+    association :robot, strategy: :build
+    association :arena, strategy: :build
 
-    factory :invalid_command do
-      initialize_with { new command: "derp" }
+    factory :place_command_with_inbounds_params do
+      command = "place 0, 0, n"
+      initialize_with { new robot: robot, arena: arena, command: command }
     end
 
-    factory :move_command do
-      initialize_with { new command: "move" }
+    factory :place_command_with_out_of_bounds_params do
+      command = "place 100, 100, n"
+      initialize_with { new robot: robot, arena: arena, command: command }
     end
+  end
 
-    factory :left_command do
-      initialize_with { new command: "left" }
-    end
+  factory :move_command do
+    association :robot, strategy: :build
+    initialize_with { new robot: robot }
+  end
 
-    factory :right_command do
-      initialize_with { new command: "right" }
-    end
+  factory :left_command do
+    association :robot, strategy: :build
+    initialize_with { new robot: robot }
+  end
 
-    factory :report_command do
-      initialize_with { new command: "report" }
-    end
+  factory :right_command do
+    association :robot, strategy: :build
+    initialize_with { new robot: robot }
+  end
 
-    factory :place_command do
-      initialize_with { new command: "place #{rand 0...5}, #{rand 0...5}, #{%w(n e s w)}" }
-    end
+  factory :report_command do
+    association :robot, strategy: :build
+    initialize_with { new robot: robot }
+  end
+
+  factory :invalid_command do
   end
 end
