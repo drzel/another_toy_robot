@@ -1,5 +1,5 @@
 class PlaceCommand
-  def initialize(robot: robot, arena: NullArena.new, command:)
+  def initialize(robot:, arena: NullArena.new, command:)
     @robot  = robot
     @arena  = arena
     @params = command[/\s.*/].delete(" ").split(",")
@@ -15,30 +15,50 @@ class PlaceCommand
 end
 
 class MoveCommand
+  def initialize(robot:)
+    @robot = robot
+  end
+
   def execute
     @robot.move
   end
 end
 
 class LeftCommand
+  def initialize(robot:)
+    @robot = robot
+  end
+
   def execute
     @robot.left
   end
 end
 
 class RightCommand
+  def initialize(robot:)
+    @robot = robot
+  end
+
   def execute
     @robot.right
   end
 end
 
 class ReportCommand
+  def initialize(robot:)
+    @robot = robot
+  end
+
   def execute
     @robot.report
   end
 end
 
 class InvalidCommand
+  def initialize(robot:)
+    @robot = robot
+  end
+
   def execute
     puts "Invalid command"
   end
