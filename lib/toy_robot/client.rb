@@ -5,7 +5,7 @@ class Client
   end
 
   def instruction(input)
-    command = case input.strip
+    command = case input.strip!
               when /place\s+(\d+,\s*){2}[nesw]/
                 PlaceCommand.new robot: @robot, arena: @table, command: input
               when "move"
