@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :client do
+  end
+
   factory :robot do
   end
 

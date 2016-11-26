@@ -55,9 +55,7 @@ class ReportCommand
 end
 
 class InvalidCommand
-  def initialize(robot:)
-    @robot = robot
-  end
+  def intialize; end
 
   def execute
     puts "Invalid command"
