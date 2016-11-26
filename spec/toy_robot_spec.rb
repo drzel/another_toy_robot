@@ -314,6 +314,17 @@ describe Client do
       end
     end
 
+    context 'when command is "report"' do
+      input = "report"
+
+      it "sends execute to ReportCommand.new robot: @robot" do
+        dbl = instance_double "ReportCommand"
+        expect(ReportCommand).to receive(:new).with(robot: robot) { dbl }
+        expect(dbl).to receive :execute
+        client.instruction input
+      end
+    end
+
     context "when command is invalid" do
       input = "derp"
 
