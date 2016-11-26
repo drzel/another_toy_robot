@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/drzel/toy_robot/badges/gpa.svg)](https://codeclimate.com/github/drzel/toy_robot)
+[![Test Coverage](https://codeclimate.com/github/drzel/toy_robot/badges/coverage.svg)](https://codeclimate.com/github/drzel/toy_robot/coverage)
 #Toy Robot Simulator
 ###Description
 - The application is a simulation of a toy robot moving on a square tabletop, of
