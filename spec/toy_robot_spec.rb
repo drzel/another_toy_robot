@@ -44,7 +44,6 @@ describe Arena do
   let(:arena) { build :arena }
 
   describe "#inbounds?" do
-
     context "when coordinates are inbounds" do
       it "returns true" do
         expect(arena.inbounds?(0, 0)).to eq true
@@ -71,7 +70,6 @@ end
 
 describe RealPosition do
   describe "#advance" do
-
     context "when facing north" do
       let(:position) { build :real_position, direction: :n }
 
@@ -110,7 +108,6 @@ describe RealPosition do
   end
 
   describe "#turn" do
-
     context "when facing north" do
       let(:position) { build :real_position, direction: :n }
 
@@ -188,12 +185,11 @@ describe RealPosition do
     let(:position) { build :real_position }
 
     it "returns string of format 'x, y, d'" do
-      expect(position.to_s).to match /(\d+,\s){2}[nesw]/
+      expect(position.to_s).to match(/(\d+,\s){2}[nesw]/)
     end
   end
 
   describe "#go_to" do
-
     context "with NullArena" do
       let(:position) { build :real_position }
 
@@ -267,15 +263,15 @@ describe Client do
   let(:table) { client.instance_variable_get "@table" }
 
   describe "#instruction" do
-
     context 'when command is "place"' do
       input = "place 0, 0, n"
 
-      it "sends execute to PlaceCommand.new robot: @robot, arena: @table, command: input" do
+      it "sends execute to PlaceCommand.new" \
+         "robot: @robot, arena: @table, command: input" do
         dbl = instance_double "PlaceCommand"
-        expect(PlaceCommand).to(
-          receive(:new).with(robot: robot, arena: table, command: input) { dbl }
-        )
+        expect(PlaceCommand).to(receive(:new).with(robot:   robot,
+                                                   arena:   table,
+                                                   command: input) { dbl })
         expect(dbl).to receive :execute
         client.instruction input
       end
@@ -340,7 +336,6 @@ end
 
 describe PlaceCommand do
   describe "#execute" do
-
     context "when given inbounds params" do
       let(:command) { build :place_command_with_inbounds_params }
 
