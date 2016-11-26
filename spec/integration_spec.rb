@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "integration tests" do
+describe "Integration tests" do
   let(:client) { build :client }
 
   describe "Example a) 'place 0, 0, n' 'move' 'report'" do
@@ -91,7 +91,7 @@ describe "integration tests" do
                 "place 4, 4, s", "move", "move", "left", "move", "report"]
     let(:user_input) { commands.each { |command| client.instruction command } }
 
-    it "ignores command to walk off the edge" do
+    it "does it all" do
       expect { user_input }.to output(
         "Invalid command\nNo position\n4, 2, e\n",
       ).to_stdout
