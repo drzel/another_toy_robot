@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
 
 require "toy_robot"
+ToyRobot.main

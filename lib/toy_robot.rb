@@ -5,10 +5,14 @@ require "toy_robot/arena"
 require "toy_robot/command"
 require "toy_robot/position"
 
-client = Client.new
+module ToyRobot
+  def self.main
+    client = Client.new
 
-loop do
-  print "Input command: "
-  input = gets.strip
-  client.instruction input
+    loop do
+      print "Input command: "
+      input = gets.strip
+      client.instruction input
+    end
+  end
 end
