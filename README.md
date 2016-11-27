@@ -1,9 +1,42 @@
 [![Code Climate](https://codeclimate.com/github/drzel/toy_robot/badges/gpa.svg)](https://codeclimate.com/github/drzel/toy_robot)
 [![Test Coverage](https://codeclimate.com/github/drzel/toy_robot/badges/coverage.svg)](https://codeclimate.com/github/drzel/toy_robot/coverage)
+[![Gem Version](https://badge.fury.io/rb/another_toy_robot.svg)](https://badge.fury.io/rb/another_toy_robot)
 
-#Toy Robot Simulator
+# Another Toy Robot Simulator
+The application is a simulation of a toy robot moving on a 5 x 5 unit tabletop. It
+is an example of a well tested, object oriented design, employing the command design
+pattern.
 
-##Description
+### Installation
+```
+gem install another_toy_robot
+```
+
+### Usage
+```
+toy_robot
+```
+
+This will present a prompt:
+```
+Input command:
+```
+
+Valid commands are:
+
+| Command       | Description
+| ------------- | ---
+| `place x,y,d` | Places robot at position `x`, `y`, facing cardinal direction `d`. E.g. `place 1,2,n`.
+| `left`        | Rotates robot 90° counter-clockwise.
+| `right`       | Rotates robot 90° clockwise.
+| `move`        | Advances the robot one position in the direction it is currently facing.
+| `report`      | Prints the current location.
+
+Commands resulting in the robot moving to an out-of-bounds position (`x` or `y` being `< 0` or `> 4`) will be ignored.
+
+## Specification
+
+### Description
 - The application is a simulation of a toy robot moving on a square tabletop, 
 of dimensions 5 units x 5 units.
 - There are no other obstructions on the table surface.
@@ -13,13 +46,13 @@ robot falling from the table must be prevented, however further valid
 movement commands must still be allowed.
 - Create an application that can read in commands of the following form:
 
-````
+```
 PLACE X,Y,F
 MOVE
 LEFT
 RIGHT
 REPORT
-````
+```
 
 - PLACE will put the toy robot on the table in position X,Y and facing NORTH,
 SOUTH, EAST or WEST.
@@ -39,41 +72,45 @@ and REPORT commands.
 - Input can be from a file, or from standard input, as the developer chooses.
 - Provide test data to exercise the application.
 
-##Constraints
+### Constraints
 The toy robot must not fall off the table during movement. This also includes 
 the initial placement of the toy robot. Any move that would cause the robot 
 to fall must be ignored.
 
-##Example Input and Output
+### Example Input and Output
 a)
-````
+```
 PLACE 0,0,NORTH
 MOVE
 REPORT
-````
-Output: ````0,1,NORTH````
+```
+Output: `0,1,NORTH`
 
 b)
-````
+```
 PLACE 0,0,NORTH
 LEFT
 REPORT
-````
-Output: ````0,0,WEST````
+```
+Output: `0,0,WEST`
 
 c)
-````
+```
 PLACE 1,2,EAST
 MOVE
 MOVE
 LEFT
 MOVE
 REPORT
-````
-Output: ````3,3,NORTH````
+```
+Output: `3,3,NORTH`
 
-##Deliverables
+### Deliverables
 The source files, the test data and any test code.
 
 It is not required to provide any graphical output showing the movement of the
 toy robot. 
+
+## Acknowledgements
+- [RafaelChefe's Toy Robot Simulator](https://github.com/RafaelChefe/toy_robot)
+- [Wikipedia Command pattern article](https://en.wikipedia.org/wiki/Command_pattern)
