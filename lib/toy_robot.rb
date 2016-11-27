@@ -12,6 +12,7 @@ module ToyRobot
     loop do
       print "Input command: "
       input = gets.strip
+      break if input == "exit"
       client.instruction input
     end
   end
