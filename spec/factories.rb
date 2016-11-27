@@ -13,8 +13,8 @@ FactoryGirl.define do
   end
 
   factory :real_position do
-    x         { rand(0...5) }
-    y         { rand(0...5) }
+    x_coord   { rand(0...5) }
+    y_coord   { rand(0...5) }
     direction { %i(n e s w).sample }
 
     factory :real_position_with_arena do

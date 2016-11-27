@@ -15,8 +15,8 @@ describe PlaceCommand do
         command.execute
         robot = command.instance_variable_get "@robot"
         params = command.instance_variable_get "@params"
-        expect(robot.position.x).to eq params[0].to_i
-        expect(robot.position.y).to eq params[1].to_i
+        expect(robot.position.x_coord).to eq params[0].to_i
+        expect(robot.position.y_coord).to eq params[1].to_i
         expect(robot.position.direction).to eq params[2].to_sym
       end
     end

@@ -6,8 +6,8 @@ describe RealPosition do
       let(:position) { build :real_position, direction: :n }
 
       it "increments y coordinate by 1" do
-        y_coordinate = position.y
-        expect(position.advance.y).to eq(y_coordinate + 1)
+        y_coordinate = position.y_coord
+        expect(position.advance.y_coord).to eq(y_coordinate + 1)
       end
     end
 
@@ -15,8 +15,8 @@ describe RealPosition do
       let(:position) { build :real_position, direction: :e }
 
       it "increments x coordinate by 1" do
-        x_coordinate = position.x
-        expect(position.advance.x).to eq(x_coordinate + 1)
+        x_coordinate = position.x_coord
+        expect(position.advance.x_coord).to eq(x_coordinate + 1)
       end
     end
 
@@ -24,8 +24,8 @@ describe RealPosition do
       let(:position) { build :real_position, direction: :s }
 
       it "decrements y coordinate by 1" do
-        y_coordinate = position.y
-        expect(position.advance.y).to eq(y_coordinate - 1)
+        y_coordinate = position.y_coord
+        expect(position.advance.y_coord).to eq(y_coordinate - 1)
       end
     end
 
@@ -33,8 +33,8 @@ describe RealPosition do
       let(:position) { build :real_position, direction: :w }
 
       it "decrements x coordinate by 1" do
-        x_coordinate = position.x
-        expect(position.advance.x).to eq(x_coordinate - 1)
+        x_coordinate = position.x_coord
+        expect(position.advance.x_coord).to eq(x_coordinate - 1)
       end
     end
   end
@@ -132,8 +132,8 @@ describe RealPosition do
         new_position = position.go_to(x: new_x,
                                       y: new_y,
                                       direction: new_direction)
-        expect(new_position.x).to eq new_x
-        expect(new_position.y).to eq new_y
+        expect(new_position.x_coord).to eq new_x
+        expect(new_position.y_coord).to eq new_y
         expect(new_position.direction).to eq new_direction
       end
     end
@@ -149,8 +149,8 @@ describe RealPosition do
           new_position = position.go_to(x: new_x,
                                         y: new_y,
                                         direction: new_direction)
-          expect(new_position.x).to eq new_x
-          expect(new_position.y).to eq new_y
+          expect(new_position.x_coord).to eq new_x
+          expect(new_position.y_coord).to eq new_y
           expect(new_position.direction).to eq new_direction
         end
       end

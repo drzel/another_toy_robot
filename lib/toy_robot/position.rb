@@ -6,7 +6,7 @@ class Position
     post_initialize args
   end
 
-  def go_to(x: @x, y: @y, direction: @direction)
+  def go_to(x: @x_coord, y: @y_coord, direction: @direction)
     if @arena.inbounds? x, y
       RealPosition.new x: x, y: y, direction: direction, arena: @arena
     else
@@ -16,7 +16,7 @@ class Position
 end
 
 class RealPosition < Position
-  attr_accessor :x, :y, :direction
+  attr_accessor :x_coord, :y_coord, :direction
 
   ROTATION     = { left: -1, right: 1 }.freeze
   DISPLACEMENT = { n: { x:  0, y:  1 },
@@ -25,14 +25,14 @@ class RealPosition < Position
                    w: { x: -1, y:  0 } }.freeze
 
   def post_initialize(x: 0, y: 0, direction: :n)
-    @x         = x
-    @y         = y
+    @x_coord   = x
+    @y_coord   = y
     @direction = direction
   end
 
   def advance
-    new_x = @x + DISPLACEMENT[@direction][:x]
-    new_y = @y + DISPLACEMENT[@direction][:y]
+    new_x = @x_coord + DISPLACEMENT[@direction][:x]
+    new_y = @y_coord + DISPLACEMENT[@direction][:y]
     go_to x: new_x, y: new_y
   end
 
@@ -43,7 +43,7 @@ class RealPosition < Position
   end
 
   def to_s
-    "#{@x}, #{@y}, #{@direction}"
+    "#{@x_coord}, #{@y_coord}, #{@direction}"
   end
 end
 
