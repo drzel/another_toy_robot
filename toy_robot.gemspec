@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = ">= 2.3"
   spec.license               = "MIT"
 
-  spec.description = <<~ HEREDOC
+  spec.description = <<~HEREDOC
     The application is a simulation of a toy robot moving on a square tabletop.
     It is an example of a well tested, object oriented design, employing the command design pattern.
   HEREDOC
