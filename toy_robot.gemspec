@@ -28,5 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "factory_girl", "~> 4.0"
   spec.add_development_dependency "codeclimate-test-reporter", "~> 1.0.0"
-  spec.add_development_dependency "simplecov", require: false
+  spec.add_development_dependency "simplecov"
 end
