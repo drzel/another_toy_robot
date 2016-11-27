@@ -6,8 +6,9 @@ require 'toy_robot/version'
 Gem::Specification.new do |spec|
   spec.name          = "toy_robot"
   spec.version       = ToyRobot::VERSION
-  spec.authors       = ["drzel"]
-  spec.email         = ["shayolden@hotmail.com"]
+  spec.date          = "2016-11-27"
+  spec.authors       = ["Sheldon J. Johnson"]
+  spec.email         = ["sheldon.j.johnson@outlook.com"]
 
   spec.summary       = %q{A toy robot demonstration app}
   spec.description   = %q{The application is a simulation of a toy robot moving on a square tabletop.}
