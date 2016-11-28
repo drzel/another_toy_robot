@@ -9,16 +9,18 @@ class PlaceCommand
     position = NullPosition.new arena: @arena
     position = position.go_to(x:         @params[0].to_i,
                               y:         @params[1].to_i,
-                              direction: direction_chooser(@params[2]))
+                              direction: direction)
     @robot.position = position
   end
 
-  def direction_chooser(str)
-    case str
-    when "north" then North.new
-    when "east" then East.new
-    when "south" then South.new
-    when "west" then West.new
+  private
+
+  def direction
+    case @params[2]
+    when "n", "north" then North.new
+    when "e", "east"  then East.new
+    when "s", "south" then South.new
+    when "w", "west"  then West.new
     end
   end
 end

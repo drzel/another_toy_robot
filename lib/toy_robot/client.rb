@@ -6,7 +6,7 @@ class Client
 
   def instruction(input)
     command = case input
-              when /place\s+(\d+,\s*){2}(north|east|south|west)/
+              when /place\s+(\d+,\s*){2}([nesw]|north|east|south|west)/
                 PlaceCommand.new robot: @robot, arena: @table, command: input
               when "move"
                 MoveCommand.new robot: @robot

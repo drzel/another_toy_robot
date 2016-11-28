@@ -7,16 +7,32 @@ describe Client do
 
   describe "#instruction" do
     context 'when command is "place"' do
-      input = "place 0, 0, north"
+      context "when full direction name is used" do
+        input = "place 0, 0, north"
 
-      it "sends execute to PlaceCommand.new" \
-         "robot: @robot, arena: @table, command: input" do
-        dbl = instance_double "PlaceCommand"
-        expect(PlaceCommand).to(receive(:new).with(robot:   robot,
-                                                   arena:   table,
-                                                   command: input) { dbl })
-        expect(dbl).to receive :execute
-        client.instruction input
+        it "sends execute to PlaceCommand.new" \
+           "robot: @robot, arena: @table, command: input" do
+          dbl = instance_double "PlaceCommand"
+          expect(PlaceCommand).to(receive(:new).with(robot:   robot,
+                                                     arena:   table,
+                                                     command: input) { dbl })
+          expect(dbl).to receive :execute
+          client.instruction input
+        end
+      end
+
+      context "when direction initial is used" do
+        input = "place 0, 0, n"
+
+        it "sends execute to PlaceCommand.new" \
+           "robot: @robot, arena: @table, command: input" do
+          dbl = instance_double "PlaceCommand"
+          expect(PlaceCommand).to(receive(:new).with(robot:   robot,
+                                                     arena:   table,
+                                                     command: input) { dbl })
+          expect(dbl).to receive :execute
+          client.instruction input
+        end
       end
     end
 
