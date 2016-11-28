@@ -11,7 +11,7 @@ class Position
       RealPosition.new(x_coord:   x_coord,
                        y_coord:   y_coord,
                        direction: direction,
-                       arena: @arena)
+                       arena:     @arena)
     else
       self
     end
@@ -28,9 +28,9 @@ class RealPosition < Position
   end
 
   def advance
-    new_x = @x_coord + @direction.x_displacement
-    new_y = @y_coord + @direction.y_displacement
-    go_to x_coord: new_x, y_coord: new_y
+    x = @x_coord + @direction.x_displacement
+    y = @y_coord + @direction.y_displacement
+    go_to x_coord: x, y_coord: y
   end
 
   def turn(hand_side)
