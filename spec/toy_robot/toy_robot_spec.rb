@@ -21,7 +21,8 @@ describe "Integration tests" do
     end
   end
 
-  describe "Example c) 'place 1, 2, east' 'move' 'move' 'left' 'move' 'report'" do
+  describe "Example c) 'place 1, 2, east' 'move' 'move' 'left' 'move' " \
+           "'report'" do
     commands = ["place 1, 2, east", "move", "move", "left", "move", "report"]
     let(:user_input) { commands.each { |command| client.instruction command } }
 
