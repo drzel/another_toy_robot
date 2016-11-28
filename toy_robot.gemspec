@@ -6,7 +6,7 @@ require 'toy_robot/version'
 Gem::Specification.new do |spec|
   spec.name                  = "another_toy_robot"
   spec.version               = ToyRobot::VERSION
-  spec.date                  = "2016-11-27"
+  spec.date                  = "2016-11-29"
   spec.authors               = "Sheldon J. Johnson"
   spec.email                 = "sheldon.j.johnson@outlook.com"
   spec.homepage              = "https://github.com/drzel/toy_robot"
@@ -16,7 +16,8 @@ Gem::Specification.new do |spec|
 
   spec.description = <<~HEREDOC
     The application is a simulation of a toy robot moving on a square tabletop.
-    It is an example of a well tested, object oriented design, employing the command design pattern.
+    It is an example of a well tested, object oriented design, employing the 
+    command design pattern.
   HEREDOC
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
