@@ -50,7 +50,7 @@ describe "Integration tests" do
   end
 
   describe "place robot in out of bounds position" do
-    commands = ["place 10, 10, n", "report"]
+    commands = ["place 10, 10, north", "report"]
     let(:user_input) { commands.each { |command| client.instruction command } }
 
     it 'ignores command, reports "No position"' do
@@ -86,9 +86,10 @@ describe "Integration tests" do
   end
 
   describe "catch all" do
-    commands = ["move", "left", "right", "derp", "report", "place 10, 10, n", \
-                "move", "place 0, 0, south", "right", "move", "right", "move",    \
-                "place 4, 4, south", "move", "move", "left", "move", "report"]
+    commands = ["move", "left", "right", "derp", "report",                    \
+                "place 10, 10, north", "move", "place 0, 0, south", "right",  \
+                "move", "right", "move", "place 4, 4, south", "move", "move", \
+                "left", "move", "report"]
     let(:user_input) { commands.each { |command| client.instruction command } }
 
     it "does it all" do
