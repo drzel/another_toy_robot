@@ -1,16 +1,13 @@
 class PlaceCommand
-  def initialize(robot:, arena: NullArena.new, command:)
+  def initialize(robot:, command:)
     @robot  = robot
-    @arena  = arena
     @params = command[/\s.*/].delete(" ").split(",")
   end
 
   def execute
-    position = NullPosition.new arena: @arena
-    position = position.go_to(x_coord:   @params[0].to_i,
-                              y_coord:   @params[1].to_i,
-                              direction: direction)
-    @robot.position = position
+    @robot.place RealPosition.new(x_coord:   @params[0].to_i,
+                                  y_coord:   @params[1].to_i,
+                                  direction: direction)
   end
 
   private

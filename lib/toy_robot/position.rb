@@ -1,27 +1,7 @@
-class Position
-  attr_accessor :arena
+class RealPosition
+  attr_reader :x_coord, :y_coord, :direction
 
-  def initialize(arena: NullArena.new, **args)
-    @arena = arena
-    post_initialize args
-  end
-
-  def go_to(x_coord: @x_coord, y_coord: @y_coord, direction: @direction)
-    if @arena.inbounds? x_coord, y_coord
-      RealPosition.new(x_coord:   x_coord,
-                       y_coord:   y_coord,
-                       direction: direction,
-                       arena:     @arena)
-    else
-      self
-    end
-  end
-end
-
-class RealPosition < Position
-  attr_accessor :x_coord, :y_coord, :direction
-
-  def post_initialize(x_coord: 0, y_coord: 0, direction: North.new)
+  def initialize(x_coord: 0, y_coord: 0, direction: North.new)
     @x_coord   = x_coord
     @y_coord   = y_coord
     @direction = direction
@@ -30,11 +10,13 @@ class RealPosition < Position
   def advance
     x = @x_coord + @direction.x_displacement
     y = @y_coord + @direction.y_displacement
-    go_to x_coord: x, y_coord: y
+    RealPosition.new x_coord: x, y_coord: y, direction: @direction
   end
 
   def turn(hand_side)
-    go_to direction: @direction.send(hand_side)
+    RealPosition.new(x_coord:   @x_coord,
+                     y_coord:   @y_coord,
+                     direction: @direction.send(hand_side))
   end
 
   def to_s
@@ -42,8 +24,14 @@ class RealPosition < Position
   end
 end
 
-class NullPosition < Position
-  def post_initialize(*); end
+class NullPosition
+  attr_reader :x_coord, :y_coord, :direction
+
+  def initialize
+    @x_coord   = nil
+    @y_coord   = nil
+    @direction = nil
+  end
 
   def advance
     self

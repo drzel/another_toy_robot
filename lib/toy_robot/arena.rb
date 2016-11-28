@@ -6,8 +6,8 @@ class Arena
     @height = height
   end
 
-  def inbounds?(x, y)
-    x.between?(0, max_x) && y.between?(0, max_y)
+  def inbounds?(x_coord, y_coord)
+    x_coord&.between?(0, max_x) && y_coord&.between?(0, max_y)
   end
 
   private
@@ -18,11 +18,5 @@ class Arena
 
   def max_y
     height - 1
-  end
-end
-
-class NullArena
-  def inbounds?(*)
-    true
   end
 end

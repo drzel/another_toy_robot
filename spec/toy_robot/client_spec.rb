@@ -3,18 +3,15 @@ require "spec_helper"
 describe Client do
   let(:client) { build :client }
   let(:robot) { client.instance_variable_get "@robot" }
-  let(:table) { client.instance_variable_get "@table" }
 
   describe "#instruction" do
     context 'when command is "place"' do
       context "when full direction name is given" do
         input = "place 0, 0, north"
 
-        it "sends execute to PlaceCommand.new" \
-           "robot: @robot, arena: @table, command: input" do
+        it "sends execute to PlaceCommand.new robot: @robot, command: input" do
           dbl = instance_double "PlaceCommand"
           expect(PlaceCommand).to(receive(:new).with(robot:   robot,
-                                                     arena:   table,
                                                      command: input) { dbl })
           expect(dbl).to receive :execute
           client.instruction input
@@ -24,11 +21,9 @@ describe Client do
       context "when first character of direction initial is given" do
         input = "place 0, 0, n"
 
-        it "sends execute to PlaceCommand.new" \
-           "robot: @robot, arena: @table, command: input" do
+        it "sends execute to PlaceCommand.new robot: @robot, command: input" do
           dbl = instance_double "PlaceCommand"
           expect(PlaceCommand).to(receive(:new).with(robot:   robot,
-                                                     arena:   table,
                                                      command: input) { dbl })
           expect(dbl).to receive :execute
           client.instruction input

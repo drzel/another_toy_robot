@@ -15,15 +15,11 @@ describe Arena do
         expect(arena.inbounds?(10, 10)).to eq false
       end
     end
-  end
-end
 
-describe NullArena do
-  let(:arena) { build :null_arena }
-
-  describe "#inbounds?" do
-    it "returns true" do
-      expect(arena.inbounds?(rand(100), rand(100))).to eq true
+    context "when coordinates are nil" do
+      it "returns nil" do
+        expect(arena.inbounds?(nil, nil)).to eq nil
+      end
     end
   end
 end

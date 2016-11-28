@@ -3,22 +3,43 @@ FactoryGirl.define do
   end
 
   factory :robot do
+    association :arena, strategy: :build
+    initialize_with { new arena: arena }
+
+    factory :robot_in_real_position_facing_north do
+      association(:position,
+                  factory:  :real_position_facing_north,
+                  strategy: :build)
+    end
   end
 
   factory :arena do
     initialize_with { new width: 5, height: 5 }
   end
 
-  factory :null_arena do
-  end
-
   factory :real_position do
-    x_coord   { rand(0...5) }
-    y_coord   { rand(0...5) }
-    direction { [North.new, East.new, South.new, West.new].sample }
+    factory :real_position_facing_north do
+      initialize_with do
+        new x_coord: 0, y_coord: 0, direction: North.new
+      end
+    end
 
-    factory :real_position_with_arena do
-      association :arena, strategy: :build
+    factory :real_position_facing_east do
+      initialize_with do
+        new x_coord: 0, y_coord: 0, direction: East.new
+      end
+    end
+
+    factory :real_position_facing_south do
+      initialize_with do
+        new x_coord: 0, y_coord: 0, direction: South.new
+      end
+    end
+
+    factory :real_position_facing_west do
+      initialize_with do
+        new x_coord: 0, y_coord: 0, direction: West.new
+      end
     end
   end
 
@@ -27,16 +48,15 @@ FactoryGirl.define do
 
   factory :place_command do
     association :robot, strategy: :build
-    association :arena, strategy: :build
 
     factory :place_command_with_inbounds_params do
       command = "place 0, 0, north"
-      initialize_with { new robot: robot, arena: arena, command: command }
+      initialize_with { new robot: robot, command: command }
     end
 
     factory :place_command_with_out_of_bounds_params do
       command = "place 100, 100, north"
-      initialize_with { new robot: robot, arena: arena, command: command }
+      initialize_with { new robot: robot, command: command }
     end
   end
 
