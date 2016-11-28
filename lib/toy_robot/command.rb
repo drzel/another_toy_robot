@@ -7,8 +7,8 @@ class PlaceCommand
 
   def execute
     position = NullPosition.new arena: @arena
-    position = position.go_to(x:         @params[0].to_i,
-                              y:         @params[1].to_i,
+    position = position.go_to(x_coord:   @params[0].to_i,
+                              y_coord:   @params[1].to_i,
                               direction: direction)
     @robot.position = position
   end

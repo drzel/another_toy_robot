@@ -137,8 +137,8 @@ describe RealPosition do
         new_x = rand 0...100
         new_y = rand 0...100
         new_direction = [North.new, East.new, South.new, West.new].sample
-        new_position = position.go_to(x: new_x,
-                                      y: new_y,
+        new_position = position.go_to(x_coord:  new_x,
+                                      y_coord:  new_y,
                                       direction: new_direction)
         expect(new_position.x_coord).to eq new_x
         expect(new_position.y_coord).to eq new_y
@@ -154,8 +154,8 @@ describe RealPosition do
           new_x = rand 0...5
           new_y = rand 0...5
           new_direction = [North.new, East.new, South.new, West.new].sample
-          new_position = position.go_to(x: new_x,
-                                        y: new_y,
+          new_position = position.go_to(x_coord:   new_x,
+                                        y_coord:   new_y,
                                         direction: new_direction)
           expect(new_position.x_coord).to eq new_x
           expect(new_position.y_coord).to eq new_y
@@ -166,7 +166,7 @@ describe RealPosition do
       context "when new position is out-of-bounds" do
         it "returns self" do
           new_x = 100
-          new_position = position.go_to x: new_x
+          new_position = position.go_to x_coord: new_x
           expect(new_position).to be position
         end
       end

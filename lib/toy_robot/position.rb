@@ -6,9 +6,12 @@ class Position
     post_initialize args
   end
 
-  def go_to(x: @x_coord, y: @y_coord, direction: @direction)
-    if @arena.inbounds? x, y
-      RealPosition.new x: x, y: y, direction: direction, arena: @arena
+  def go_to(x_coord: @x_coord, y_coord: @y_coord, direction: @direction)
+    if @arena.inbounds? x_coord, y_coord
+      RealPosition.new(x_coord: x_coord,
+                       y_coord: y_coord,
+                       direction: direction,
+                       arena: @arena)
     else
       self
     end
@@ -18,16 +21,16 @@ end
 class RealPosition < Position
   attr_accessor :x_coord, :y_coord, :direction
 
-  def post_initialize(x: 0, y: 0, direction: North.new)
-    @x_coord   = x
-    @y_coord   = y
+  def post_initialize(x_coord: 0, y_coord: 0, direction: North.new)
+    @x_coord   = x_coord
+    @y_coord   = y_coord
     @direction = direction
   end
 
   def advance
     new_x = @x_coord + @direction.x_displacement
     new_y = @y_coord + @direction.y_displacement
-    go_to x: new_x, y: new_y
+    go_to x_coord: new_x, y_coord: new_y
   end
 
   def turn(hand_side)
