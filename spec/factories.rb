@@ -55,7 +55,7 @@ FactoryGirl.define do
     end
 
     factory :place_command_with_out_of_bounds_params do
-      command = "place 100, 100, north"
+      command = "place 100, 100, west"
       initialize_with { new robot: robot, command: command }
     end
   end
