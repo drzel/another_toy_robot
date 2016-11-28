@@ -8,8 +8,8 @@ class Position
 
   def go_to(x_coord: @x_coord, y_coord: @y_coord, direction: @direction)
     if @arena.inbounds? x_coord, y_coord
-      RealPosition.new(x_coord: x_coord,
-                       y_coord: y_coord,
+      RealPosition.new(x_coord:   x_coord,
+                       y_coord:   y_coord,
                        direction: direction,
                        arena: @arena)
     else
