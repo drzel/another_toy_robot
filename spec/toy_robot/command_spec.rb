@@ -17,7 +17,6 @@ describe PlaceCommand do
         params = command.instance_variable_get "@params"
         expect(robot.position.x_coord).to eq params[0].to_i
         expect(robot.position.y_coord).to eq params[1].to_i
-        expect(robot.position.direction.class).to eq North
       end
     end
 
