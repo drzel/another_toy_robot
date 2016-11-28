@@ -54,35 +54,3 @@ class NullPosition < Position
     "No position"
   end
 end
-
-class North
-  def left; West.new; end
-  def right; East.new; end
-  def x_displacement; 0; end
-  def y_displacement; 1; end
-  def to_s; "north"; end
-end
-
-class East
-  def left; North.new; end
-  def right; South.new; end
-  def x_displacement; 1; end
-  def y_displacement; 0; end
-  def to_s; "east"; end
-end
-
-class South
-  def left; East.new; end
-  def right; West.new; end
-  def x_displacement; 0; end
-  def y_displacement; -1; end
-  def to_s; "south"; end
-end
-
-class West
-  def left; South.new; end
-  def right; North.new; end
-  def x_displacement; -1; end
-  def y_displacement; 0; end
-  def to_s; "west"; end
-end

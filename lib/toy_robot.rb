@@ -4,6 +4,7 @@ require "toy_robot/robot"
 require "toy_robot/arena"
 require "toy_robot/command"
 require "toy_robot/position"
+require "toy_robot/direction"
 
 module ToyRobot
   def self.main
