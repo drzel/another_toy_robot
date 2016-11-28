@@ -7,7 +7,7 @@ describe Client do
 
   describe "#instruction" do
     context 'when command is "place"' do
-      context "when full direction name is used" do
+      context "when full direction name is given" do
         input = "place 0, 0, north"
 
         it "sends execute to PlaceCommand.new" \
@@ -21,7 +21,7 @@ describe Client do
         end
       end
 
-      context "when direction initial is used" do
+      context "when first character of direction initial is given" do
         input = "place 0, 0, n"
 
         it "sends execute to PlaceCommand.new" \
@@ -30,6 +30,17 @@ describe Client do
           expect(PlaceCommand).to(receive(:new).with(robot:   robot,
                                                      arena:   table,
                                                      command: input) { dbl })
+          expect(dbl).to receive :execute
+          client.instruction input
+        end
+      end
+
+      context "when part of direction name is given" do
+        input = "place 0, 0, nor"
+
+        it "sends execute to InvalidCommand.new" do
+          dbl = instance_double "InvalidCommand"
+          expect(InvalidCommand).to receive(:new) { dbl }
           expect(dbl).to receive :execute
           client.instruction input
         end
