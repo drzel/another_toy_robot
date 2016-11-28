@@ -7,7 +7,7 @@ describe Client do
 
   describe "#instruction" do
     context 'when command is "place"' do
-      input = "place 0, 0, n"
+      input = "place 0, 0, north"
 
       it "sends execute to PlaceCommand.new" \
          "robot: @robot, arena: @table, command: input" do

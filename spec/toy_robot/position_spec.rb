@@ -3,7 +3,8 @@ require "spec_helper"
 describe RealPosition do
   describe "#advance" do
     context "when facing north" do
-      let(:position) { build :real_position, direction: :n }
+      let(:north) { build :north }
+      let(:position) { build :real_position, direction: north }
 
       it "increments y coordinate by 1" do
         y_coordinate = position.y_coord
@@ -12,7 +13,8 @@ describe RealPosition do
     end
 
     context "when facing east" do
-      let(:position) { build :real_position, direction: :e }
+      let(:east) { build :east }
+      let(:position) { build :real_position, direction: east }
 
       it "increments x coordinate by 1" do
         x_coordinate = position.x_coord
@@ -21,7 +23,8 @@ describe RealPosition do
     end
 
     context "when facing south" do
-      let(:position) { build :real_position, direction: :s }
+      let(:south) { build :south }
+      let(:position) { build :real_position, direction: south }
 
       it "decrements y coordinate by 1" do
         y_coordinate = position.y_coord
@@ -30,7 +33,8 @@ describe RealPosition do
     end
 
     context "when facing west" do
-      let(:position) { build :real_position, direction: :w }
+      let(:west) { build :west }
+      let(:position) { build :real_position, direction: west }
 
       it "decrements x coordinate by 1" do
         x_coordinate = position.x_coord
@@ -41,73 +45,77 @@ describe RealPosition do
 
   describe "#turn" do
     context "when facing north" do
-      let(:position) { build :real_position, direction: :n }
+      let(:north) { build :north }
+      let(:position) { build :real_position, direction: north }
 
       context "when turning left" do
         it "faces west" do
           new_position = position.turn :left
-          expect(new_position.direction).to eq :w
+          expect(new_position.direction.class).to eq West
         end
       end
 
       context "when turning right" do
         it "faces east" do
           new_position = position.turn :right
-          expect(new_position.direction).to eq :e
+          expect(new_position.direction.class).to eq East
         end
       end
     end
 
     context "when facing east" do
-      let(:position) { build :real_position, direction: :e }
+      let(:east) { build :east }
+      let(:position) { build :real_position, direction: east }
 
       context "when turning left" do
         it "faces north" do
           new_position = position.turn :left
-          expect(new_position.direction).to eq :n
+          expect(new_position.direction.class).to eq North
         end
       end
 
       context "when turning right" do
         it "faces south" do
           new_position = position.turn :right
-          expect(new_position.direction).to eq :s
+          expect(new_position.direction.class).to eq South
         end
       end
     end
 
     context "when facing south" do
-      let(:position) { build :real_position, direction: :s }
+      let(:south) { build :south }
+      let(:position) { build :real_position, direction: south }
 
       context "when turning left" do
         it "faces east" do
           new_position = position.turn :left
-          expect(new_position.direction).to eq :e
+          expect(new_position.direction.class).to eq East
         end
       end
 
       context "when turning right" do
         it "faces west" do
           new_position = position.turn :right
-          expect(new_position.direction).to eq :w
+          expect(new_position.direction.class).to eq West
         end
       end
     end
 
     context "when facing west" do
-      let(:position) { build :real_position, direction: :w }
+      let(:west) { build :west }
+      let(:position) { build :real_position, direction: west }
 
       context "when turning left" do
         it "faces south" do
           new_position = position.turn :left
-          expect(new_position.direction).to eq :s
+          expect(new_position.direction.class).to eq South
         end
       end
 
       context "when turning right" do
         it "faces north" do
           new_position = position.turn :right
-          expect(new_position.direction).to eq :n
+          expect(new_position.direction.class).to eq North
         end
       end
     end
@@ -128,7 +136,7 @@ describe RealPosition do
       it "returns new position" do
         new_x = rand 0...100
         new_y = rand 0...100
-        new_direction = %i(n e s w).sample
+        new_direction = [North.new, East.new, South.new, West.new].sample
         new_position = position.go_to(x: new_x,
                                       y: new_y,
                                       direction: new_direction)
@@ -145,7 +153,7 @@ describe RealPosition do
         it "returns new position" do
           new_x = rand 0...5
           new_y = rand 0...5
-          new_direction = %i(n e s w).sample
+          new_direction = [North.new, East.new, South.new, West.new].sample
           new_position = position.go_to(x: new_x,
                                         y: new_y,
                                         direction: new_direction)

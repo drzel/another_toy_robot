@@ -15,7 +15,7 @@ FactoryGirl.define do
   factory :real_position do
     x_coord   { rand(0...5) }
     y_coord   { rand(0...5) }
-    direction { %i(n e s w).sample }
+    direction { [North.new, East.new, South.new, West.new].sample }
 
     factory :real_position_with_arena do
       association :arena, strategy: :build
@@ -30,7 +30,7 @@ FactoryGirl.define do
     association :arena, strategy: :build
 
     factory :place_command_with_inbounds_params do
-      command = "place 0, 0, n"
+      command = "place 0, 0, north"
       initialize_with { new robot: robot, arena: arena, command: command }
     end
 
@@ -61,5 +61,17 @@ FactoryGirl.define do
   end
 
   factory :invalid_command do
+  end
+
+  factory :north do
+  end
+
+  factory :east do
+  end
+
+  factory :south do
+  end
+
+  factory :west do
   end
 end
