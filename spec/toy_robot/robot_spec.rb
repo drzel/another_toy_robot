@@ -18,8 +18,8 @@ describe Robot do
   end
 
   describe "#move" do
-    context "when in a RealPosition" do
-      let(:robot) { build :robot_in_real_position_facing_north }
+    context "when in a Position" do
+      let(:robot) { build :robot_in_position_facing_north }
 
       it "sends advance to @position" do
         dbl = double
@@ -44,8 +44,8 @@ describe Robot do
   end
 
   describe "#place" do
-    context "when in a RealPosition" do
-      let(:robot) { build :robot_in_real_position_facing_north }
+    context "when in a Position" do
+      let(:robot) { build :robot_in_position_facing_north }
 
       it "changes the robot's position" do
         expect { robot.move }.to change { robot.position }

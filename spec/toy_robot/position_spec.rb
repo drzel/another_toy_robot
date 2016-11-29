@@ -1,9 +1,9 @@
 require "spec_helper"
 
-describe RealPosition do
+describe Position do
   describe "#advance" do
     context "when facing north" do
-      let(:position) { build :real_position_facing_north }
+      let(:position) { build :position_facing_north }
 
       it "increments y coordinate by 1" do
         y_coordinate = position.y_coord
@@ -12,7 +12,7 @@ describe RealPosition do
     end
 
     context "when facing east" do
-      let(:position) { build :real_position_facing_east }
+      let(:position) { build :position_facing_east }
 
       it "increments x coordinate by 1" do
         x_coordinate = position.x_coord
@@ -21,7 +21,7 @@ describe RealPosition do
     end
 
     context "when facing south" do
-      let(:position) { build :real_position_facing_south }
+      let(:position) { build :position_facing_south }
 
       it "decrements y coordinate by 1" do
         y_coordinate = position.y_coord
@@ -30,7 +30,7 @@ describe RealPosition do
     end
 
     context "when facing west" do
-      let(:position) { build :real_position_facing_west }
+      let(:position) { build :position_facing_west }
 
       it "decrements x coordinate by 1" do
         x_coordinate = position.x_coord
@@ -41,7 +41,7 @@ describe RealPosition do
 
   describe "#turn" do
     context "when facing north" do
-      let(:position) { build :real_position_facing_north }
+      let(:position) { build :position_facing_north }
 
       context "when turning left" do
         it "faces west" do
@@ -57,7 +57,7 @@ describe RealPosition do
     end
 
     context "when facing east" do
-      let(:position) { build :real_position_facing_east }
+      let(:position) { build :position_facing_east }
 
       context "when turning left" do
         it "faces north" do
@@ -73,7 +73,7 @@ describe RealPosition do
     end
 
     context "when facing south" do
-      let(:position) { build :real_position_facing_south }
+      let(:position) { build :position_facing_south }
 
       context "when turning left" do
         it "faces east" do
@@ -89,7 +89,7 @@ describe RealPosition do
     end
 
     context "when facing west" do
-      let(:position) { build :real_position_facing_west }
+      let(:position) { build :position_facing_west }
 
       context "when turning left" do
         it "faces south" do
@@ -106,7 +106,7 @@ describe RealPosition do
   end
 
   describe "#to_s" do
-    let(:position) { build :real_position }
+    let(:position) { build :position }
 
     it "returns string of format 'x, y, d'" do
       expect(position.to_s).to match(/(\d+,\s){2}[nesw]/)

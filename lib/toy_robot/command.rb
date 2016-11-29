@@ -5,7 +5,7 @@ class PlaceCommand
   end
 
   def execute
-    @robot.place RealPosition.new(x_coord:   @params[0].to_i,
+    @robot.place Position.new(x_coord:   @params[0].to_i,
                                   y_coord:   @params[1].to_i,
                                   direction: direction)
   end

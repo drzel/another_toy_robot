@@ -5,10 +5,10 @@ describe PlaceCommand do
     context "when given inbounds params" do
       let(:command) { build :place_command_with_inbounds_params }
 
-      it "sets robot position to a RealPosition" do
+      it "sets robot position to a Position" do
         command.execute
         robot = command.instance_variable_get "@robot"
-        expect(robot.position.class).to be RealPosition
+        expect(robot.position.class).to be Position
       end
 
       it "sets robot position coordinates to input params" do
