@@ -1,6 +1,4 @@
 class Arena
-  attr_accessor :width, :height
-
   def initialize(width:, height:)
     @width  = width
     @height = height
@@ -13,10 +11,10 @@ class Arena
   private
 
   def max_x
-    width - 1
+    @width - 1
   end
 
   def max_y
-    height - 1
+    @height - 1
   end
 end
