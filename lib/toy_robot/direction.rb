@@ -1,5 +1,5 @@
 class Direction
-  attr_reader :x_displacement, :y_displacement, :to_s
+  attr_reader :x_displacement, :y_displacement
 
   def to_s
     self.class.to_s.downcase
