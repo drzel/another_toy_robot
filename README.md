@@ -7,6 +7,9 @@ The application is a simulation of a toy robot moving on a 5 x 5 unit tabletop. 
 is an example of a well tested, object oriented design, employing the command design
 pattern.
 
+### Dependencies
+Requires Ruby 2.3 or later.
+
 ### Installation
 ```
 gem install another_toy_robot
