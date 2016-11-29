@@ -1,138 +1,45 @@
 require "spec_helper"
 
 describe Position do
+  let(:position) { build :position }
+
   describe "#advance" do
-    context "when facing north" do
-      let(:position) { build :position_facing_north }
-
-      it "increments y coordinate by 1" do
-        y_coordinate = position.y_coord
-        expect(position.advance.y_coord).to eq(y_coordinate + 1)
-      end
+    it "sends x_displacement and y_displacment to @direction" do
+      expect(position.direction).to receive(:x_displacement) { rand 0...5 }
+      expect(position.direction).to receive(:y_displacement) { rand 0...5 }
+      position.advance
     end
 
-    context "when facing east" do
-      let(:position) { build :position_facing_east }
-
-      it "increments x coordinate by 1" do
-        x_coordinate = position.x_coord
-        expect(position.advance.x_coord).to eq(x_coordinate + 1)
-      end
-    end
-
-    context "when facing south" do
-      let(:position) { build :position_facing_south }
-
-      it "decrements y coordinate by 1" do
-        y_coordinate = position.y_coord
-        expect(position.advance.y_coord).to eq(y_coordinate - 1)
-      end
-    end
-
-    context "when facing west" do
-      let(:position) { build :position_facing_west }
-
-      it "decrements x coordinate by 1" do
-        x_coordinate = position.x_coord
-        expect(position.advance.x_coord).to eq(x_coordinate - 1)
-      end
+    it "return a new instance of Position" do
+      expect(position.advance.class).to be Position
     end
   end
 
-  describe "#turn" do
-    context "when facing north" do
-      let(:position) { build :position_facing_north }
-
-      context "when turning left" do
-        it "faces west" do
-          expect(position.turn(:left).direction.class).to eq West
-        end
-      end
-
-      context "when turning right" do
-        it "faces east" do
-          expect(position.turn(:right).direction.class).to eq East
-        end
-      end
+  describe "#left" do
+    it "sends left to @direction" do
+      expect(position.direction).to receive(:left)
+      position.left
     end
 
-    context "when facing east" do
-      let(:position) { build :position_facing_east }
+    it "return a new instance of Position" do
+      expect(position.advance.class).to be Position
+    end
+  end
 
-      context "when turning left" do
-        it "faces north" do
-          expect(position.turn(:left).direction.class).to eq North
-        end
-      end
-
-      context "when turning right" do
-        it "faces south" do
-          expect(position.turn(:right).direction.class).to eq South
-        end
-      end
+  describe "#right" do
+    it "sends right to @direction" do
+      expect(position.direction).to receive(:right)
+      position.right
     end
 
-    context "when facing south" do
-      let(:position) { build :position_facing_south }
-
-      context "when turning left" do
-        it "faces east" do
-          expect(position.turn(:left).direction.class).to eq East
-        end
-      end
-
-      context "when turning right" do
-        it "faces west" do
-          expect(position.turn(:right).direction.class).to eq West
-        end
-      end
-    end
-
-    context "when facing west" do
-      let(:position) { build :position_facing_west }
-
-      context "when turning left" do
-        it "faces south" do
-          expect(position.turn(:left).direction.class).to eq South
-        end
-      end
-
-      context "when turning right" do
-        it "faces north" do
-          expect(position.turn(:right).direction.class).to eq North
-        end
-      end
+    it "return a new instance of Position" do
+      expect(position.advance.class).to be Position
     end
   end
 
   describe "#to_s" do
-    let(:position) { build :position }
-
     it "returns string of format 'x, y, d'" do
       expect(position.to_s).to match(/(\d+,\s){2}[nesw]/)
-    end
-  end
-end
-
-describe NullPosition do
-  let(:null_position) { build :null_position }
-
-  describe "#advance" do
-    it "returns NullPosition" do
-      expect(null_position.advance.class).to eq NullPosition
-    end
-  end
-
-  describe "#turn" do
-    it "returns NullPosition" do
-      argument = [:left, :right].sample
-      expect(null_position.turn(argument).class).to eq NullPosition
-    end
-  end
-
-  describe "#to_s" do
-    it 'returns "No position"' do
-      expect(null_position.to_s).to eq "No position"
     end
   end
 end

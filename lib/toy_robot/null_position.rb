@@ -12,7 +12,11 @@ class NullPosition
     self
   end
 
-  def turn(*)
+  def left
+    self
+  end
+
+  def right
     self
   end
 end

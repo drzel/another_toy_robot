@@ -15,11 +15,11 @@ class Robot
   end
 
   def left
-    @position = @position.turn :left
+    @position = @position.left
   end
 
   def right
-    @position = @position.turn :right
+    @position = @position.right
   end
 
   def report

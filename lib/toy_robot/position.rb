@@ -8,15 +8,21 @@ class Position
   end
 
   def advance
-    x = @x_coord + @direction.x_displacement
-    y = @y_coord + @direction.y_displacement
-    Position.new x_coord: x, y_coord: y, direction: @direction
+    Position.new(x_coord:   @x_coord + @direction.x_displacement,
+                 y_coord:   @y_coord + @direction.y_displacement,
+                 direction: @direction)
   end
 
-  def turn(hand_side)
+  def left
     Position.new(x_coord:   @x_coord,
                  y_coord:   @y_coord,
-                 direction: @direction.send(hand_side))
+                 direction: @direction.left)
+  end
+
+  def right
+    Position.new(x_coord:   @x_coord,
+                 y_coord:   @y_coord,
+                 direction: @direction.right)
   end
 
   def to_s

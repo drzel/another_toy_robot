@@ -6,10 +6,8 @@ FactoryGirl.define do
     association :arena, strategy: :build
     initialize_with { new arena: arena }
 
-    factory :robot_in_position_facing_north do
-      association(:position,
-                  factory:  :position_facing_north,
-                  strategy: :build)
+    factory :robot_in_position do
+      association :position, strategy: :build
     end
   end
 
@@ -18,29 +16,6 @@ FactoryGirl.define do
   end
 
   factory :position do
-    factory :position_facing_north do
-      initialize_with do
-        new x_coord: 0, y_coord: 0, direction: North.new
-      end
-    end
-
-    factory :position_facing_east do
-      initialize_with do
-        new x_coord: 0, y_coord: 0, direction: East.new
-      end
-    end
-
-    factory :position_facing_south do
-      initialize_with do
-        new x_coord: 0, y_coord: 0, direction: South.new
-      end
-    end
-
-    factory :position_facing_west do
-      initialize_with do
-        new x_coord: 0, y_coord: 0, direction: West.new
-      end
-    end
   end
 
   factory :null_position do
