@@ -12,16 +12,16 @@ module ToyRobot
     client = Client.new
 
     loop do
-      command = get_input
-      break if command == "exit"
-      client.instruction command
+      print "Input command: "
+      input = get_input
+      break if input == "exit"
+      client.parse input
     end
   end
 
   private
 
   def self.get_input
-    print "Input command: "
     gets.downcase.strip
   end
 end

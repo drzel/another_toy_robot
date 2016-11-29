@@ -4,7 +4,7 @@ class Client
     @robot = Robot.new arena: @table
   end
 
-  def instruction(input)
+  def parse(input)
     command = case input
               when /place\s+(\d+,\s*){2}([nesw]|(north)|(east)|(south)|(west))$/
                 PlaceCommand.new robot: @robot, command: input
