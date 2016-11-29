@@ -23,25 +23,3 @@ class RealPosition
     "#{@x_coord}, #{@y_coord}, #{@direction}"
   end
 end
-
-class NullPosition
-  attr_reader :x_coord, :y_coord, :direction
-
-  def initialize
-    @x_coord   = nil
-    @y_coord   = nil
-    @direction = nil
-  end
-
-  def advance
-    self
-  end
-
-  def turn(*)
-    self
-  end
-
-  def to_s
-    "No position"
-  end
-end

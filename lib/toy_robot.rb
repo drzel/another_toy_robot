@@ -3,8 +3,9 @@ require "toy_robot/client"
 require "toy_robot/robot"
 require "toy_robot/arena"
 require "toy_robot/command"
-require "toy_robot/position"
 require "toy_robot/direction"
+require "toy_robot/position"
+require "toy_robot/null_position"
 
 module ToyRobot
   def self.main
