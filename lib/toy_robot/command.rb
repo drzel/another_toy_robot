@@ -71,8 +71,6 @@ class ReportCommand
 end
 
 class InvalidCommand
-  def intialize; end
-
   def execute
     puts "Invalid command"
   end
