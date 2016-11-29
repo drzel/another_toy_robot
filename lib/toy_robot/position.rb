@@ -15,8 +15,8 @@ class Position
 
   def turn(hand_side)
     Position.new(x_coord:   @x_coord,
-                     y_coord:   @y_coord,
-                     direction: @direction.send(hand_side))
+                 y_coord:   @y_coord,
+                 direction: @direction.send(hand_side))
   end
 
   def to_s
