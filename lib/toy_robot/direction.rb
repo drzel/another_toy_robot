@@ -1,10 +1,15 @@
-class North
+class Direction
   attr_reader :x_displacement, :y_displacement, :to_s
 
+  def to_s
+    self.class.to_s.downcase
+  end
+end
+
+class North < Direction
   def initialize
     @x_displacement = 0
     @y_displacement = 1
-    @to_s           = "north"
   end
 
   def left
@@ -16,13 +21,10 @@ class North
   end
 end
 
-class East
-  attr_reader :x_displacement, :y_displacement, :to_s
-
+class East < Direction
   def initialize
     @x_displacement = 1
     @y_displacement = 0
-    @to_s           = "east"
   end
 
   def left
@@ -34,13 +36,10 @@ class East
   end
 end
 
-class South
-  attr_reader :x_displacement, :y_displacement, :to_s
-
+class South < Direction
   def initialize
     @x_displacement = 0
     @y_displacement = -1
-    @to_s           = "south"
   end
 
   def left
@@ -52,13 +51,10 @@ class South
   end
 end
 
-class West
-  attr_reader :x_displacement, :y_displacement, :to_s
-
+class West < Direction
   def initialize
     @x_displacement = -1
     @y_displacement = 0
-    @to_s           = "west"
   end
 
   def left
