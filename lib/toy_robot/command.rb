@@ -5,12 +5,20 @@ class PlaceCommand
   end
 
   def execute
-    @robot.place Position.new(x_coord:   @params[0].to_i,
-                                  y_coord:   @params[1].to_i,
-                                  direction: direction)
+    @robot.place Position.new(x_coord:   x_coord,
+                              y_coord:   y_coord,
+                              direction: direction)
   end
 
   private
+
+  def x_coord
+    @params[0].to_i
+  end
+
+  def y_coord
+    @params[1].to_i
+  end
 
   def direction
     case @params[2]
