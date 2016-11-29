@@ -26,13 +26,14 @@ Valid commands are:
 
 | Command       | Description
 | ------------- | ---
-| `place x,y,d` | Places robot at position `x`, `y`, facing cardinal direction `d`. E.g. `place 1,2,n`.
+| `place x,y,d` | Places robot at position `x`, `y`, facing cardinal direction `d`. E.g. `place 1,2,north`.
 | `left`        | Rotates robot 90° counter-clockwise.
 | `right`       | Rotates robot 90° clockwise.
 | `move`        | Advances the robot one position in the direction it is currently facing.
 | `report`      | Prints the current location.
+| `exit`        | Closes the application.
 
-Commands resulting in the robot moving to an out-of-bounds position (`x` or `y` being `< 0` or `> 4`) will be ignored.
+Commands resulting in the robot moving to an out-of-bounds position (`x` or `y` being less than 0 or greater than 4) will be ignored.
 
 ## Specification
 
