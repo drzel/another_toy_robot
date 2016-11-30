@@ -1,6 +1,7 @@
+[![Gem Version](https://badge.fury.io/rb/another_toy_robot.svg)](https://badge.fury.io/rb/another_toy_robot)
 [![Code Climate](https://codeclimate.com/github/drzel/toy_robot/badges/gpa.svg)](https://codeclimate.com/github/drzel/toy_robot)
 [![Test Coverage](https://codeclimate.com/github/drzel/toy_robot/badges/coverage.svg)](https://codeclimate.com/github/drzel/toy_robot/coverage)
-[![Gem Version](https://badge.fury.io/rb/another_toy_robot.svg)](https://badge.fury.io/rb/another_toy_robot)
+[![Build Status](https://travis-ci.org/drzel/toy_robot.svg?branch=master)](https://travis-ci.org/drzel/toy_robot)
 
 # Another Toy Robot Simulator
 The application is a simulation of a toy robot moving on a 5 x 5 unit tabletop. It
