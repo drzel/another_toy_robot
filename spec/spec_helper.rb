@@ -6,6 +6,7 @@ require "factory_girl"
 require "support/factory_girl"
 require "pry"
 
+require "toy_robot"
 require "toy_robot/client"
 require "toy_robot/robot"
 require "toy_robot/arena"
