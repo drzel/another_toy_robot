@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 gem "pry"
 gem "rspec"
+gem "rake"
 gem "factory_girl", "~> 4.0"
 
 group :test do
