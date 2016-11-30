@@ -19,8 +19,6 @@ module ToyRobot
     end
   end
 
-  private
-
   def self.get_input
     gets.downcase.strip
   end
