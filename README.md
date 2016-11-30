@@ -118,3 +118,4 @@ toy robot.
 ## Acknowledgements
 - [RafaelChefe's Toy Robot Simulator](https://github.com/RafaelChefe/toy_robot)
 - [Wikipedia Command pattern article](https://en.wikipedia.org/wiki/Command_pattern)
+- [Sandi Metz](https://www.sandimetz.com/) :heart:
