@@ -1,22 +1,21 @@
 class NullPosition
-  attr_reader :x_coord, :y_coord, :direction, :to_s
+  attr_reader :x_coord, :y_coord, :direction
 
   def initialize
     @x_coord   = nil
     @y_coord   = nil
     @direction = nil
-    @to_s      = "No position"
   end
 
-  def advance
+  def to_s
+    "No position"
+  end
+
+  def return_self
     self
   end
 
-  def left
-    self
-  end
-
-  def right
-    self
-  end
+  alias advance return_self
+  alias left    return_self
+  alias right   return_self
 end
