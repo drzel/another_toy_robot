@@ -6,7 +6,7 @@ require 'toy_robot/version'
 Gem::Specification.new do |spec|
   spec.name                  = "another_toy_robot"
   spec.version               = ToyRobot::VERSION
-  spec.date                  = "2016-11-30"
+  spec.date                  = "2016-12-01"
   spec.authors               = "Sheldon J. Johnson"
   spec.email                 = "sheldon.j.johnson@outlook.com"
   spec.homepage              = "https://github.com/drzel/toy_robot"
