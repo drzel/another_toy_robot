@@ -32,12 +32,12 @@ end
 
 describe "Integration" do
   describe "Example a) 'place 0, 0, north' 'move' 'report'" do
-    it 'outputs "0, 1, north"' do
+    it 'outputs "0, 1, North"' do
       commands = ["place 0, 0, north", "move", "report", "exit"]
 
       allow(ToyRobot).to receive :print
-      expect(ToyRobot).to receive(:gets).and_return *commands
-      expect { ToyRobot.main }.to output("0, 1, north\n").to_stdout
+      expect(ToyRobot).to receive(:gets).and_return(*commands)
+      expect { ToyRobot.main }.to output("0, 1, North\n").to_stdout
     end
   end
 
@@ -46,8 +46,8 @@ describe "Integration" do
       commands = ["place 0, 0, north", "left", "report", "exit"]
 
       allow(ToyRobot).to receive :print
-      expect(ToyRobot).to receive(:gets).and_return *commands
-      expect { ToyRobot.main }.to output("0, 0, west\n").to_stdout
+      expect(ToyRobot).to receive(:gets).and_return(*commands)
+      expect { ToyRobot.main }.to output("0, 0, West\n").to_stdout
     end
   end
 
@@ -58,8 +58,8 @@ describe "Integration" do
                   "report", "exit"]
 
       allow(ToyRobot).to receive :print
-      expect(ToyRobot).to receive(:gets).and_return *commands
-      expect { ToyRobot.main }.to output("3, 3, north\n").to_stdout
+      expect(ToyRobot).to receive(:gets).and_return(*commands)
+      expect { ToyRobot.main }.to output("3, 3, North\n").to_stdout
     end
   end
 
@@ -69,8 +69,8 @@ describe "Integration" do
                   "move", "right", "move", "report", "exit"]
 
       allow(ToyRobot).to receive :print
-      expect(ToyRobot).to receive(:gets).and_return *commands
-      expect { ToyRobot.main }.to output("3, 2, east\n").to_stdout
+      expect(ToyRobot).to receive(:gets).and_return(*commands)
+      expect { ToyRobot.main }.to output("3, 2, East\n").to_stdout
     end
   end
 
@@ -79,8 +79,8 @@ describe "Integration" do
       commands = ["place 4, 3, north", "move", "move", "report", "exit"]
 
       allow(ToyRobot).to receive :print
-      expect(ToyRobot).to receive(:gets).and_return *commands
-      expect { ToyRobot.main }.to output("4, 4, north\n").to_stdout
+      expect(ToyRobot).to receive(:gets).and_return(*commands)
+      expect { ToyRobot.main }.to output("4, 4, North\n").to_stdout
     end
   end
 
@@ -89,7 +89,7 @@ describe "Integration" do
       commands = ["place 10, 10, north", "report", "exit"]
 
       allow(ToyRobot).to receive :print
-      expect(ToyRobot).to receive(:gets).and_return *commands
+      expect(ToyRobot).to receive(:gets).and_return(*commands)
       expect { ToyRobot.main }.to output("No position\n").to_stdout
     end
   end
@@ -99,7 +99,7 @@ describe "Integration" do
       commands = ["move", "left", "right", "report", "exit"]
 
       allow(ToyRobot).to receive :print
-      expect(ToyRobot).to receive(:gets).and_return *commands
+      expect(ToyRobot).to receive(:gets).and_return(*commands)
       expect { ToyRobot.main }.to output("No position\n").to_stdout
     end
   end
@@ -109,7 +109,7 @@ describe "Integration" do
       commands = ["derp", "exit"]
 
       allow(ToyRobot).to receive :print
-      expect(ToyRobot).to receive(:gets).and_return *commands
+      expect(ToyRobot).to receive(:gets).and_return(*commands)
       expect { ToyRobot.main }.to output("Invalid command\n").to_stdout
     end
   end
@@ -119,8 +119,8 @@ describe "Integration" do
       commands = ["place 0, 0, north", "place 2, 2, south", "report", "exit"]
 
       allow(ToyRobot).to receive :print
-      expect(ToyRobot).to receive(:gets).and_return *commands
-      expect { ToyRobot.main }.to output("2, 2, south\n").to_stdout
+      expect(ToyRobot).to receive(:gets).and_return(*commands)
+      expect { ToyRobot.main }.to output("2, 2, South\n").to_stdout
     end
   end
 
@@ -132,9 +132,9 @@ describe "Integration" do
                   "move", "left", "move", "report", "exit"]
 
       allow(ToyRobot).to receive :print
-      expect(ToyRobot).to receive(:gets).and_return *commands
+      expect(ToyRobot).to receive(:gets).and_return(*commands)
       expect { ToyRobot.main }.to output(
-        "Invalid command\nNo position\n4, 2, east\n",
+        "Invalid command\nNo position\n4, 2, East\n",
       ).to_stdout
     end
   end

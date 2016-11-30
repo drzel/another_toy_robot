@@ -22,10 +22,10 @@ class PlaceCommand
 
   def direction
     case @params[2]
-    when "n", "north" then North.new
-    when "e", "east"  then East.new
-    when "s", "south" then South.new
-    when "w", "west"  then West.new
+    when "n", "north" then North
+    when "e", "east"  then East
+    when "s", "south" then South
+    when "w", "west"  then West
     end
   end
 end

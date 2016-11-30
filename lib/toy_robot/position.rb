@@ -1,15 +1,15 @@
 class Position
   attr_reader :x_coord, :y_coord, :direction
 
-  def initialize(x_coord: 0, y_coord: 0, direction: North.new)
+  def initialize(x_coord: 0, y_coord: 0, direction: North)
     @x_coord   = x_coord
     @y_coord   = y_coord
     @direction = direction
   end
 
   def advance
-    Position.new(x_coord:   @x_coord + @direction.x_displacement,
-                 y_coord:   @y_coord + @direction.y_displacement,
+    Position.new(x_coord:   @x_coord + @direction::X_DISPLACEMENT,
+                 y_coord:   @y_coord + @direction::Y_DISPLACEMENT,
                  direction: @direction)
   end
 

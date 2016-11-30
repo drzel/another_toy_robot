@@ -4,14 +4,22 @@ describe Position do
   let(:position) { build :position }
 
   describe "#advance" do
-    it "sends x_displacement and y_displacment to @direction" do
-      expect(position.direction).to receive(:x_displacement) { rand 0...5 }
-      expect(position.direction).to receive(:y_displacement) { rand 0...5 }
-      position.advance
-    end
-
     it "return a new instance of Position" do
       expect(position.advance.class).to be Position
+    end
+
+    it "changes new instance's x_coord by direction's X_DISPLACEMENT" do
+      stub_const "#{position.direction}::X_DISPLACEMENT", 1
+      x = position.x_coord
+      new_x = position.advance.x_coord
+      expect(new_x).to eq(x + 1)
+    end
+
+    it "changes new instance's y_coord by direction's Y_DISPLACEMENT" do
+      stub_const "#{position.direction}::Y_DISPLACEMENT", 1
+      y = position.y_coord
+      new_y = position.advance.y_coord
+      expect(new_y).to eq(y + 1)
     end
   end
 
@@ -39,7 +47,9 @@ describe Position do
 
   describe "#to_s" do
     it "returns string of format 'x, y, d'" do
-      expect(position.to_s).to match(/(\d+,\s){2}[nesw]/)
+      expect(position.to_s).to(
+        match(/(\d+,\s){2}((North)|(East)|(South)|(West))$/),
+      )
     end
   end
 end

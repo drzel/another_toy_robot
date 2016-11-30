@@ -1,67 +1,51 @@
-class Direction
-  attr_reader :x_displacement, :y_displacement
+module North
+  X_DISPLACEMENT = 0
+  Y_DISPLACEMENT = 1
 
-  def to_s
-    self.class.to_s.downcase
+  def self.left
+    West
+  end
+
+  def self.right
+    East
   end
 end
 
-class North < Direction
-  def initialize
-    @x_displacement = 0
-    @y_displacement = 1
+module East
+  X_DISPLACEMENT = 1
+  Y_DISPLACEMENT = 0
+
+  def self.left
+    North
   end
 
-  def left
-    West.new
-  end
-
-  def right
-    East.new
+  def self.right
+    South
   end
 end
 
-class East < Direction
-  def initialize
-    @x_displacement = 1
-    @y_displacement = 0
+module South
+  X_DISPLACEMENT = 0
+  Y_DISPLACEMENT = -1
+
+  def self.left
+    East
   end
 
-  def left
-    North.new
-  end
-
-  def right
-    South.new
+  def self.right
+    West
   end
 end
 
-class South < Direction
-  def initialize
-    @x_displacement = 0
-    @y_displacement = -1
+module West
+  X_DISPLACEMENT = -1
+  Y_DISPLACEMENT = 0
+
+  def self.left
+    South
   end
 
-  def left
-    East.new
-  end
-
-  def right
-    West.new
-  end
-end
-
-class West < Direction
-  def initialize
-    @x_displacement = -1
-    @y_displacement = 0
-  end
-
-  def left
-    South.new
-  end
-
-  def right
-    North.new
+  def self.right
+    North
   end
 end

@@ -57,16 +57,4 @@ FactoryGirl.define do
 
   factory :invalid_command do
   end
-
-  factory :north do
-  end
-
-  factory :east do
-  end
-
-  factory :south do
-  end
-
-  factory :west do
-  end
 end
