@@ -30,7 +30,7 @@ describe Position do
     end
 
     it "return a new instance of Position" do
-      expect(position.advance.class).to be Position
+      expect(position.left.class).to be Position
     end
   end
 
@@ -41,7 +41,7 @@ describe Position do
     end
 
     it "return a new instance of Position" do
-      expect(position.advance.class).to be Position
+      expect(position.right.class).to be Position
     end
   end
 
