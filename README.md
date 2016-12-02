@@ -199,4 +199,4 @@ toy robot.
 ## Acknowledgements
 - [RafaelChefe's Toy Robot Simulator](https://github.com/RafaelChefe/toy_robot)
 - [Sandi Metz' Unit Testing Minimalist](https://youtu.be/URSWYvyc42M)
-- [Daniel Steele]([https://uk.linkedin.com/in/developerdansteele](https://uk.linkedin.com/in/developerdansteele)) and [Omnidev](http://www.omnidev.co.uk)
+- [Daniel Steele]([https://uk.linkedin.com/in/developerdansteele](https://uk.linkedin.com/in/developerdansteele) and [Omnidev](http://www.omnidev.co.uk)
