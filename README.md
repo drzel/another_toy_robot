@@ -4,25 +4,44 @@
 [![Build Status](https://travis-ci.org/drzel/toy_robot.svg?branch=master)](https://travis-ci.org/drzel/toy_robot)
 
 # Another Toy Robot Simulator
-The application is a simulation of a toy robot moving on a 5 x 5 unit tabletop. It
-is an example of a well tested, object oriented design, employing the command design
-pattern.
+The application is a simulation of a toy robot moving on a 5 x 5 unit tabletop. It is an example of a well tested, object oriented design, employing the command design pattern. It is commonly used as an code-test. See specifications below for the full text of the test.
 
-### Links
-- [another_toy_robot on RubyGems](https://rubygems.org/gems/another_toy_robot)
-- [Discussion on Reddit](https://www.reddit.com/r/ruby/comments/5fptz9/i_did_the_toy_robot_challenge_ive_tried_to_be/?ref=share&ref_source=link)
+### Environment
+This application was developed on Ubuntu 16.10 x86_64. It requires Ruby 2.3.0 or later.
 
-### Dependencies
-Requires Ruby 2.3 or later.
+It has been tested and is known to work on Ubuntu 14.04 and OS X Sierra, however it should be fine on any modern Unix-like distribution with Ruby >= 2.3.
+
+To check your version run:
+```
+$ ruby -v
+```
+
+Information on installing Ruby can be found at [Installing Ruby](https://www.ruby-lang.org/en/documentation/installation/).
 
 ### Installation
+The latest release can be installed via RubyGems:
 ```
-gem install another_toy_robot
+$ gem install another_toy_robot
 ```
+
+Alternatively it can be built from source:
+```
+$ git clone https://github.com/drzel/toy_robot.git
+$ cd toy_robot
+$ bundle install
+```
+
+### Testing
+The test suite is invoked with:
+```
+$ bundle exec rspec
+```
+
+Unit tests are written to [Sandi Metz' Unit Testing Minimalist](https://youtu.be/URSWYvyc42M) guidelines.
 
 ### Usage
 ```
-toy_robot
+$ toy_robot
 ```
 
 This will present a prompt:
@@ -42,6 +61,63 @@ Valid commands are:
 | `exit`        | Closes the application.
 
 Commands resulting in the robot moving to an out-of-bounds position (`x` or `y` being less than 0 or greater than 4) will be ignored.
+
+### Design
+The app implements:
+- The [command pattern](https://en.wikipedia.org/wiki/Command_pattern)
+- The [null-object pattern](https://en.wikipedia.org/wiki/Null_Object_pattern) (for positions)
+- The [singleton pattern](https://en.wikipedia.org/wiki/Singleton_pattern) (for directions)
+
+`toy_robot` is an executable in your load path. It is a Ruby script that calls the main function:
+```
+#!/usr/bin/env ruby
+
+require "toy_robot"
+ToyRobot.main
+```
+
+The `ToyRobot#main` instantiates `Client`. The `Client` instance initialises an `Arena` with `width` and `height` arguments before a new `Robot` is instantiated, with the `@arena` as an argument. The new `Robot` is initialised with `NullPosition`.
+
+Then user input is requested through `gets`, the sanitised user input is sent to the the client's `parse` method.
+
+The `Client` instance receives the sanitised user input, which is matched against a list of possible `xCommand` objects (e.g. `"move"` will match `MoveCommand`). When a matching command is received, the `#execute` method is called on a new `xCommand` object. The `@robot` instance, (and in the event of `PlaceCommand`, the `@command` itself) are passed in. If no match is found, `InvalidCommand` is instantiated.
+
+The `xCommand` object will parse any arguments provided and call the appropriate action on the `Robot`.
+
+When receiving a `place` method the robot will check with its `@arena` to see if the position is `#inbounds` before assigning the new `Position` to itself.
+
+When receiving `#left`, `#right` or `#move`, the robot will pass the request to its `@position` which will respond with the new position.
+
+The `Robot` will then check with its `@arena` to see if the position is `#inbounds` before assigning the new position to itself.
+
+When receiving a `#left`, `#right` or `#move` message the `NullPosition` will return itself.
+
+When the `Robot` receives `#report` it prints its `@position` as a string.
+
+This `input > parsing > new command object > command execution` process loops until an `"exit"` command is received, breaking the loop.
+
+### Considerations
+Given the requirement for a command line interface to interact with the robot, I settled on the well established and widely used command pattern.
+
+I'm particularly happy with the `Position` class and the `Direction` modules. Together as a unit they have absolutely no dependencies and could be easily reused with new features, new objects, or with changing specifications. It would be reasonably straight forward to add a second robot, or a third dimension.
+
+Currently the `Robot` must be instantiated with an `Arena`. Originally, I had also employed the null object pattern for the `Arena` as well as the position, but as it turned out, with the current specification, there is no situation where a robot is not in an arena, so it was unneeded and removed, reducing overall complexity of the application.
+
+As GINnFIN helpfully pointed out in the [Reddit discussion](https://www.reddit.com/r/ruby/comments/5fptz9/i_did_the_toy_robot_challenge_ive_tried_to_be/), the `Position` `#left` and `#right` methods do necessarily need to return a new instance of `Position`, and could instead mutate the current position in place. While this is true, there is a pleasing symmetry in each of the current `Position` methods returning a new instance of position that would would be lost if these were to be changed. I'm not entirely sure which is better, but have decided to keep the current implementation, as different behaviour for the `place` and `move` methods to the `left` and `right` methods may be unnecessarily increasing the conceptual complexity of the app.
+
+### Licence
+[MIT](https://tldrlegal.com/license/mit-license)
+
+### Contributing
+My goal is to continue to develop this application to use as an example for other developers who are learning Ruby and object oriented design and have attempted to ensure it is SOLID, DRY, OO and TDD.
+
+If you have something to contribute, whether it be to report an bug, suggest a potential improvement or even ask a question, don't hesitate to log an issue.
+
+Pull requests are also warmly welcomed.
+
+### Links
+- [another_toy_robot on RubyGems](https://rubygems.org/gems/another_toy_robot)
+- [Discussion on Reddit](https://www.reddit.com/r/ruby/comments/5fptz9/i_did_the_toy_robot_challenge_ive_tried_to_be/?ref=share&ref_source=link)
 
 ## Specification
 
@@ -122,5 +198,5 @@ toy robot.
 
 ## Acknowledgements
 - [RafaelChefe's Toy Robot Simulator](https://github.com/RafaelChefe/toy_robot)
-- [Wikipedia Command pattern article](https://en.wikipedia.org/wiki/Command_pattern)
-- [Sandi Metz' Unit Testing Minimalist](https://youtu.be/URSWYvyc42M) :heart:
+- [Sandi Metz' Unit Testing Minimalist](https://youtu.be/URSWYvyc42M)
+- [Daniel Steele]([https://uk.linkedin.com/in/developerdansteele](https://uk.linkedin.com/in/developerdansteele)) and [Omnidev](http://www.omnidev.co.uk)
