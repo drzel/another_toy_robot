@@ -8,24 +8,25 @@ class Position
   end
 
   def advance
-    Position.new(x_coord:   @x_coord + @direction::X_DISPLACEMENT,
-                 y_coord:   @y_coord + @direction::Y_DISPLACEMENT,
-                 direction: @direction)
+    new_position(x_coord: @x_coord + @direction::X_DISPLACEMENT,
+                 y_coord: @y_coord + @direction::Y_DISPLACEMENT)
   end
 
   def left
-    Position.new(x_coord:   @x_coord,
-                 y_coord:   @y_coord,
-                 direction: @direction.left)
+    new_position direction: @direction.left
   end
 
   def right
-    Position.new(x_coord:   @x_coord,
-                 y_coord:   @y_coord,
-                 direction: @direction.right)
+    new_position direction: @direction.right
   end
 
   def to_s
     "#{@x_coord}, #{@y_coord}, #{@direction}"
+  end
+
+  private
+
+  def new_position(x_coord: @x_coord, y_coord: @y_coord, direction: @direction)
+    Position.new x_coord: x_coord, y_coord: y_coord, direction: direction
   end
 end

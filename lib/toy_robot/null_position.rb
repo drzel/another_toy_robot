@@ -11,11 +11,15 @@ class NullPosition
     "No position"
   end
 
-  def return_self
+  def advance
     self
   end
 
-  alias advance return_self
-  alias left    return_self
-  alias right   return_self
+  def left
+    self
+  end
+
+  def right
+    self
+  end
 end

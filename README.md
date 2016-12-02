@@ -7,9 +7,7 @@
 The application is a simulation of a toy robot moving on a 5 x 5 unit tabletop. It is an example of a well tested, object oriented design, employing the command design pattern. It is commonly used as an code-test. See specifications below for the full text of the test.
 
 ### Environment
-This application was developed on Ubuntu 16.10 x86_64. It requires Ruby 2.3.0 or later.
-
-It has been tested and is known to work on Ubuntu 14.04 and OS X Sierra, however it should be fine on any modern Unix-like distribution with Ruby >= 2.3.
+This application was developed on Ubuntu 16.10 x86_64. It requires Ruby 2.3 or later.
 
 To check your version run:
 ```
@@ -52,7 +50,7 @@ Input command:
 Valid commands are:
 
 | Command       | Description
-| ------------- | ---
+| ---           | ---
 | `place x,y,d` | Places robot at position `x`, `y`, facing cardinal direction `d`. E.g. `place 1,2,north`.
 | `left`        | Rotates robot 90° counter-clockwise.
 | `right`       | Rotates robot 90° clockwise.
@@ -82,7 +80,7 @@ Then user input is requested through `gets`, the sanitised user input is sent to
 
 The `Client` instance receives the sanitised user input, which is matched against a list of possible `xCommand` objects (e.g. `"move"` will match `MoveCommand`). When a matching command is received, the `#execute` method is called on a new `xCommand` object. The `@robot` instance, (and in the event of `PlaceCommand`, the `@command` itself) are passed in. If no match is found, `InvalidCommand` is instantiated.
 
-The `xCommand` object will parse any arguments provided and call the appropriate action on the `Robot`.
+The `xCommand` object will parse any arguments provided and call the appropriate action on the `@robot`.
 
 When receiving a `place` method the robot will check with its `@arena` to see if the position is `#inbounds` before assigning the new `Position` to itself.
 

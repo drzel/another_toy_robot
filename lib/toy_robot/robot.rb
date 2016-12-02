@@ -6,20 +6,20 @@ class Robot
     @arena    = arena
   end
 
-  def place(new_position)
-    @position = safely_go_to new_position
+  def place(position)
+    safely_go_to position
   end
 
   def move
-    @position = safely_go_to @position.advance
+    safely_go_to @position.advance
   end
 
   def left
-    @position = @position.left
+    safely_go_to @position.left
   end
 
   def right
-    @position = @position.right
+    safely_go_to @position.right
   end
 
   def report
@@ -28,11 +28,7 @@ class Robot
 
   private
 
-  def safely_go_to(new_position)
-    if @arena.inbounds? new_position.x_coord, new_position.y_coord
-      new_position
-    else
-      @position
-    end
+  def safely_go_to(position)
+    @position = position if @arena.inbounds? position.x_coord, position.y_coord
   end
 end
