@@ -12,20 +12,26 @@ describe ToyRobot do
       ToyRobot.main
     end
 
-    it "sends parse with user input to client" do
-      dbl = instance_double "Client"
-      expect(Client).to receive(:new) { dbl }
+    it "creates a new instance of input" do
+      client_dbl = instance_double "Client"
+      input_dbl  = instance_double "Input"
+      allow(Client).to receive(:new) { client_dbl }
       allow(ToyRobot).to receive :print
-      expect(ToyRobot).to receive(:get_input).and_return "move", "exit"
-      expect(dbl).to receive(:parse).with "move"
+      allow(ToyRobot).to receive(:gets).and_return "move", "exit"
+      expect(Input).to receive(:new).with("move") { input_dbl }
+      allow(client_dbl).to receive(:command_for).with input_dbl
       ToyRobot.main
     end
-  end
 
-  describe "#get_input" do
-    it "returns a sanitized user input" do
-      expect(ToyRobot).to receive(:gets) { " MOVE " }
-      expect(ToyRobot.get_input).to eq "move"
+    it "sends command_for with input object to client" do
+      client_dbl = instance_double "Client"
+      input_dbl  = instance_double "Input"
+      allow(Client).to receive(:new) { client_dbl }
+      allow(ToyRobot).to receive :print
+      allow(ToyRobot).to receive(:gets).and_return "move", "exit"
+      allow(Input).to receive(:new).with("move") { input_dbl }
+      expect(client_dbl).to receive(:command_for).with input_dbl
+      ToyRobot.main
     end
   end
 end

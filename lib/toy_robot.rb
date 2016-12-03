@@ -6,6 +6,7 @@ require "toy_robot/command"
 require "toy_robot/direction"
 require "toy_robot/position"
 require "toy_robot/null_position"
+require "toy_robot/input"
 
 module ToyRobot
   def self.main
@@ -13,13 +14,9 @@ module ToyRobot
 
     loop do
       print "Input command: "
-      input = get_input
-      break if input == "exit"
-      client.parse input
+      input = gets
+      break if input.chomp == "exit"
+      client.command_for Input.new(input)
     end
-  end
-
-  def self.get_input
-    gets.downcase.strip
   end
 end
