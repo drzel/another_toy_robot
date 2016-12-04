@@ -14,7 +14,7 @@ describe PlaceCommand do
     context 'when @params[2] is "n"' do
       let(:command) { build :place_command, params: ["0", "0", "n"] }
 
-      it "creates a new position with coordinates and direction" do
+      it "creates a new position facing north" do
         expect(Position).to receive(:new).with hash_including(direction: North)
         allow(command.target).to receive :place
         command.execute
@@ -24,7 +24,7 @@ describe PlaceCommand do
     context 'when @params[2] is "e"' do
       let(:command) { build :place_command, params: ["0", "0", "e"] }
 
-      it "creates a new position with coordinates and direction" do
+      it "creates a new position facing east" do
         expect(Position).to receive(:new).with hash_including(direction: East)
         allow(command.target).to receive :place
         command.execute
@@ -34,7 +34,7 @@ describe PlaceCommand do
     context 'when @params[2] is "s"' do
       let(:command) { build :place_command, params: ["0", "0", "s"] }
 
-      it "creates a new position with coordinates and direction" do
+      it "creates a new position facing south" do
         expect(Position).to receive(:new).with hash_including(direction: South)
         allow(command.target).to receive :place
         command.execute
@@ -44,7 +44,7 @@ describe PlaceCommand do
     context 'when @params[2] is "w"' do
       let(:command) { build :place_command, params: ["0", "0", "w"] }
 
-      it "creates a new position with coordinates and direction" do
+      it "creates a new position facing west" do
         expect(Position).to receive(:new).with hash_including(direction: West)
         allow(command.target).to receive :place
         command.execute
