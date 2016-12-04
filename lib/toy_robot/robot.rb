@@ -3,7 +3,7 @@ require "toy_robot/null_position"
 require "toy_robot/arena"
 
 class Robot
-  attr_accessor :position, :arena
+  attr_reader :position, :arena
 
   def initialize(position: NullPosition.new, arena: Arena.new)
     @position = position

@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Robot do
   context "when in null position" do
-    let(:robot) { build :robot }
+    let(:robot) { build :robot_in_null_position }
 
     describe "#place" do
       let(:position) { build :position }
@@ -58,8 +58,7 @@ describe Robot do
   end
 
   context "when in position" do
-    let(:position) { build :position }
-    let(:robot) { build :robot, position: position }
+    let(:robot) { build :robot_in_position }
 
     describe "#place" do
       let(:new_position) { build :position }

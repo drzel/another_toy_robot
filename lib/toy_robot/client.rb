@@ -2,8 +2,6 @@ require "toy_robot/arena"
 require "toy_robot/robot"
 
 class Client
-  attr_reader :robot
-
   def initialize
     @table = Arena.new width: 5, height: 5
     @robot = Robot.new arena: @table

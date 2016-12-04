@@ -6,8 +6,6 @@ require "toy_robot/report_command"
 require "toy_robot/invalid_command"
 
 class Input
-  attr_accessor :input
-
   def initialize(input)
     @input = input.strip.downcase
   end
