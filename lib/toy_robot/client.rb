@@ -1,3 +1,6 @@
+require "toy_robot/arena"
+require "toy_robot/robot"
+
 class Client
   attr_reader :robot
 

@@ -1,3 +1,5 @@
+require "toy_robot/direction"
+
 class Position
   attr_reader :x_coord, :y_coord, :direction
 

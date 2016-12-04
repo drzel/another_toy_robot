@@ -1,3 +1,7 @@
+require "toy_robot/position"
+require "toy_robot/null_position"
+require "toy_robot/arena"
+
 class Robot
   attr_accessor :position, :arena
 

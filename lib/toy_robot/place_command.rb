@@ -1,3 +1,5 @@
+require "toy_robot/command"
+
 class PlaceCommand < Command
   def post_initialize
     @params = @params.join.delete(" ").split ","
