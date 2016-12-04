@@ -2,11 +2,20 @@ require "toy_robot/command"
 
 class PlaceCommand < Command
   def post_initialize
-    @params = @params.join.delete(" ").split ","
+    @params &&= @params.join.delete(" ").split ","
   end
 
+  def issue_command
+    @target.place Position.new(x_coord:   x_coord,
+                               y_coord:   y_coord,
+                               direction: direction)
+  end
+
+  private
+
   def valid?
-    @params.length == 3     &&
+    @params                 &&
+      @params.length == 3   &&
       @params[0] =~ /^\d+$/ &&
       @params[1] =~ /^\d+$/ &&
       @params[2] =~ /^([nesw]|(north)|(east)|(south)|(west))$/
@@ -27,11 +36,5 @@ class PlaceCommand < Command
     when "s", "south" then South
     when "w", "west"  then West
     end
-  end
-
-  def issue_command
-    @target.place Position.new(x_coord:   x_coord,
-                               y_coord:   y_coord,
-                               direction: direction)
   end
 end

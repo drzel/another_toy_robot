@@ -6,16 +6,24 @@ require "toy_robot/report_command"
 require "toy_robot/invalid_command"
 
 class Input
+  attr_accessor :input
+
   def initialize(input)
-    @input = input.strip.downcase.split " "
+    @input = input.strip.downcase
   end
 
+  def new_command(target)
+    to_class.new target: target, params: params
+  end
+
+  private
+
   def basename
-    @basename ||= @input.first
+    @basename ||= @input.split(" ").first
   end
 
   def params
-    @params ||= @input.drop 1
+    @params ||= @input.split(" ").drop 1
   end
 
   def classname
@@ -28,9 +36,5 @@ class Input
     else
       InvalidCommand
     end
-  end
-
-  def new_command(target)
-    to_class.new target: target, params: params
   end
 end

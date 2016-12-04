@@ -1,7 +1,8 @@
 require "spec_helper"
 
 describe LeftCommand do
-  let(:command) { build :left_command }
+  let(:robot) { build :robot }
+  let(:command) { build :left_command, target: robot }
 
   describe "#execute" do
     it "sends left to @target" do

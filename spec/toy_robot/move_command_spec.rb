@@ -1,7 +1,8 @@
 require "spec_helper"
 
 describe MoveCommand do
-  let(:command) { build :move_command }
+  let(:robot) { build :robot }
+  let(:command) { build :move_command, target: robot }
 
   describe "#execute" do
     it "sends move to @target" do

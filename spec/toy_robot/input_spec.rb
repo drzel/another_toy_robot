@@ -1,38 +1,65 @@
 describe Input do
   let(:robot) { build :robot }
-  let(:input) { build :input_with_valid_command }
 
   describe "#new_command" do
-    it "creates a new xCommand class" do
-      expect(input.new_command(robot).class.to_s).to eq(
-        "#{input.basename.capitalize}Command",
-      )
+    context "when input is move" do
+      let(:input) { build :input, input: "move" }
+
+      it "creates a new MoveCommand" do
+        expect(MoveCommand).to receive(:new).with(target: robot,
+                                                  params: [])
+        input.new_command robot
+      end
     end
-  end
 
-  describe "#basename" do
-    it "is a string containing only word characters" do
-      expect(input.basename).to match(/\w+/)
+    context "when input is left" do
+      let(:input) { build :input, input: "left" }
+
+      it "creates a new LeftCommand" do
+        expect(LeftCommand).to receive(:new).with(target: robot,
+                                                  params: [])
+        input.new_command robot
+      end
     end
-  end
-end
 
-describe "#params" do
-  context "when input has params" do
-    let(:input) { build :input_place_with_valid_params }
+    context "when input is right" do
+      let(:input) { build :input, input: "right" }
 
-    it "is a non-empty array" do
-      expect(input.params.class).to be Array
-      expect(input.params).not_to be_empty
+      it "creates a new RightCommand" do
+        expect(RightCommand).to receive(:new).with(target: robot,
+                                                   params: [])
+        input.new_command robot
+      end
     end
-  end
 
-  context "when input has no params" do
-    let(:input) { build :input_with_valid_command }
+    context "when input is report" do
+      let(:input) { build :input, input: "report" }
 
-    it "is an empty array" do
-      expect(input.params.class).to be Array
-      expect(input.params).to be_empty
+      it "creates a new ReportCommand" do
+        expect(ReportCommand).to receive(:new).with(target: robot,
+                                                    params: [])
+        input.new_command robot
+      end
+    end
+
+    context "when input is place 0, 0, n" do
+      let(:input) { build :input, input: "place 0, 0, n" }
+
+      it "creates a new PlaceCommand" do
+        expect(PlaceCommand).to receive(:new).with(target: robot,
+                                                   params: ["0,", "0,", "n"])
+        input.new_command robot
+      end
+    end
+
+    context "when input is unknown" do
+      let(:input) { build :input, input: "derp" }
+
+      it "creates a new InvalidCommand" do
+        expect(InvalidCommand).to receive(:new).with(target: robot,
+                                                     params: [])
+        input.new_command robot
+      end
     end
   end
 end

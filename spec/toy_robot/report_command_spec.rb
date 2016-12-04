@@ -1,7 +1,8 @@
 require "spec_helper"
 
 describe ReportCommand do
-  let(:command) { build :report_command }
+  let(:robot) { build :robot }
+  let(:command) { build :report_command, target: robot }
 
   describe "#execute" do
     it "sends report to @target" do

@@ -1,7 +1,8 @@
 require "spec_helper"
 
 describe RightCommand do
-  let(:command) { build :right_command }
+  let(:robot) { build :robot }
+  let(:command) { build :right_command, target: robot }
 
   describe "#execute" do
     it "sends right to @target" do
