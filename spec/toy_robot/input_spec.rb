@@ -1,5 +1,5 @@
 describe Input do
-  let (:robot) { build :robot }
+  let(:robot) { build :robot }
   let(:input) { build :input_with_valid_command }
 
   describe "#new_command" do

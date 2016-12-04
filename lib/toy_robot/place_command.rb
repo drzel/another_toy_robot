@@ -6,10 +6,10 @@ class PlaceCommand < Command
   end
 
   def valid?
-    @params.length == 3   &&
-    @params[0] =~ /^\d+$/ &&
-    @params[1] =~ /^\d+$/ &&
-    @params[2] =~ /^([nesw]|(north)|(east)|(south)|(west))$/
+    @params.length == 3     &&
+      @params[0] =~ /^\d+$/ &&
+      @params[1] =~ /^\d+$/ &&
+      @params[2] =~ /^([nesw]|(north)|(east)|(south)|(west))$/
   end
 
   def x_coord
