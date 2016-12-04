@@ -80,19 +80,15 @@ The main loop does the following:
 
 - Requests user input
 - Instantiates a new `Input` object
-- Passes the new `Input` object to the client
+- Passes the new `Input` object to the client's `#command_for` method
 
 The `Input` class contains methods to parse the user input and determine the correct `Command` class for the given command. E.g. `"move"` will resolve a the `MoveCommand` while `"derp"` will resolve `InvalidCommand`.
 
-The client calls the `Input#new_command` method, passing the `@robot` as the target.
+The `Client#command_for` method calls the `Input#new_command` method, passing the `@robot` as the target.
 
 The `xCommand` object will parse any arguments provided and call the appropriate action on the `@robot`.
 
-When receiving a `place` method the robot will check with its `@arena` to see if the position is `#inbounds` before assigning the new `Position` to itself.
-
-When receiving `#left`, `#right` or `#move`, the robot will pass the request to its `@position` which will respond with the new position.
-
-The `Robot` will then check with its `@arena` to see if the position is `#inbounds` before assigning the new position to itself.
+When receiving `#left`, `#right` or `#move`, the robot will pass the request to its `@position` which will respond with the new position. The `#place` method obtains it's position from the commands parameters. Then `Robot` will then check with its `@arena` to see if the position is `#inbounds` before assigning the new position to itself.
 
 When receiving a `#left`, `#right` or `#move` message the `NullPosition` will return itself.
 
