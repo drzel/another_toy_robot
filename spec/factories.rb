@@ -16,7 +16,6 @@ FactoryGirl.define do
   end
 
   factory :arena do
-    initialize_with { new width: 5, height: 5 }
   end
 
   factory :position do
