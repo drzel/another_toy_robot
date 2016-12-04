@@ -15,7 +15,7 @@ module ToyRobot
     loop do
       print "Input command: "
       input = gets
-      break if input.chomp == "exit"
+      break if input =~ /^exit\s+/
       client.command_for Input.new(input)
     end
   end
