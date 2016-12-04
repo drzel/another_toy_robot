@@ -54,7 +54,7 @@ describe PlaceCommand do
 
     context "when params are valid" do
       let(:command) do
-        build :place_command, robot: robot, params: ["0", "0", "n"]
+        build :place_command, target: robot, params: ["0", "0", "n"]
       end
 
       it "sends place to @target" do
