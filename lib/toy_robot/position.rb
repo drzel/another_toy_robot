@@ -1,7 +1,7 @@
 require "toy_robot/direction"
 
 class Position
-  attr_reader :x_coord, :y_coord, :direction
+  attr_accessor :x_coord, :y_coord, :direction
 
   def initialize(x_coord: 0, y_coord: 0, direction: North)
     @x_coord   = x_coord

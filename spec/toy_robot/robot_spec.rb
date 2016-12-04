@@ -58,13 +58,14 @@ describe Robot do
   end
 
   context "when in position" do
-    let(:robot) { build :robot_in_position }
+    let(:position) { build :position }
+    let(:robot) { build :robot, position: position }
 
     describe "#place" do
-      let(:position) { build :position }
+      let(:new_position) { build :position }
 
       it "changes @position" do
-        expect { robot.place position }.to change { robot.position }
+        expect { robot.place new_position }.to change { robot.position }
       end
     end
 

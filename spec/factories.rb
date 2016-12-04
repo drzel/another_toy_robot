@@ -1,41 +1,18 @@
 FactoryGirl.define do
-  factory :client do
-  end
+  factory :client
 
   factory :input do
     initialize_with { new "string" }
   end
 
-  factory :robot do
-    factory :robot_in_position do
-      association :position, strategy: :build
-    end
-  end
-
-  factory :arena do
-  end
-
-  factory :position do
-  end
-
-  factory :null_position do
-  end
-
-  factory :place_command do
-  end
-
-  factory :move_command do
-  end
-
-  factory :left_command do
-  end
-
-  factory :right_command do
-  end
-
-  factory :report_command do
-  end
-
-  factory :invalid_command do
-  end
+  factory :robot
+  factory :arena
+  factory :position
+  factory :null_position
+  factory :place_command
+  factory :move_command
+  factory :left_command
+  factory :right_command
+  factory :report_command
+  factory :invalid_command
 end
