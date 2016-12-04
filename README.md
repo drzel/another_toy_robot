@@ -76,7 +76,8 @@ ToyRobot.main
 
 `ToyRobot#main` instantiates a new `Client`. The `Client` instantiates an `Arena` and `Robot` objects. The new `Robot` is initialised with `NullPosition` in the `Arena`.
 
-- The main loop does the following:
+The main loop does the following:
+
 - Requests user input
 - Instantiates a new `Input` object
 - Passes the new `Input` object to the client
