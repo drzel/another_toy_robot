@@ -7,9 +7,6 @@ FactoryGirl.define do
   end
 
   factory :robot do
-    association :arena, strategy: :build
-    initialize_with { new arena: arena }
-
     factory :robot_in_position do
       association :position, strategy: :build
     end
