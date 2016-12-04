@@ -24,4 +24,10 @@ Gem::Specification.new do |spec|
 
   spec.bindir = "bin"
   spec.executables << "toy_robot"
+
+  spec.add_development_dependency "rspec", "~> 3.5"
+  spec.add_development_dependency "rake", "~> 11.3"
+  spec.add_development_dependency "factory_girl", "~> 4.0"
+  spec.add_development_dependency "simplecov", "~> 0.12"
+  spec.add_development_dependency "codeclimate-test-reporter", "~> 1.0"
 end
