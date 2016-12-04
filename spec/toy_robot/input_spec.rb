@@ -2,9 +2,9 @@ describe Input do
   let (:robot) { build :robot }
   let(:input) { build :input_with_valid_command }
 
-  describe "#to_command" do
+  describe "#new_command" do
     it "creates a new xCommand class" do
-      expect(input.to_command(target: robot).class.to_s).to eq(
+      expect(input.new_command(target: robot).class.to_s).to eq(
         "#{input.basename.capitalize}Command",
       )
     end
