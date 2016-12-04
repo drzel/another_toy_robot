@@ -74,11 +74,16 @@ require "toy_robot"
 ToyRobot.main
 ```
 
-The `ToyRobot#main` instantiates `Client`. The `Client` instance initialises an `Arena` with `width` and `height` arguments before a new `Robot` is instantiated, with the `@arena` as an argument. The new `Robot` is initialised with `NullPosition`.
+`ToyRobot#main` instantiates a new `Client`. The `Client` instantiates an `Arena` and `Robot` objects. The new `Robot` is initialised with `NullPosition` in the `Arena`.
 
-Then user input is requested through `gets`, the sanitised user input is sent to the the client's `parse` method.
+- The main loop does the following:
+- Requests user input
+- Instantiates a new `Input` object
+- Passes the new `Input` object to the client
 
-The `Client` instance receives the sanitised user input, which is matched against a list of possible `xCommand` objects (e.g. `"move"` will match `MoveCommand`). When a matching command is received, the `#execute` method is called on a new `xCommand` object. The `@robot` instance, (and in the event of `PlaceCommand`, the `@command` itself) are passed in. If no match is found, `InvalidCommand` is instantiated.
+The `Input` class contains methods to parse the user input and determine the correct `Command` class for the given command. E.g. `"move"` will resolve a the `MoveCommand` while `"derp"` will resolve `InvalidCommand`.
+
+The client calls the `Input#new_command` method, passing the `@robot` as the target.
 
 The `xCommand` object will parse any arguments provided and call the appropriate action on the `@robot`.
 
@@ -92,10 +97,12 @@ When receiving a `#left`, `#right` or `#move` message the `NullPosition` will re
 
 When the `Robot` receives `#report` it prints its `@position` as a string.
 
-This `input > parsing > new command object > command execution` process loops until an `"exit"` command is received, breaking the loop.
+This process continues until an `"exit"` command is received, breaking the loop.
 
 ### Considerations
 Given the requirement for a command line interface to interact with the robot, I settled on the well established and widely used command pattern.
+
+The `Input` wrapper allows new commands to be easily added. E.g. Creating a new file `lib/toy_robot/random_command.rb` and requiring it, would be all that is required for the application to accept the `"random"` command, and it would have access to an array of parameters. Validations can also be added by defining a `valid?` method on the command object. See the `lib/toy_robot/place_command.rb` for an example.
 
 I'm particularly happy with the `Position` class and the `Direction` modules. Together as a unit they have absolutely no dependencies and could be easily reused with new features, new objects, or with changing specifications. It would be reasonably straight forward to add a second robot, or a third dimension.
 
@@ -198,3 +205,4 @@ toy robot.
 - [RafaelChefe's Toy Robot Simulator](https://github.com/RafaelChefe/toy_robot)
 - [Sandi Metz' Unit Testing Minimalist](https://youtu.be/URSWYvyc42M)
 - [Daniel Steele](https://uk.linkedin.com/in/developerdansteele) and [Omnidev](https://omnidev.co.uk/)
+
