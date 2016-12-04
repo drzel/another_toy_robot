@@ -5,14 +5,6 @@ class PlaceCommand < Command
     @params = @params.join.delete(" ").split ","
   end
 
-  private
-
-  def issue_command
-    @target.place Position.new(x_coord:   x_coord,
-                               y_coord:   y_coord,
-                               direction: direction)
-  end
-
   def valid?
     @params.length == 3   &&
     @params[0] =~ /^\d+$/ &&
@@ -35,5 +27,11 @@ class PlaceCommand < Command
     when "s", "south" then South
     when "w", "west"  then West
     end
+  end
+
+  def issue_command
+    @target.place Position.new(x_coord:   x_coord,
+                               y_coord:   y_coord,
+                               direction: direction)
   end
 end

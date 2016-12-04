@@ -42,20 +42,8 @@ FactoryGirl.define do
   factory :place_command do
     association :robot, strategy: :build
 
-    factory :place_command_with_valid_params do
-      association :input_place_with_valid_params, strategy: :build
-
-      initialize_with do
-        new target: robot, params: input_place_with_valid_params.params
-      end
-    end
-
-    factory :place_command_with_invalid_params do
-      association :input_place_with_invalid_params, strategy: :build
-
-      initialize_with do
-        new target: robot, params: input_place_with_invalid_params.params
-      end
+    initialize_with do
+      new target: robot, params: ["0, ", "0, ", "n"]
     end
   end
 

@@ -1,5 +1,5 @@
 class Command
-  attr_reader :target, :params
+  attr_accessor :target, :params
 
   def initialize(target: nil, params: nil)
     @target = target
