@@ -23,7 +23,7 @@ class Input
     end
   end
 
-  def new_command(target:)
+  def new_command(target)
     to_class.new target: target, params: params
   end
 end

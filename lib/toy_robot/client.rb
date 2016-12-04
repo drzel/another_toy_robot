@@ -7,6 +7,6 @@ class Client
   end
 
   def command_for(input)
-    input.new_command(target: @robot).execute
+    input.new_command(@robot).execute
   end
 end

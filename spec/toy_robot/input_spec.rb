@@ -4,7 +4,7 @@ describe Input do
 
   describe "#new_command" do
     it "creates a new xCommand class" do
-      expect(input.new_command(target: robot).class.to_s).to eq(
+      expect(input.new_command(robot).class.to_s).to eq(
         "#{input.basename.capitalize}Command",
       )
     end
