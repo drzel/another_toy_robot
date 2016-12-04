@@ -1,11 +1,11 @@
 class Arena
   def initialize(width:, height:)
-    @max_x = width - 1
-    @max_y = height - 1
+    @columns = 0...width
+    @rows    = 0...height
   end
 
   def inbounds?(x_coord, y_coord)
-    x_coord && x_coord.between?(0, @max_x) &&
-    y_coord && y_coord.between?(0, @max_y)
+    x_coord && @columns.cover?(x_coord) &&
+    y_coord && @rows.cover?(y_coord)
   end
 end
