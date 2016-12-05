@@ -71,10 +71,10 @@ The app implements:
 #!/usr/bin/env ruby
 
 require "another_toy_robot"
-ToyRobot.main
+AnotherToyRobot.main
 ```
 
-`ToyRobot#main` instantiates a new `Client`. The `Client` instantiates an `Arena` and `Robot` objects. The new `Robot` is initialised with `NullPosition` in the `Arena`.
+`AnotherToyRobot#main` instantiates a new `Client`. The `Client` instantiates an `Arena` and `Robot` objects. The new `Robot` is initialised with `NullPosition` in the `Arena`.
 
 The main loop does the following:
 

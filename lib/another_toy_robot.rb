@@ -1,7 +1,7 @@
 require "another_toy_robot/client"
 require "another_toy_robot/input"
 
-module ToyRobot
+module AnotherToyRobot
   def self.main
     client = Client.new
 

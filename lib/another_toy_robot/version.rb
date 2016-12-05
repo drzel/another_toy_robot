@@ -1,3 +1,3 @@
-module ToyRobot
+module AnotherToyRobot
   VERSION = "0.1.9".freeze
 end
