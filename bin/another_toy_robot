@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
-require "toy_robot"
+require "another_toy_robot"
 ToyRobot.main

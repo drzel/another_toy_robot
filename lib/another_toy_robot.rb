@@ -1,5 +1,5 @@
-require "toy_robot/client"
-require "toy_robot/input"
+require "another_toy_robot/client"
+require "another_toy_robot/input"
 
 module ToyRobot
   def self.main

@@ -1,9 +1,9 @@
-require "toy_robot/move_command"
-require "toy_robot/left_command"
-require "toy_robot/right_command"
-require "toy_robot/place_command"
-require "toy_robot/report_command"
-require "toy_robot/invalid_command"
+require "another_toy_robot/move_command"
+require "another_toy_robot/left_command"
+require "another_toy_robot/right_command"
+require "another_toy_robot/place_command"
+require "another_toy_robot/report_command"
+require "another_toy_robot/invalid_command"
 
 class Input
   def initialize(input)

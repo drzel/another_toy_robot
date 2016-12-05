@@ -1,4 +1,4 @@
-require "toy_robot/command"
+require "another_toy_robot/command"
 
 class InvalidCommand < Command
   def execute

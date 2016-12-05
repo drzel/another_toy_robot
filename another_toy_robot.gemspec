@@ -1,7 +1,7 @@
 # coding: utf-8
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "toy_robot/version"
+require "another_toy_robot/version"
 
 Gem::Specification.new do |spec|
   spec.name                  = "another_toy_robot"
@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.date                  = "2016-12-05"
   spec.authors               = "Sheldon J. Johnson"
   spec.email                 = "sheldon.j.johnson@outlook.com"
-  spec.homepage              = "https://github.com/drzel/toy_robot"
+  spec.homepage              = "https://github.com/drzel/another_toy_robot"
   spec.summary               = "Another toy robot demonstration app"
   spec.required_ruby_version = ">= 2.3"
   spec.license               = "MIT"
@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.bindir = "bin"
-  spec.executables << "toy_robot"
+  spec.executables << "another_toy_robot"
 
   spec.add_development_dependency "rspec", "~> 3.5"
   spec.add_development_dependency "rake", "~> 11.3"

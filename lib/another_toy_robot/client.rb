@@ -1,5 +1,5 @@
-require "toy_robot/arena"
-require "toy_robot/robot"
+require "another_toy_robot/arena"
+require "another_toy_robot/robot"
 
 class Client
   def initialize

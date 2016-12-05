@@ -1,7 +1,7 @@
 [![Gem Version](https://badge.fury.io/rb/another_toy_robot.svg)](https://badge.fury.io/rb/another_toy_robot)
-[![Code Climate](https://codeclimate.com/github/drzel/toy_robot/badges/gpa.svg)](https://codeclimate.com/github/drzel/toy_robot)
-[![Test Coverage](https://codeclimate.com/github/drzel/toy_robot/badges/coverage.svg)](https://codeclimate.com/github/drzel/toy_robot/coverage)
-[![Build Status](https://travis-ci.org/drzel/toy_robot.svg?branch=master)](https://travis-ci.org/drzel/toy_robot)
+[![Code Climate](https://codeclimate.com/github/drzel/another_toy_robot/badges/gpa.svg)](https://codeclimate.com/github/drzel/another_toy_robot)
+[![Test Coverage](https://codeclimate.com/github/drzel/another_toy_robot/badges/coverage.svg)](https://codeclimate.com/github/drzel/another_toy_robot/coverage)
+[![Build Status](https://travis-ci.org/drzel/another_toy_robot.svg?branch=master)](https://travis-ci.org/drzel/another_toy_robot)
 
 # Another Toy Robot Simulator
 The application is a simulation of a toy robot moving on a 5 x 5 unit tabletop. It is an example of a well tested, object oriented design, employing the command design pattern. It is commonly used as an code-test. See specifications below for the full text of the test.
@@ -24,8 +24,8 @@ $ gem install another_toy_robot
 
 Alternatively it can be built from source:
 ```
-$ git clone https://github.com/drzel/toy_robot.git
-$ cd toy_robot
+$ git clone https://github.com/drzel/another_toy_robot.git
+$ cd another_toy_robot
 $ bundle install
 ```
 
@@ -39,7 +39,7 @@ Unit tests are written to [Sandi Metz' Unit Testing Minimalist](https://youtu.be
 
 ### Usage
 ```
-$ toy_robot
+$ another_toy_robot
 ```
 
 This will present a prompt:
@@ -66,11 +66,11 @@ The app implements:
 - The [null-object pattern](https://en.wikipedia.org/wiki/Null_Object_pattern) (for positions)
 - The [singleton pattern](https://en.wikipedia.org/wiki/Singleton_pattern) (for directions)
 
-`toy_robot` is an executable in your load path. It is a Ruby script that calls the main function:
+`another_toy_robot` is an executable in your load path. It is a Ruby script that calls the main function:
 ```
 #!/usr/bin/env ruby
 
-require "toy_robot"
+require "another_toy_robot"
 ToyRobot.main
 ```
 
@@ -99,7 +99,7 @@ This process continues until an `"exit"` command is received, breaking the loop.
 ### Considerations
 Given the requirement for a command line interface to interact with the robot, I settled on the well established and widely used command pattern.
 
-The `Input` wrapper allows new commands to be easily added. E.g. Creating a new file `lib/toy_robot/random_command.rb` and requiring it, would be all that is required for the application to accept the `"random"` command, and it would have access to an array of parameters. Validations can also be added by defining a `valid?` method on the command object. See the `lib/toy_robot/place_command.rb` for an example.
+The `Input` wrapper allows new commands to be easily added. E.g. Creating a new file `lib/another_toy_robot/random_command.rb` and requiring it, would be all that is required for the application to accept the `"random"` command, and it would have access to an array of parameters. Validations can also be added by defining a `valid?` method on the command object. See the `lib/another_toy_robot/place_command.rb` for an example.
 
 I'm particularly happy with the `Position` class and the `Direction` modules. Together as a unit they have absolutely no dependencies and could be easily reused with new features, new objects, or with changing specifications. It would be reasonably straight forward to add a second robot, or a third dimension.
 

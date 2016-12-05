@@ -1,6 +1,6 @@
-require "toy_robot/position"
-require "toy_robot/null_position"
-require "toy_robot/arena"
+require "another_toy_robot/position"
+require "another_toy_robot/null_position"
+require "another_toy_robot/arena"
 
 class Robot
   attr_reader :position, :arena
