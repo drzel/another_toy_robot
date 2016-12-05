@@ -119,6 +119,7 @@ Pull requests are also warmly welcomed.
 
 ### Links
 - [another_toy_robot on RubyGems](https://rubygems.org/gems/another_toy_robot)
+- [RubyDoc.info auto-generated documentation](http://www.rubydoc.info/gems/another_toy_robot)
 - [Discussion on Reddit](https://www.reddit.com/r/ruby/comments/5fptz9/i_did_the_toy_robot_challenge_ive_tried_to_be/?ref=share&ref_source=link)
 
 ## Specification
