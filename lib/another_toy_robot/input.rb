@@ -11,25 +11,22 @@ class Input
   end
 
   def new_command(target)
-    to_class.new target: target, params: params
+    command_class.new target: target, params: params
   end
 
   private
-
-  def basename
-    @basename ||= @input.split(" ").first
-  end
 
   def params
     @params ||= @input.split(" ").drop 1
   end
 
-  def classname
-    @classname ||= "#{basename.capitalize}Command"
+  def basename
+    @basename ||= @input.split(" ").first
   end
 
-  def to_class
-    return InvalidCommand unless Object.const_defined? classname
-    Object.const_get classname
+  def command_class
+    klass = "#{basename.capitalize}Command"
+    return InvalidCommand unless Object.const_defined? klass
+    Object.const_get klass
   end
 end
