@@ -29,10 +29,7 @@ class Input
   end
 
   def to_class
-    if Object.const_defined? classname
-      Object.const_get classname
-    else
-      InvalidCommand
-    end
+    return InvalidCommand unless Object.const_defined? classname
+    Object.const_get classname
   end
 end
