@@ -37,7 +37,14 @@ FactoryGirl.define do
   end
 
   factory :arena
-  factory :position
+  factory :null_arena
+
+  factory :position do
+    factory :out_of_bounds_position do
+      initialize_with { new x_coord: 100 }
+    end
+  end
+
   factory :null_position
   factory :place_command
   factory :move_command
