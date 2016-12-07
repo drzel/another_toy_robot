@@ -10,6 +10,10 @@ class Client
   end
 
   def command_for(input)
-    input.new_command(@robot).execute
+    klass   = input.to_class
+    params  = input.params
+    command = klass.new target: @robot, params: params
+
+    command.execute
   end
 end

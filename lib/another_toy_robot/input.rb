@@ -10,21 +10,15 @@ class Input
     @input = input.strip.downcase
   end
 
-  def new_command(target)
-    command_class.new target: target, params: params
+  def basename
+    @basename ||= @input.split(" ").first
   end
-
-  private
 
   def params
     @params ||= @input.split(" ").drop 1
   end
 
-  def basename
-    @basename ||= @input.split(" ").first
-  end
-
-  def command_class
+  def to_class
     klass = "#{basename.capitalize}Command"
     return InvalidCommand unless Object.const_defined? klass
     Object.const_get klass
