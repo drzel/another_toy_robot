@@ -74,7 +74,7 @@ require "another_toy_robot"
 AnotherToyRobot.main
 ```
 
-`AnotherToyRobot#main` instantiates a new `Client`. The `Client` instantiates an `Arena` and `Robot` objects. The new `Robot` is initialised with `NullPosition` in the `Arena`.
+`AnotherToyRobot#main` instantiates a new `Client`. The `Client` instantiates a new `Robot` and `Arena`. The new `Robot` is initialised with `NullPosition`, and assigned the new arena.
 
 The main loop does the following:
 
@@ -99,13 +99,9 @@ This process continues until an `"exit"` command is received, breaking the loop.
 ### Considerations
 Given the requirement for a command line interface to interact with the robot, I settled on the well established and widely used command pattern.
 
-The `Input` wrapper allows new commands to be easily added. E.g. Creating a new file `lib/another_toy_robot/random_command.rb` and requiring it, would be all that is required for the application to accept the `"random"` command, and it would have access to an array of parameters. Validations can also be added by defining a `valid?` method on the command object. See the `lib/another_toy_robot/place_command.rb` for an example.
+The `Input` wrapper allows new commands to be easily added. E.g. Creating a new file `lib/another_toy_robot/random_command.rb` and requiring it, is all that is required for the application to accept the `"random"` command, and it would have access to an array of parameters. Validations can also be added by defining a `valid?` method on the command object. See the `lib/another_toy_robot/place_command.rb` for an example.
 
 I'm particularly happy with the `Position` class and the `Direction` modules. Together as a unit they have absolutely no dependencies and could be easily reused with new features, new objects, or with changing specifications. It would be reasonably straight forward to add a second robot, or a third dimension.
-
-Currently the `Robot` must be instantiated with an `Arena`. Originally, I had also employed the null object pattern for the `Arena` as well as the position, but as it turned out, with the current specification, there is no situation where a robot is not in an arena, so it was unneeded and removed, reducing overall complexity of the application.
-
-As GINnFIN helpfully pointed out in the [Reddit discussion](https://www.reddit.com/r/ruby/comments/5fptz9/i_did_the_toy_robot_challenge_ive_tried_to_be/), the `Position` `#left` and `#right` methods do necessarily need to return a new instance of `Position`, and could instead mutate the current position in place. While this is true, there is a pleasing symmetry in each of the current `Position` methods returning a new instance of position that would would be lost if these were to be changed. I'm not entirely sure which is better, but have decided to keep the current implementation, as different behaviour for the `place` and `move` methods to the `left` and `right` methods may be unnecessarily increasing the conceptual complexity of the app.
 
 ### Licence
 [MIT](https://tldrlegal.com/license/mit-license)
