@@ -22,4 +22,8 @@ class NullPosition
   def right
     self
   end
+
+  def at_coords?(*)
+    false
+  end
 end
