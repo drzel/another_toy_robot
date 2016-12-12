@@ -26,6 +26,10 @@ class Position
     "#{@x_coord}, #{@y_coord}, #{@direction}"
   end
 
+  def at_coords?(x_coord, y_coord)
+    x_coord == @x_coord && y_coord == @y_coord
+  end
+
   private
 
   def new_position(x_coord: @x_coord, y_coord: @y_coord, direction: @direction)

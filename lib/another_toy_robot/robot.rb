@@ -42,7 +42,7 @@ class Robot
   end
 
   def at_coords?(x_coord, y_coord)
-    @position.x_coord == x_coord && @position.y_coord == y_coord
+    @position.at_coords? x_coord, y_coord
   end
 
   private
