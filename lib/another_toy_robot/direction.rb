@@ -9,6 +9,10 @@ module North
   def self.right
     East
   end
+
+  def self.to_char
+    "↑"
+  end
 end
 
 module East
@@ -21,6 +25,10 @@ module East
 
   def self.right
     South
+  end
+
+  def self.to_char
+    "→"
   end
 end
 
@@ -35,6 +43,10 @@ module South
   def self.right
     West
   end
+
+  def self.to_char
+    "↓"
+  end
 end
 
 module West
@@ -47,5 +59,9 @@ module West
 
   def self.right
     North
+  end
+
+  def self.to_char
+    "←"
   end
 end
