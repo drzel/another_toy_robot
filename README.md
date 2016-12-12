@@ -56,6 +56,18 @@ Valid commands are:
 | `right`       | Rotates robot 90° clockwise.
 | `move`        | Advances the robot one position in the direction it is currently facing.
 | `report`      | Prints the current location.
+| `map`         | Draws a fancy unicode map.
+|               | `┌───┬───┬───┬───┬───┐`
+|               | `│   │   │   │   │   │`
+|               | `├───┼───┼───┼───┼───┤`
+|               | `│   │   │   │   │   │`
+|               | `├───┼───┼───┼───┼───┤`
+|               | `│   │   │   │   │   │`
+|               | `├───┼───┼───┼───┼───┤`
+|               | `│   │   │   │   │   │`
+|               | `├───┼───┼───┼───┼───┤`
+|               | `│ ↑ │   │   │   │   │`
+|               | `└───┴───┴───┴───┴───┘`
 | `exit`        | Closes the application.
 
 Commands resulting in the robot moving to an out-of-bounds position (`x` or `y` being less than 0 or greater than 4) will be ignored.
