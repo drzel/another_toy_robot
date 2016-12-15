@@ -13,11 +13,7 @@ class Map
   end
 
   def to_s
-    <<~HEREDOC.gsub(/\s$/, "")
-      #{grid_top}
-      #{cell_rows.join grid_between}
-      #{grid_bottom}
-    HEREDOC
+    grid_top + cell_rows.join(grid_between) + grid_bottom
   end
 
   private
@@ -34,12 +30,12 @@ class Map
     row GRIDLINES[:bottom]
   end
 
-  def cell_rows
-    @rows.reverse_each.map { |y_coord| cell_row y_coord }
-  end
-
   def cell_row(y_coord)
     row GRIDLINES[:cell], y_coord
+  end
+
+  def cell_rows
+    @rows.reverse_each.map { |y_coord| cell_row y_coord }
   end
 
   def row(gridlines, y_coord = nil)
