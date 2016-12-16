@@ -6,9 +6,8 @@ class PlaceCommand < Command
   end
 
   def issue_command
-    @target.place Position.new(x_coord:   x_coord,
-                               y_coord:   y_coord,
-                               direction: direction)
+    @target.place Position.new(coordinates: coordinates,
+                               direction:   direction)
   end
 
   private
@@ -21,12 +20,10 @@ class PlaceCommand < Command
       @params[2] =~ /^([nesw]|(north)|(east)|(south)|(west))$/
   end
 
-  def x_coord
-    @params[0].to_i
-  end
-
-  def y_coord
-    @params[1].to_i
+  def coordinates
+    x = @params[0].to_i
+    y = @params[1].to_i
+    Vector.new x: x, y: y
   end
 
   def direction

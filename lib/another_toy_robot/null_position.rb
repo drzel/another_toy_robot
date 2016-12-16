@@ -1,10 +1,9 @@
 class NullPosition
-  attr_reader :x_coord, :y_coord, :direction
+  attr_reader :coordinates, :direction
 
   def initialize
-    @x_coord   = nil
-    @y_coord   = nil
-    @direction = nil
+    @coordinates = NullVector.new
+    @direction   = nil
   end
 
   def to_s
@@ -25,5 +24,14 @@ class NullPosition
 
   def at_coords?(*)
     false
+  end
+end
+
+class NullVector
+  attr_reader :x, :y
+
+  def initialize
+    @x = nil
+    @y = nil
   end
 end

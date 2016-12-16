@@ -48,7 +48,7 @@ class Robot
   private
 
   def safely_go_to(position)
-    return unless @arena.inbounds? position
+    return unless @arena.inbounds? position.coordinates
     @position = position
   end
 end

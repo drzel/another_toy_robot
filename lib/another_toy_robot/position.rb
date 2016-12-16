@@ -1,17 +1,15 @@
 require "another_toy_robot/direction"
 
 class Position
-  attr_reader :x_coord, :y_coord, :direction
+  attr_reader :coordinates, :direction
 
-  def initialize(x_coord: 0, y_coord: 0, direction: North)
-    @x_coord   = x_coord
-    @y_coord   = y_coord
-    @direction = direction
+  def initialize(coordinates: Vector.new, direction: North)
+    @coordinates = coordinates
+    @direction   = direction
   end
 
   def advance
-    new_position(x_coord: @x_coord + @direction::X_DISPLACEMENT,
-                 y_coord: @y_coord + @direction::Y_DISPLACEMENT)
+    new_position coordinates: @coordinates + @direction.displacement
   end
 
   def left
@@ -23,16 +21,41 @@ class Position
   end
 
   def to_s
-    "#{@x_coord}, #{@y_coord}, #{@direction}"
+    "#{@coordinates}, #{@direction}"
   end
 
   def at_coords?(x_coord, y_coord)
-    x_coord == @x_coord && y_coord == @y_coord
+    @coordinates == Vector.new(x: x_coord, y: y_coord)
   end
 
   private
 
-  def new_position(x_coord: @x_coord, y_coord: @y_coord, direction: @direction)
-    Position.new x_coord: x_coord, y_coord: y_coord, direction: direction
+  def new_position(coordinates: @coordinates, direction: @direction)
+    self.class.new coordinates: coordinates, direction: direction
+  end
+end
+
+class Vector
+  attr_reader :x, :y
+
+  def initialize(x: 0, y: 0)
+    @x = x
+    @y = y
+  end
+
+  def ==(coords)
+    @x == coords.x && @y == coords.y
+  end
+
+  def +(coords)
+    self.class.new x: @x + coords.x, y: @y + coords.y
+  end
+
+  def *(scalar)
+    self.class.new x: @x * scalar, y: @y * scalar
+  end
+
+  def to_s
+    "#{@x}, #{@y}"
   end
 end

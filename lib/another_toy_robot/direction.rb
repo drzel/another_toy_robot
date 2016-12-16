@@ -1,6 +1,7 @@
-module North
-  X_DISPLACEMENT = 0
-  Y_DISPLACEMENT = 1
+class North
+  def self.displacement
+    @displacement ||= Vector.new y: 1
+  end
 
   def self.left
     West
@@ -15,9 +16,10 @@ module North
   end
 end
 
-module East
-  X_DISPLACEMENT = 1
-  Y_DISPLACEMENT = 0
+class East
+  def self.displacement
+    @displacement ||= Vector.new x: 1
+  end
 
   def self.left
     North
@@ -32,9 +34,10 @@ module East
   end
 end
 
-module South
-  X_DISPLACEMENT = 0
-  Y_DISPLACEMENT = -1
+class South
+  def self.displacement
+    @displacement ||= Vector.new y: -1
+  end
 
   def self.left
     East
@@ -49,9 +52,10 @@ module South
   end
 end
 
-module West
-  X_DISPLACEMENT = -1
-  Y_DISPLACEMENT = 0
+class West
+  def self.displacement
+    @displacement ||= Vector.new x: -1
+  end
 
   def self.left
     South

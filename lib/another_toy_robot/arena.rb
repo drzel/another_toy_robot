@@ -6,7 +6,7 @@ class Arena
     @rows    = 0...height
   end
 
-  def inbounds?(position)
-    @columns.cover?(position.x_coord) && @rows.cover?(position.y_coord)
+  def inbounds?(vector)
+    @columns.cover?(vector.x) && @rows.cover?(vector.y)
   end
 end
