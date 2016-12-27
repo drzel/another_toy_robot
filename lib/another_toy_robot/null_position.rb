@@ -1,8 +1,10 @@
+require "another_toy_robot/null_coordinates"
+
 class NullPosition
   attr_reader :coordinates, :direction
 
   def initialize
-    @coordinates = NullVector.new
+    @coordinates = NullCoordinates.new
     @direction   = nil
   end
 
@@ -10,7 +12,7 @@ class NullPosition
     "No position"
   end
 
-  def advance
+  def move
     self
   end
 
@@ -20,18 +22,5 @@ class NullPosition
 
   def right
     self
-  end
-
-  def at_coords?(*)
-    false
-  end
-end
-
-class NullVector
-  attr_reader :x, :y
-
-  def initialize
-    @x = nil
-    @y = nil
   end
 end

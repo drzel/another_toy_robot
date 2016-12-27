@@ -1,4 +1,6 @@
 require "another_toy_robot/command"
+require "another_toy_robot/coordinates"
+require "another_toy_robot/direction"
 
 class PlaceCommand < Command
   def post_initialize
@@ -6,8 +8,7 @@ class PlaceCommand < Command
   end
 
   def issue_command
-    @target.place Position.new(coordinates: coordinates,
-                               direction:   direction)
+    @target.place Position.new(coordinates: coordinates, direction: direction)
   end
 
   private
@@ -21,9 +22,7 @@ class PlaceCommand < Command
   end
 
   def coordinates
-    x = @params[0].to_i
-    y = @params[1].to_i
-    Vector.new x: x, y: y
+    Coordinates.new x: @params[0].to_i, y: @params[1].to_i
   end
 
   def direction

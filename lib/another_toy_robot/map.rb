@@ -6,10 +6,10 @@ class Map
     bottom:  "└─┴┘",
   }.freeze
 
-  def initialize(object: nil, arena:)
-    @object  = object
+  def initialize(arena:, object: nil)
     @columns = arena.columns
     @rows    = arena.rows
+    @object  = object
   end
 
   def to_s
@@ -52,11 +52,16 @@ class Map
   end
 
   def cell(space, x_coord, y_coord)
-    indicator = if x_coord && y_coord && @object.at_coords?(x_coord, y_coord)
+    return padded_cell(space: space) unless x_coord && y_coord
+    indicator = if @object.at_coords? Coordinates.new(x: x_coord, y: y_coord)
                   @object.to_char
                 else
                   space
                 end
+    padded_cell space: space, indicator: indicator
+  end
+
+  def padded_cell(space:, indicator: space)
     space + indicator + space
   end
 end

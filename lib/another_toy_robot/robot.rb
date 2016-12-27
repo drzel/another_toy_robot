@@ -14,41 +14,32 @@ class Robot
   end
 
   def place(position)
-    safely_go_to position
+    return unless @arena.cover? position.coordinates
+    @position = position
   end
 
   def move
-    safely_go_to @position.advance
+    new_position = @position.move
+    @position = new_position if @arena.cover?(new_position.coordinates)
   end
 
   def left
-    safely_go_to @position.left
+    @position = @position.left
   end
 
   def right
-    safely_go_to @position.right
+    @position = @position.right
   end
 
   def report
     puts @position.to_s
   end
 
-  def display_map
-    puts Map.new(object: self, arena: @arena).to_s
-  end
-
   def to_char
     @position.direction.to_char
   end
 
-  def at_coords?(x_coord, y_coord)
-    @position.at_coords? x_coord, y_coord
-  end
-
-  private
-
-  def safely_go_to(position)
-    return unless @arena.inbounds? position.coordinates
-    @position = position
+  def at_coords?(coordinates)
+    @position.coordinates == coordinates
   end
 end

@@ -1,6 +1,8 @@
+require "another_toy_robot/coordinates"
+
 class North
   def self.displacement
-    @displacement ||= Vector.new y: 1
+    Coordinates.new y: 1
   end
 
   def self.left
@@ -18,7 +20,7 @@ end
 
 class East
   def self.displacement
-    @displacement ||= Vector.new x: 1
+    Coordinates.new x: 1
   end
 
   def self.left
@@ -36,7 +38,7 @@ end
 
 class South
   def self.displacement
-    @displacement ||= Vector.new y: -1
+    Coordinates.new y: -1
   end
 
   def self.left
@@ -54,7 +56,7 @@ end
 
 class West
   def self.displacement
-    @displacement ||= Vector.new x: -1
+    Coordinates.new x: -1
   end
 
   def self.left
