@@ -1,5 +1,6 @@
 require "another_toy_robot/arena"
 require "another_toy_robot/robot"
+require "another_toy_robot/map"
 
 class Client
   def initialize
@@ -15,5 +16,9 @@ class Client
     command = klass.new target: @robot, params: params
 
     command.execute
+  end
+
+  def map
+    Map.new(arena: @table, object: @robot).to_s
   end
 end

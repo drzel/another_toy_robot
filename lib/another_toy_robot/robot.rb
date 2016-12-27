@@ -2,7 +2,6 @@ require "another_toy_robot/position"
 require "another_toy_robot/null_position"
 require "another_toy_robot/arena"
 require "another_toy_robot/null_arena"
-require "another_toy_robot/map"
 
 class Robot
   attr_accessor :arena

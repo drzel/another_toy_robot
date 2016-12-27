@@ -5,16 +5,16 @@ class North
     Coordinates.new y: 1
   end
 
+  def self.to_char
+    "↑"
+  end
+
   def self.left
     West
   end
 
   def self.right
     East
-  end
-
-  def self.to_char
-    "↑"
   end
 end
 
@@ -23,6 +23,10 @@ class East
     Coordinates.new x: 1
   end
 
+  def self.to_char
+    "→"
+  end
+
   def self.left
     North
   end
@@ -30,15 +34,15 @@ class East
   def self.right
     South
   end
-
-  def self.to_char
-    "→"
-  end
 end
 
 class South
   def self.displacement
     Coordinates.new y: -1
+  end
+
+  def self.to_char
+    "↓"
   end
 
   def self.left
@@ -48,15 +52,15 @@ class South
   def self.right
     West
   end
-
-  def self.to_char
-    "↓"
-  end
 end
 
 class West
   def self.displacement
     Coordinates.new x: -1
+  end
+
+  def self.to_char
+    "←"
   end
 
   def self.left
@@ -65,9 +69,5 @@ class West
 
   def self.right
     North
-  end
-
-  def self.to_char
-    "←"
   end
 end

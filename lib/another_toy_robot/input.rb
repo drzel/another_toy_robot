@@ -3,7 +3,6 @@ require "another_toy_robot/left_command"
 require "another_toy_robot/right_command"
 require "another_toy_robot/place_command"
 require "another_toy_robot/report_command"
-require "another_toy_robot/map_command"
 require "another_toy_robot/invalid_command"
 
 class Input

@@ -7,19 +7,24 @@ class Position
   end
 
   def move
-    Position.new(coordinates: @coordinates + @direction.displacement,
-                 direction:   @direction)
+    goto coordinates: @coordinates + @direction.displacement
   end
 
   def left
-    Position.new coordinates: @coordinates, direction: @direction.left
+    goto direction: @direction.left
   end
 
   def right
-    Position.new coordinates: @coordinates, direction: @direction.right
+    goto direction: @direction.right
   end
 
   def to_s
     "#{@coordinates}, #{@direction}"
+  end
+
+  private
+
+  def goto(coordinates: @coordinates, direction: @direction)
+    Position.new coordinates: coordinates, direction: direction
   end
 end
