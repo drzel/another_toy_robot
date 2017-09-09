@@ -1,32 +1,14 @@
 FactoryGirl.define do
   factory :client
 
+  factory :command_delegator do
+    initialize_with { new(robot, basename) }
+    association :robot, strategy: :build
+    basename "report"
+  end
+
   factory :input do
-    initialize_with { new "string" }
-
-    factory :input_move do
-      initialize_with { new "move" }
-    end
-
-    factory :input_left do
-      initialize_with { new "left" }
-    end
-
-    factory :input_right do
-      initialize_with { new "right" }
-    end
-
-    factory :input_report do
-      initialize_with { new "report" }
-    end
-
-    factory :input_place do
-      initialize_with { new "place 0, 0, n" }
-    end
-
-    factory :input_derp do
-      initialize_with { new "derp" }
-    end
+    basename "report"
   end
 
   factory :robot, aliases: [:robot_in_null_position] do

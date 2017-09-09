@@ -1,8 +1,8 @@
-class Command
-  attr_accessor :target, :params
+module Command
+  attr_accessor :robot, :params
 
-  def initialize(target: nil, params: nil)
-    @target = target
+  def initialize(robot: nil, params: nil)
+    @robot = robot
     @params = params
 
     post_initialize
@@ -12,6 +12,7 @@ class Command
 
   def execute
     return InvalidCommand.new.execute unless valid?
+
     issue_command
   end
 

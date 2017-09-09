@@ -1,51 +1,69 @@
-module North
-  X_DISPLACEMENT = 0
-  Y_DISPLACEMENT = 1
+module Direction
+  module North
+    X_DISPLACEMENT = 0
+    Y_DISPLACEMENT = 1
 
-  def self.left
-    West
+    def self.left
+      West
+    end
+
+    def self.right
+      East
+    end
+
+    def self.to_s
+      "north"
+    end
   end
 
-  def self.right
-    East
-  end
-end
+  module East
+    X_DISPLACEMENT = 1
+    Y_DISPLACEMENT = 0
 
-module East
-  X_DISPLACEMENT = 1
-  Y_DISPLACEMENT = 0
+    def self.left
+      North
+    end
 
-  def self.left
-    North
-  end
+    def self.right
+      South
+    end
 
-  def self.right
-    South
-  end
-end
-
-module South
-  X_DISPLACEMENT = 0
-  Y_DISPLACEMENT = -1
-
-  def self.left
-    East
+    def self.to_s
+      "east"
+    end
   end
 
-  def self.right
-    West
+  module South
+    X_DISPLACEMENT = 0
+    Y_DISPLACEMENT = -1
+
+    def self.left
+      East
+    end
+
+    def self.right
+      West
+    end
+
+    def self.to_s
+      "south"
+    end
   end
-end
 
-module West
-  X_DISPLACEMENT = -1
-  Y_DISPLACEMENT = 0
+  module West
+    X_DISPLACEMENT = -1
+    Y_DISPLACEMENT = 0
 
-  def self.left
-    South
-  end
+    def self.left
+      South
+    end
 
-  def self.right
-    North
+    def self.right
+      North
+    end
+
+    def self.to_s
+      "west"
+    end
   end
 end

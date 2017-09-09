@@ -7,9 +7,9 @@ module AnotherToyRobot
 
     loop do
       print "Input command: "
-      input = gets
-      break if input =~ /^\s*exit\s+/
-      client.command_for Input.new(input)
+      input = Input.new gets
+
+      client.command_for input
     end
   end
 end

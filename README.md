@@ -84,7 +84,7 @@ The main loop does the following:
 
 The `Input` class contains methods to parse the user input and determine the correct `Command` class for the given command. E.g. `"move"` will resolve a the `MoveCommand` while `"derp"` will resolve `InvalidCommand`.
 
-The `Client#command_for` method calls the `Input#new_command` method, passing the `@robot` as the target.
+The `Client#command_for` method calls the `Input#new_command` method, passing the `@robot` as the robot.
 
 The `xCommand` object will parse any arguments provided and call the appropriate action on the `@robot`.
 
