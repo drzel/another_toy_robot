@@ -11,8 +11,8 @@ class Client
   end
 
   def command_for(input_obj)
-    command_klass = CommandDelegator.delegate input_obj.basename
-    command = command_klass.new robot: @robot, params: input_obj.params
-    command.execute
+    CommandDelegator.build(basename: input_obj.basename,
+                           params:   input_obj.params,
+                           robot:    @robot).execute
   end
 end
