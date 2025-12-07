@@ -1,4 +1,6 @@
 class Direction
+  class InvalidDirection < StandardError; end
+
   DIRECTIONS = {
     north: [0, 1],
     east:  [1, 0],
@@ -29,6 +31,7 @@ class Direction
 
   def self.from_string(str)
     x, y = DIRECTIONS[str.to_sym]
-    new(x, y) if x
+    raise InvalidDirection, "Invalid direction: #{str}" unless x
+    new(x, y)
   end
 end

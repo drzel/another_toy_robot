@@ -63,4 +63,10 @@ describe Direction do
       end
     end
   end
+
+  describe ".from_string with invalid direction" do
+    it "raises InvalidDirection error" do
+      expect { Direction.from_string(:invalid) }.to raise_error(Direction::InvalidDirection, "Invalid direction: invalid")
+    end
+  end
 end

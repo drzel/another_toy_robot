@@ -15,11 +15,6 @@ $ cd another_toy_robot
 $ bundle install
 ```
 
-### Run
-
-```
-bin/another_toy_robot
-```
 
 ### Testing
 The test suite is invoked with:
@@ -29,9 +24,10 @@ $ bundle exec rspec
 
 Unit tests are written to [Sandi Metz' Unit Testing Minimalist](https://youtu.be/URSWYvyc42M) guidelines.
 
-### Usage
+
+### Run
 ```
-$ another_toy_robot
+bin/another_toy_robot
 ```
 
 This will present a prompt:

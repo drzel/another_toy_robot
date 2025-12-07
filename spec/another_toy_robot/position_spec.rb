@@ -7,14 +7,14 @@ describe Position do
       expect(position.advance.class).to be Position
     end
 
-    it "changes new instance's x_coord by direction's x" do
+    it "advances x_coord by direction's x component" do
       x = position.x_coord
       direction_x = position.direction.x
       new_x = position.advance.x_coord
       expect(new_x).to eq(x + direction_x)
     end
 
-    it "changes new instance's y_coord by direction's y" do
+    it "advances y_coord by direction's y component" do
       y = position.y_coord
       direction_y = position.direction.y
       new_y = position.advance.y_coord
