@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email                 = "sheldon.j.johnson@outlook.com"
   spec.homepage              = "https://github.com/drzel/another_toy_robot"
   spec.summary               = "Another toy robot demonstration app"
-  spec.required_ruby_version = ">= 2.3"
+  spec.required_ruby_version = ">= 3.4"
   spec.license               = "MIT"
 
   spec.description = "The application is a simulation of a toy robot moving "  \

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "another_toy_robot/position"
 require "another_toy_robot/null_position"
 require "another_toy_robot/arena"

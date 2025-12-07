@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "another_toy_robot/move_command"
 require "another_toy_robot/left_command"
 require "another_toy_robot/right_command"

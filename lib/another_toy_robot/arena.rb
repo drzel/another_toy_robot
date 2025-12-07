@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Arena
   def initialize(width: 5, height: 5)
     @columns = 0...width

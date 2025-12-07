@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "another_toy_robot/command"
 
 class PlaceCommand < Command

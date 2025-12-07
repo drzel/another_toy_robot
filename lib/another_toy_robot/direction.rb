@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Direction
   class InvalidDirection < StandardError; end
 
