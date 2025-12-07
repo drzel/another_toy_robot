@@ -76,9 +76,7 @@ The main loop does the following:
 
 The `Input` class contains methods to parse the user input and determine the correct `Command` class for the given command. E.g. `"move"` will resolve a the `MoveCommand` while `"derp"` will resolve `InvalidCommand`.
 
-The `Client#command_for` method calls the `Input#new_command` method, passing the `@robot` as the target.
-
-The `xCommand` object will parse any arguments provided and call the appropriate action on the `@robot`.
+The `*Command` instance will parse any arguments provided and call the appropriate action on the `@robot`.
 
 When receiving `#left`, `#right` or `#move`, the robot will pass the request to its `@position` which will respond with the new position. The `#place` method obtains it's position from the commands parameters. Then `Robot` will then check with its `@arena` to see if the position is `#inbounds` before assigning the new position to itself.
 
@@ -93,7 +91,7 @@ Given the requirement for a command line interface to interact with the robot, I
 
 The `Input` wrapper allows new commands to be easily added. E.g. Creating a new file `lib/another_toy_robot/random_command.rb` and requiring it, is all that is required for the application to accept the `"random"` command, and it would have access to an array of parameters. Validations can also be added by defining a `valid?` method on the command object. See the `lib/another_toy_robot/place_command.rb` for an example.
 
-I'm particularly happy with the `Position` class and the `Direction` modules. Together as a unit they have absolutely no dependencies and could be easily reused with new features, new objects, or with changing specifications. It would be reasonably straight forward to add a second robot, or a third dimension.
+I'm particularly happy with the `Position` and `Direction` classes. Together as a unit they have no dependencies and could be easily reused with new features, new objects, or with changing specifications. It would be reasonably straight forward to add a second robot, or a third dimension.
 
 ### Licence
 [MIT](https://tldrlegal.com/license/mit-license)
