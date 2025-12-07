@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
 
+require "bundler/setup"
 require "another_toy_robot"
+
 AnotherToyRobot.main
