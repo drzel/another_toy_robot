@@ -18,15 +18,12 @@ class Input
     @input = input.strip.downcase
   end
 
-  def basename
-    @basename ||= @input.split(" ").first
-  end
-
   def params
     @params ||= @input.split(" ").drop 1
   end
 
   def to_class
-    VALID_COMMANDS.fetch(basename.to_sym, InvalidCommand)
+    command_name = @input.split(" ").first
+    VALID_COMMANDS.fetch(command_name.to_sym, InvalidCommand)
   end
 end
