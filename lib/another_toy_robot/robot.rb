@@ -1,13 +1,11 @@
 require "another_toy_robot/position"
 require "another_toy_robot/null_position"
 require "another_toy_robot/arena"
-require "another_toy_robot/null_arena"
 
 class Robot
-  attr_accessor :arena
   attr_reader :position
 
-  def initialize(position: NullPosition.new, arena: NullArena.new)
+  def initialize(arena:, position: NullPosition.new)
     @position = position
     @arena    = arena
   end
