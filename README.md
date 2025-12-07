@@ -73,7 +73,7 @@ This process continues until an `"exit"` command is received, breaking the loop.
 ### Considerations
 Given the requirement for a command line interface to interact with the robot, I settled on the well established and widely used command pattern.
 
-The `Input` wrapper allows new commands to be easily added. E.g. Creating a new file `lib/another_toy_robot/random_command.rb` and requiring it, is all that is required for the application to accept the `"random"` command, and it would have access to an array of parameters. Validations can also be added by defining a `valid?` method on the command object. See the `lib/another_toy_robot/place_command.rb` for an example.
+The `Input` wrapper allows new commands to be easily added. E.g. Creating a new file `lib/another_toy_robot/random_command.rb`, requiring it and adding it to VALID_COMMANDS is all that is required for the application to accept the `"random"` command. Validations can also be added by defining a `valid?` method on the command object. See the `lib/another_toy_robot/place_command.rb` for an example.
 
 I'm particularly happy with the `Position` and `Direction` classes. Together as a unit they have no dependencies and could be easily reused with new features, new objects, or with changing specifications. It would be reasonably straight forward to add a second robot, or a third dimension.
 
