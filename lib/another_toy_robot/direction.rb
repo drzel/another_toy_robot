@@ -5,19 +5,21 @@ class Direction
 
   DIRECTIONS = {
     north: [0, 1],
-    east:  [1, 0],
+    east: [1, 0],
     south: [0, -1],
-    west:  [-1, 0]
+    west: [-1, 0]
   }.freeze
 
   DIRECTION_NAMES = DIRECTIONS.invert.freeze
 
   attr_reader :x, :y
 
+  # rubocop:disable Naming/MethodParameterName
   def initialize(x, y)
     @x = x
     @y = y
   end
+  # rubocop:enable Naming/MethodParameterName
 
   def left
     Direction.new(-@y, @x)
@@ -33,7 +35,8 @@ class Direction
 
   def self.from_string(str)
     x, y = DIRECTIONS[str.to_sym]
-    raise InvalidDirection, "Invalid direction: #{str}" unless x
+    raise(InvalidDirection, "Invalid direction: #{str}") unless x
+
     new(x, y)
   end
 end

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module AnotherToyRobot
-  VERSION = "0.1.13".freeze
+  VERSION = '0.1.13'
 end

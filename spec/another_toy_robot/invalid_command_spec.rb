@@ -1,8 +1,9 @@
+# frozen_string_literal: true
 
 describe InvalidCommand do
   let(:command) { build :invalid_command }
 
-  describe "#execute" do
+  describe '#execute' do
     it 'outputs "Invalid command" to stdout' do
       expect { command.execute }.to output("Invalid command\n").to_stdout
     end

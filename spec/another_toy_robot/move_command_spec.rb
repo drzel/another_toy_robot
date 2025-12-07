@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 
 describe MoveCommand do
   let(:robot) { build :robot }
   let(:command) { build :move_command, target: robot }
 
-  describe "#execute" do
-    it "sends move to @target" do
+  describe '#execute' do
+    it 'sends move to @target' do
       expect(command.target).to receive :move
       command.execute
     end

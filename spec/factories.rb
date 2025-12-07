@@ -1,31 +1,33 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :client
 
   factory :input do
-    initialize_with { new "string" }
+    initialize_with { new 'string' }
 
     factory :input_move do
-      initialize_with { new "move" }
+      initialize_with { new 'move' }
     end
 
     factory :input_left do
-      initialize_with { new "left" }
+      initialize_with { new 'left' }
     end
 
     factory :input_right do
-      initialize_with { new "right" }
+      initialize_with { new 'right' }
     end
 
     factory :input_report do
-      initialize_with { new "report" }
+      initialize_with { new 'report' }
     end
 
     factory :input_place do
-      initialize_with { new "place 0, 0, north" }
+      initialize_with { new 'place 0, 0, north' }
     end
 
     factory :input_derp do
-      initialize_with { new "derp" }
+      initialize_with { new 'derp' }
     end
   end
 

@@ -14,6 +14,7 @@ class Command
 
   def execute
     return InvalidCommand.new.execute unless valid?
+
     issue_command
   end
 

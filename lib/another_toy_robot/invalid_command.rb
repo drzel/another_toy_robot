@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require "another_toy_robot/command"
+require 'another_toy_robot/command'
 
 class InvalidCommand < Command
   def execute
-    puts "Invalid command"
+    puts 'Invalid command'
   end
 end
