@@ -7,17 +7,18 @@
 The application is a simulation of a toy robot moving on a 5 x 5 unit tabletop. It is an example of a well tested, object oriented design, employing the command design pattern. It is commonly used as an code-test. See specifications below for the full text of the test.
 
 
-### Installation
-The latest release can be installed via RubyGems:
-```
-$ gem install another_toy_robot
-```
+### Setup
 
-Alternatively it can be built from source:
 ```
 $ git clone https://github.com/drzel/another_toy_robot.git
 $ cd another_toy_robot
 $ bundle install
+```
+
+### Run
+
+```
+bin/another_toy_robot
 ```
 
 ### Testing
