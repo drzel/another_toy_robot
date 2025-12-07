@@ -14,10 +14,12 @@ class Direction
 
   attr_reader :x, :y
 
+  # rubocop:disable Naming/MethodParameterName
   def initialize(x, y)
     @x = x
     @y = y
   end
+  # rubocop:enable Naming/MethodParameterName
 
   def left
     Direction.new(-@y, @x)
