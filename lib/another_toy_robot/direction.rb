@@ -1,51 +1,34 @@
-module North
-  X_DISPLACEMENT = 0
-  Y_DISPLACEMENT = 1
+class Direction
+  DIRECTIONS = {
+    north: [0, 1],
+    east:  [1, 0],
+    south: [0, -1],
+    west:  [-1, 0]
+  }.freeze
 
-  def self.left
-    West
+  DIRECTION_NAMES = DIRECTIONS.invert.freeze
+
+  attr_reader :x, :y
+
+  def initialize(x, y)
+    @x = x
+    @y = y
   end
 
-  def self.right
-    East
-  end
-end
-
-module East
-  X_DISPLACEMENT = 1
-  Y_DISPLACEMENT = 0
-
-  def self.left
-    North
+  def left
+    Direction.new(-@y, @x)
   end
 
-  def self.right
-    South
-  end
-end
-
-module South
-  X_DISPLACEMENT = 0
-  Y_DISPLACEMENT = -1
-
-  def self.left
-    East
+  def right
+    Direction.new(@y, -@x)
   end
 
-  def self.right
-    West
-  end
-end
-
-module West
-  X_DISPLACEMENT = -1
-  Y_DISPLACEMENT = 0
-
-  def self.left
-    South
+  def to_s
+    DIRECTION_NAMES[[x, y]].to_s.capitalize
   end
 
-  def self.right
-    North
+  def self.from_string(str)
+    x, y = DIRECTIONS[str.to_sym]
+    new(x, y) if x
   end
 end

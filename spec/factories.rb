@@ -21,7 +21,7 @@ FactoryBot.define do
     end
 
     factory :input_place do
-      initialize_with { new "place 0, 0, n" }
+      initialize_with { new "place 0, 0, north" }
     end
 
     factory :input_derp do

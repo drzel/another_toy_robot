@@ -8,18 +8,18 @@ describe Position do
       expect(position.advance.class).to be Position
     end
 
-    it "changes new instance's x_coord by direction's X_DISPLACEMENT" do
-      stub_const "#{position.direction}::X_DISPLACEMENT", 1
+    it "changes new instance's x_coord by direction's x" do
       x = position.x_coord
+      direction_x = position.direction.x
       new_x = position.advance.x_coord
-      expect(new_x).to eq(x + 1)
+      expect(new_x).to eq(x + direction_x)
     end
 
-    it "changes new instance's y_coord by direction's Y_DISPLACEMENT" do
-      stub_const "#{position.direction}::Y_DISPLACEMENT", 1
+    it "changes new instance's y_coord by direction's y" do
       y = position.y_coord
+      direction_y = position.direction.y
       new_y = position.advance.y_coord
-      expect(new_y).to eq(y + 1)
+      expect(new_y).to eq(y + direction_y)
     end
   end
 

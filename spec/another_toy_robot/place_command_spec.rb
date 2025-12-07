@@ -6,7 +6,7 @@ describe PlaceCommand do
   describe "#execute" do
     context "when params are valid" do
       let(:command) do
-        build :place_command, target: robot, params: ["0", "0", "n"]
+        build :place_command, target: robot, params: ["0", "0", "north"]
       end
 
       it "sends place to @target" do
@@ -16,53 +16,57 @@ describe PlaceCommand do
         command.execute
       end
 
-      context 'when @params[2] is "n"' do
+      context 'when @params[2] is "north"' do
         let(:command) do
-          build :place_command, target: robot, params: ["0", "0", "n"]
+          build :place_command, target: robot, params: ["0", "0", "north"]
         end
 
         it "creates a new position facing north" do
-          expect(Position).to receive(:new).with(
-            hash_including(direction: North),
-          )
+          expect(Position).to receive(:new) do |args|
+            expect(args[:direction].to_s).to eq "North"
+          end
           allow(command.target).to receive :place
           command.execute
         end
       end
 
-      context 'when @params[2] is "e"' do
+      context 'when @params[2] is "east"' do
         let(:command) do
-          build :place_command, target: robot, params: ["0", "0", "e"]
+          build :place_command, target: robot, params: ["0", "0", "east"]
         end
 
         it "creates a new position facing east" do
-          expect(Position).to receive(:new).with hash_including(direction: East)
+          expect(Position).to receive(:new) do |args|
+            expect(args[:direction].to_s).to eq "East"
+          end
           allow(command.target).to receive :place
           command.execute
         end
       end
 
-      context 'when @params[2] is "s"' do
+      context 'when @params[2] is "south"' do
         let(:command) do
-          build :place_command, target: robot, params: ["0", "0", "s"]
+          build :place_command, target: robot, params: ["0", "0", "south"]
         end
 
         it "creates a new position facing south" do
-          expect(Position).to receive(:new).with(
-            hash_including(direction: South),
-          )
+          expect(Position).to receive(:new) do |args|
+            expect(args[:direction].to_s).to eq "South"
+          end
           allow(command.target).to receive :place
           command.execute
         end
       end
 
-      context 'when @params[2] is "w"' do
+      context 'when @params[2] is "west"' do
         let(:command) do
-          build :place_command, target: robot, params: ["0", "0", "w"]
+          build :place_command, target: robot, params: ["0", "0", "west"]
         end
 
         it "creates a new position facing west" do
-          expect(Position).to receive(:new).with hash_including(direction: West)
+          expect(Position).to receive(:new) do |args|
+            expect(args[:direction].to_s).to eq "West"
+          end
           allow(command.target).to receive :place
           command.execute
         end
