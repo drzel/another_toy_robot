@@ -6,6 +6,14 @@ require "another_toy_robot/report_command"
 require "another_toy_robot/invalid_command"
 
 class Input
+  VALID_COMMANDS = {
+    move: MoveCommand,
+    left: LeftCommand,
+    right: RightCommand,
+    place: PlaceCommand,
+    report: ReportCommand
+  }.freeze
+
   def initialize(input)
     @input = input.strip.downcase
   end
@@ -19,8 +27,6 @@ class Input
   end
 
   def to_class
-    klass = "#{basename.capitalize}Command"
-    return InvalidCommand unless Object.const_defined? klass
-    Object.const_get klass
+    VALID_COMMANDS.fetch(basename.to_sym, InvalidCommand)
   end
 end
