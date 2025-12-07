@@ -6,15 +6,6 @@
 # Another Toy Robot Simulator
 The application is a simulation of a toy robot moving on a 5 x 5 unit tabletop. It is an example of a well tested, object oriented design, employing the command design pattern. It is commonly used as an code-test. See specifications below for the full text of the test.
 
-### Environment
-This application was developed on Ubuntu 16.10 x86_64. It requires Ruby 2.3 or later.
-
-To check your version run:
-```
-$ ruby -v
-```
-
-Information on installing Ruby can be found at [Installing Ruby](https://www.ruby-lang.org/en/documentation/installation/).
 
 ### Installation
 The latest release can be installed via RubyGems:
