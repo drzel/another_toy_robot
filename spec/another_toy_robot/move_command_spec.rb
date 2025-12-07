@@ -1,4 +1,3 @@
-require "spec_helper"
 
 describe MoveCommand do
   let(:robot) { build :robot }

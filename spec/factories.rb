@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :client
 
   factory :input do
@@ -21,7 +21,7 @@ FactoryGirl.define do
     end
 
     factory :input_place do
-      initialize_with { new "place 0, 0, n" }
+      initialize_with { new "place 0, 0, north" }
     end
 
     factory :input_derp do
@@ -30,14 +30,16 @@ FactoryGirl.define do
   end
 
   factory :robot, aliases: [:robot_in_null_position] do
+    association :arena, strategy: :build
+    initialize_with { new arena: arena }
+
     factory :robot_in_position do
       association :position, strategy: :build
-      initialize_with { new position: position }
+      initialize_with { new arena: arena, position: position }
     end
   end
 
   factory :arena
-  factory :null_arena
 
   factory :position do
     factory :out_of_bounds_position do

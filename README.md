@@ -6,28 +6,15 @@
 # Another Toy Robot Simulator
 The application is a simulation of a toy robot moving on a 5 x 5 unit tabletop. It is an example of a well tested, object oriented design, employing the command design pattern. It is commonly used as an code-test. See specifications below for the full text of the test.
 
-### Environment
-This application was developed on Ubuntu 16.10 x86_64. It requires Ruby 2.3 or later.
 
-To check your version run:
-```
-$ ruby -v
-```
+### Setup
 
-Information on installing Ruby can be found at [Installing Ruby](https://www.ruby-lang.org/en/documentation/installation/).
-
-### Installation
-The latest release can be installed via RubyGems:
-```
-$ gem install another_toy_robot
-```
-
-Alternatively it can be built from source:
 ```
 $ git clone https://github.com/drzel/another_toy_robot.git
 $ cd another_toy_robot
 $ bundle install
 ```
+
 
 ### Testing
 The test suite is invoked with:
@@ -37,9 +24,10 @@ $ bundle exec rspec
 
 Unit tests are written to [Sandi Metz' Unit Testing Minimalist](https://youtu.be/URSWYvyc42M) guidelines.
 
-### Usage
+
+### Run
 ```
-$ another_toy_robot
+bin/another_toy_robot
 ```
 
 This will present a prompt:
@@ -64,7 +52,7 @@ Commands resulting in the robot moving to an out-of-bounds position (`x` or `y` 
 The app implements:
 - The [command pattern](https://en.wikipedia.org/wiki/Command_pattern)
 - The [null-object pattern](https://en.wikipedia.org/wiki/Null_Object_pattern) (for positions)
-- The [singleton pattern](https://en.wikipedia.org/wiki/Singleton_pattern) (for directions)
+- ~~The [singleton pattern](https://en.wikipedia.org/wiki/Singleton_pattern) (for directions)~~
 
 `another_toy_robot` is an executable in your load path. It is a Ruby script that calls the main function:
 ```
@@ -84,9 +72,7 @@ The main loop does the following:
 
 The `Input` class contains methods to parse the user input and determine the correct `Command` class for the given command. E.g. `"move"` will resolve a the `MoveCommand` while `"derp"` will resolve `InvalidCommand`.
 
-The `Client#command_for` method calls the `Input#new_command` method, passing the `@robot` as the target.
-
-The `xCommand` object will parse any arguments provided and call the appropriate action on the `@robot`.
+The `*Command` instance will parse any arguments provided and call the appropriate action on the `@robot`.
 
 When receiving `#left`, `#right` or `#move`, the robot will pass the request to its `@position` which will respond with the new position. The `#place` method obtains it's position from the commands parameters. Then `Robot` will then check with its `@arena` to see if the position is `#inbounds` before assigning the new position to itself.
 
@@ -101,7 +87,7 @@ Given the requirement for a command line interface to interact with the robot, I
 
 The `Input` wrapper allows new commands to be easily added. E.g. Creating a new file `lib/another_toy_robot/random_command.rb` and requiring it, is all that is required for the application to accept the `"random"` command, and it would have access to an array of parameters. Validations can also be added by defining a `valid?` method on the command object. See the `lib/another_toy_robot/place_command.rb` for an example.
 
-I'm particularly happy with the `Position` class and the `Direction` modules. Together as a unit they have absolutely no dependencies and could be easily reused with new features, new objects, or with changing specifications. It would be reasonably straight forward to add a second robot, or a third dimension.
+I'm particularly happy with the `Position` and `Direction` classes. Together as a unit they have no dependencies and could be easily reused with new features, new objects, or with changing specifications. It would be reasonably straight forward to add a second robot, or a third dimension.
 
 ### Licence
 [MIT](https://tldrlegal.com/license/mit-license)

@@ -1,4 +1,3 @@
-require "spec_helper"
 
 describe Robot do
   context "when in null position" do

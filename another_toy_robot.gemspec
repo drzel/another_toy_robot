@@ -1,5 +1,5 @@
 # coding: utf-8
-lib = File.expand_path("../lib", __FILE__)
+lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "another_toy_robot/version"
 
@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email                 = "sheldon.j.johnson@outlook.com"
   spec.homepage              = "https://github.com/drzel/another_toy_robot"
   spec.summary               = "Another toy robot demonstration app"
-  spec.required_ruby_version = ">= 2.3"
+  spec.required_ruby_version = ">= 3.4"
   spec.license               = "MIT"
 
   spec.description = "The application is a simulation of a toy robot moving "  \
@@ -25,9 +25,9 @@ Gem::Specification.new do |spec|
   spec.bindir = "bin"
   spec.executables << "another_toy_robot"
 
-  spec.add_development_dependency "rspec", "~> 3.5"
-  spec.add_development_dependency "rake", "~> 11.3"
-  spec.add_development_dependency "factory_girl", "~> 4.0"
-  spec.add_development_dependency "simplecov", "~> 0.12"
+  spec.add_development_dependency "rspec", "~> 3.13"
+  spec.add_development_dependency "rake", "~> 13.3"
+  spec.add_development_dependency "factory_bot", "~> 6.5"
+  spec.add_development_dependency "simplecov", "~> 0.22"
   spec.add_development_dependency "codeclimate-test-reporter", "~> 1.0"
 end

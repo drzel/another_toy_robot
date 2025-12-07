@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "another_toy_robot/command"
 
 class PlaceCommand < Command
@@ -16,9 +18,9 @@ class PlaceCommand < Command
   def valid?
     @params                 &&
       @params.length == 3   &&
-      @params[0] =~ /^\d+$/ &&
-      @params[1] =~ /^\d+$/ &&
-      @params[2] =~ /^([nesw]|(north)|(east)|(south)|(west))$/
+      @params[0] =~ /\A\d+\z/ &&
+      @params[1] =~ /\A\d+\z/ &&
+      @params[2] =~ /\A(north|east|south|west)\z/
   end
 
   def x_coord
@@ -30,11 +32,6 @@ class PlaceCommand < Command
   end
 
   def direction
-    case @params[2]
-    when "n", "north" then North
-    when "e", "east"  then East
-    when "s", "south" then South
-    when "w", "west"  then West
-    end
+    Direction.from_string(@params[2])
   end
 end

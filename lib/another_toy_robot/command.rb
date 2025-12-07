@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Command
   attr_accessor :target, :params
 

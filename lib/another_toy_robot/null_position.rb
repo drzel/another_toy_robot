@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NullPosition
   attr_reader :x_coord, :y_coord, :direction
 

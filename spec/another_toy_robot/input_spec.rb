@@ -32,7 +32,7 @@ describe Input do
       end
     end
 
-    context "when input is place 0, 0, n" do
+    context "when input is place 0, 0, north" do
       let(:input) { build :input_place }
 
       it "returns PlaceCommand" do
