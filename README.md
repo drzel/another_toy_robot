@@ -1,8 +1,3 @@
-[![Gem Version](https://badge.fury.io/rb/another_toy_robot.svg)](https://badge.fury.io/rb/another_toy_robot)
-[![Code Climate](https://codeclimate.com/github/drzel/another_toy_robot/badges/gpa.svg)](https://codeclimate.com/github/drzel/another_toy_robot)
-[![Test Coverage](https://codeclimate.com/github/drzel/another_toy_robot/badges/coverage.svg)](https://codeclimate.com/github/drzel/another_toy_robot/coverage)
-[![Build Status](https://travis-ci.org/drzel/another_toy_robot.svg?branch=master)](https://travis-ci.org/drzel/another_toy_robot)
-
 # Another Toy Robot Simulator
 The application is a simulation of a toy robot moving on a 5 x 5 unit tabletop. It is an example of a well tested, object oriented design, employing the command design pattern. It is commonly used as an code-test. See specifications below for the full text of the test.
 
