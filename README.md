@@ -3,7 +3,6 @@ The application is a simulation of a toy robot moving on a 5 x 5 unit tabletop. 
 
 
 ### Setup
-
 ```
 $ git clone https://github.com/drzel/another_toy_robot.git
 $ cd another_toy_robot
@@ -13,6 +12,7 @@ $ bundle install
 
 ### Testing
 The test suite is invoked with:
+
 ```
 $ bundle exec rspec
 ```
@@ -43,12 +43,12 @@ Valid commands are:
 
 Commands resulting in the robot moving to an out-of-bounds position (`x` or `y` being less than 0 or greater than 4) will be ignored.
 
+
 ### Design
 The app implements:
 - The [command pattern](https://en.wikipedia.org/wiki/Command_pattern)
 - The [null-object pattern](https://en.wikipedia.org/wiki/Null_Object_pattern) (for positions)
 - ~~The [singleton pattern](https://en.wikipedia.org/wiki/Singleton_pattern) (for directions)~~
-
 
 `AnotherToyRobot#main` instantiates a new `Client`. The `Client` instantiates a new `Robot` and `Arena`. The new `Robot` is initialised with `NullPosition`, and assigned the new arena.
 
@@ -70,6 +70,7 @@ When the `Robot` receives `#report` it prints its `@position` as a string.
 
 This process continues until an `"exit"` command is received, breaking the loop.
 
+
 ### Considerations
 Given the requirement for a command line interface to interact with the robot, I settled on the well established and widely used command pattern.
 
@@ -77,8 +78,10 @@ The `Input` wrapper allows new commands to be easily added. E.g. Creating a new 
 
 I'm particularly happy with the `Position` and `Direction` classes. Together as a unit they have no dependencies and could be easily reused with new features, new objects, or with changing specifications. It would be reasonably straight forward to add a second robot, or a third dimension.
 
+
 ### Licence
 [MIT](https://tldrlegal.com/license/mit-license)
+
 
 ### Contributing
 My goal is to continue to develop this application to use as an example for other developers who are learning Ruby and object oriented design and have attempted to ensure it is SOLID, DRY, OO and TDD.
@@ -87,10 +90,12 @@ If you have something to contribute, whether it be to report an bug, suggest a p
 
 Pull requests are also warmly welcomed.
 
+
 ### Links
 - [another_toy_robot on RubyGems](https://rubygems.org/gems/another_toy_robot)
 - [RubyDoc.info auto-generated documentation](http://www.rubydoc.info/gems/another_toy_robot)
 - [Discussion on Reddit](https://www.reddit.com/r/ruby/comments/5fptz9/i_did_the_toy_robot_challenge_ive_tried_to_be/?ref=share&ref_source=link)
+
 
 ## Specification
 
