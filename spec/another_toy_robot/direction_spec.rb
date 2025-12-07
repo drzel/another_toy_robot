@@ -1,4 +1,3 @@
-require "spec_helper"
 
 describe Direction do
   describe ".from_string(:north)" do

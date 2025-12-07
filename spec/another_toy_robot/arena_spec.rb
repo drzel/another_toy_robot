@@ -1,4 +1,3 @@
-require "spec_helper"
 
 describe Arena do
   let(:arena) { build :arena }

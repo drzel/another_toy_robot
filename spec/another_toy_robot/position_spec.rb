@@ -1,4 +1,3 @@
-require "spec_helper"
 
 describe Position do
   let(:position) { build :position }

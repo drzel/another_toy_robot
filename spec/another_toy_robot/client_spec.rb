@@ -1,4 +1,3 @@
-require "spec_helper"
 
 describe Client do
   let(:client) { build :client }

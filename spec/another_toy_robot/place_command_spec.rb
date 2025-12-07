@@ -1,4 +1,3 @@
-require "spec_helper"
 
 describe PlaceCommand do
   let(:robot) { build :robot }

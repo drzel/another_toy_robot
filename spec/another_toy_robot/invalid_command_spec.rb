@@ -1,4 +1,3 @@
-require "spec_helper"
 
 describe InvalidCommand do
   let(:command) { build :invalid_command }

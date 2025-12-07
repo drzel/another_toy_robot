@@ -1,4 +1,3 @@
-require "spec_helper"
 
 describe RightCommand do
   let(:robot) { build :robot }

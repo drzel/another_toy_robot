@@ -1,4 +1,3 @@
-require "spec_helper"
 
 describe AnotherToyRobot do
   it "has a version number" do

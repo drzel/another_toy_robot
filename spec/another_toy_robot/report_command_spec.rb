@@ -1,4 +1,3 @@
-require "spec_helper"
 
 describe ReportCommand do
   let(:robot) { build :robot }
