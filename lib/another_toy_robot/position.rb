@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "another_toy_robot/direction"
+require 'another_toy_robot/direction'
 
 class Position
   attr_reader :x_coord, :y_coord, :direction
@@ -17,11 +17,11 @@ class Position
   end
 
   def left
-    new_position direction: @direction.left
+    new_position(direction: @direction.left)
   end
 
   def right
-    new_position direction: @direction.right
+    new_position(direction: @direction.right)
   end
 
   def to_s
@@ -31,6 +31,6 @@ class Position
   private
 
   def new_position(x_coord: @x_coord, y_coord: @y_coord, direction: @direction)
-    Position.new x_coord: x_coord, y_coord: y_coord, direction: direction
+    Position.new(x_coord: x_coord, y_coord: y_coord, direction: direction)
   end
 end

@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require "another_toy_robot/command"
+require 'another_toy_robot/command'
 
 class PlaceCommand < Command
   def post_initialize
-    @params &&= @params.join.delete(" ").split ","
+    @params &&= @params.join.delete(' ').split ','
   end
 
   def issue_command
-    @target.place Position.new(x_coord:   x_coord,
-                               y_coord:   y_coord,
+    @target.place Position.new(x_coord: x_coord,
+                               y_coord: y_coord,
                                direction: direction)
   end
 

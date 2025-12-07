@@ -10,7 +10,7 @@ class NullPosition
   end
 
   def to_s
-    "No position"
+    'No position'
   end
 
   def advance

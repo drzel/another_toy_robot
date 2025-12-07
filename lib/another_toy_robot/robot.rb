@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require "another_toy_robot/position"
-require "another_toy_robot/null_position"
-require "another_toy_robot/arena"
+require 'another_toy_robot/position'
+require 'another_toy_robot/null_position'
+require 'another_toy_robot/arena'
 
 class Robot
   attr_reader :position
@@ -29,13 +29,14 @@ class Robot
   end
 
   def report
-    puts @position.to_s
+    puts @position
   end
 
   private
 
   def safely_go_to(position)
     return unless @arena.inbounds? position
+
     @position = position
   end
 end

@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 
 describe ReportCommand do
   let(:robot) { build :robot }
   let(:command) { build :report_command, target: robot }
 
-  describe "#execute" do
-    it "sends report to @target" do
+  describe '#execute' do
+    it 'sends report to @target' do
       expect(command.target).to receive :report
       command.execute
     end
