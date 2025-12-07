@@ -54,13 +54,6 @@ The app implements:
 - The [null-object pattern](https://en.wikipedia.org/wiki/Null_Object_pattern) (for positions)
 - ~~The [singleton pattern](https://en.wikipedia.org/wiki/Singleton_pattern) (for directions)~~
 
-`another_toy_robot` is an executable in your load path. It is a Ruby script that calls the main function:
-```
-#!/usr/bin/env ruby
-
-require "another_toy_robot"
-AnotherToyRobot.main
-```
 
 `AnotherToyRobot#main` instantiates a new `Client`. The `Client` instantiates a new `Robot` and `Arena`. The new `Robot` is initialised with `NullPosition`, and assigned the new arena.
 
