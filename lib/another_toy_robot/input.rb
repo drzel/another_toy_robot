@@ -21,7 +21,7 @@ class Input
   end
 
   def params
-    @params ||= @input.split(' ').drop 1
+    @params ||= @input.split(' ').drop(1)
   end
 
   def to_class

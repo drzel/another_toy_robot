@@ -8,9 +8,9 @@ class PlaceCommand < Command
   end
 
   def issue_command
-    @target.place Position.new(x_coord: x_coord,
-                               y_coord: y_coord,
-                               direction: direction)
+    @target.place(
+      Position.new(x_coord: x_coord, y_coord: y_coord, direction: direction)
+    )
   end
 
   private

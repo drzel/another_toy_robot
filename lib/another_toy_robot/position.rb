@@ -6,14 +6,16 @@ class Position
   attr_reader :x_coord, :y_coord, :direction
 
   def initialize(x_coord: 0, y_coord: 0, direction: Direction.from_string(:north))
-    @x_coord   = x_coord
-    @y_coord   = y_coord
+    @x_coord = x_coord
+    @y_coord = y_coord
     @direction = direction
   end
 
   def advance
-    new_position(x_coord: @x_coord + @direction.x,
-                 y_coord: @y_coord + @direction.y)
+    new_position(
+      x_coord: @x_coord + @direction.x,
+      y_coord: @y_coord + @direction.y
+    )
   end
 
   def left

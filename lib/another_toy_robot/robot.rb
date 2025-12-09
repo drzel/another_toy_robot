@@ -9,23 +9,23 @@ class Robot
 
   def initialize(arena:, position: NullPosition.new)
     @position = position
-    @arena    = arena
+    @arena = arena
   end
 
   def place(position)
-    safely_go_to position
+    safely_go_to(position)
   end
 
   def move
-    safely_go_to @position.advance
+    safely_go_to(@position.advance)
   end
 
   def left
-    safely_go_to @position.left
+    safely_go_to(@position.left)
   end
 
   def right
-    safely_go_to @position.right
+    safely_go_to(@position.right)
   end
 
   def report
@@ -35,7 +35,7 @@ class Robot
   private
 
   def safely_go_to(position)
-    return unless @arena.inbounds? position
+    return unless @arena.inbounds?(position)
 
     @position = position
   end
