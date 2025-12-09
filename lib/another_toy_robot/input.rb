@@ -8,6 +8,8 @@ require 'another_toy_robot/report_command'
 require 'another_toy_robot/invalid_command'
 
 class Input
+  attr_reader :params
+
   VALID_COMMANDS = {
     move: MoveCommand,
     left: LeftCommand,
@@ -17,15 +19,10 @@ class Input
   }.freeze
 
   def initialize(input)
-    @input = input.strip.downcase
-  end
-
-  def params
-    @params ||= @input.split(' ').drop(1)
+    @command_name, *@params = input.strip.downcase.split(' ')
   end
 
   def to_class
-    command_name = @input.split(' ').first
-    VALID_COMMANDS.fetch(command_name.to_sym, InvalidCommand)
+    VALID_COMMANDS.fetch(@command_name.to_sym, InvalidCommand)
   end
 end
