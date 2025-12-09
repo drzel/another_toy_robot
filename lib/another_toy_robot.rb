@@ -12,7 +12,7 @@ module AnotherToyRobot
       input = gets
       break if input =~ /^\s*exit\s+/
 
-      client.command_for Input.new(input)
+      client.command_for(Input.new(input))
     end
   end
 end
