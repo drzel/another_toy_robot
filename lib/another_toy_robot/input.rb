@@ -19,10 +19,10 @@ class Input
   }.freeze
 
   def initialize(input)
-    @command_name, *@params = input.strip.downcase.split(' ')
+    @command_name, *@params = input && input.strip.downcase.split(' ')
   end
 
   def to_class
-    VALID_COMMANDS.fetch(@command_name.to_sym, InvalidCommand)
+    VALID_COMMANDS.fetch(@command_name&.to_sym, InvalidCommand)
   end
 end
